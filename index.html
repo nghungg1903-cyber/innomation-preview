@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AgentFlow – Bản thử nghiệm banner | Innomation</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=JetBrains+Mono:wght@500;700&display=swap&subset=vietnamese" rel="stylesheet">
+<style>
+  :root{--blue:#001AAD;--cyan:#10CBFF;--ink:#171C2B}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Montserrat,system-ui,sans-serif;background:#05081A;color:#fff}
+
+  /* Hero ghim trong lúc cuộn: phần cuộn 260vh dùng để chuyển ngày -> đêm, xong mới nhả xuống section dưới */
+  .hero-wrap{position:relative;height:260vh}
+  .hero{position:sticky;top:0;height:100vh;overflow:hidden;background:#000}
+  /* khung thiết kế 1440x860, phóng theo kiểu cover để thẻ luôn khớp với ảnh */
+  .stage{position:absolute;left:50%;top:50%;width:1440px;height:860px;transform-origin:50% 50%}
+  .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:100% 50%}
+  .photo.night{opacity:0}
+  .shade{position:absolute;inset:0;background:radial-gradient(ellipse 980px 420px at 0% 18%,rgba(0,10,50,.62),rgba(0,10,50,.3) 55%,rgba(0,10,50,0) 100%)}
+
+  .nav{position:absolute;left:40px;right:40px;top:24px;height:64px;border-radius:16px;display:flex;align-items:center;padding:0 22px 0 28px;z-index:5;
+    background:rgba(255,255,255,.94);box-shadow:0 10px 30px rgba(0,0,0,.12);color:#2B3350}
+  .nav img{height:24px}
+  .nav ul{display:flex;gap:30px;list-style:none;margin-left:56px;font-size:14px;font-weight:600}
+  .nav li:first-child{color:var(--blue)}
+  .nav .r{margin-left:auto;display:flex;align-items:center;gap:14px}
+  .lang{display:flex;border:1px solid #D9E0F2;border-radius:999px;padding:3px}
+  .lang button{font:700 12px Montserrat,sans-serif;padding:5px 10px;border-radius:999px;border:0;background:none;color:#6B7490;cursor:pointer}
+  .lang button.on{background:var(--blue);color:#fff}
+  .navcta{background:var(--blue);color:#fff;padding:12px 20px;font-size:13.5px;border-radius:999px;font-weight:700}
+
+  .lbl{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:5px 10px 5px 5px;border-radius:999px;background:rgba(8,12,30,.58);
+    backdrop-filter:blur(8px);font:700 11.5px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+  .lbl .ic{width:20px;height:20px;border-radius:6px;background:var(--blue);display:grid;place-items:center;box-shadow:0 0 0 1px rgba(255,255,255,.35)}
+  .lbl .av{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center}
+
+  .copy{position:absolute;left:80px;top:172px;width:760px;z-index:3}
+  .copy .lbl{margin-bottom:16px}
+  .copy h1{font-size:50px;line-height:1.1;font-weight:700;letter-spacing:-.02em}
+  .copy h1 b{font-weight:700;background:linear-gradient(90deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .copy p{margin-top:12px;max-width:470px;font-size:15px;line-height:1.6;font-weight:500;color:rgba(255,255,255,.88)}
+  .copy .meta{margin-top:22px;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+  .copy .meta i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--cyan);margin-right:8px;box-shadow:0 0 8px var(--cyan)}
+
+  .grp{position:absolute;z-index:4}
+  .tk{position:relative;display:flex;align-items:center;gap:10px;margin-top:6px;padding:10px 12px;border-radius:9px;font-size:13px;font-weight:600;
+    background:rgba(16,24,48,.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.14);overflow:hidden;height:40px}
+  .tk .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cb{width:18px;height:18px;border-radius:5px;flex:none;display:grid;place-items:center;font-size:11px;font-weight:800;color:#00163D;
+    border:2px solid rgba(255,255,255,.45);transition:background .3s,border-color .3s,box-shadow .3s}
+  .tk.run .cb{border-color:var(--cyan);box-shadow:0 0 10px rgba(16,203,255,.6)}
+  .tk.done .cb{background:var(--cyan);border-color:var(--cyan)}
+  .tk.queue{color:rgba(255,255,255,.62)}
+  .tk .bar{position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,rgba(16,203,255,.2),var(--cyan))}
+  .tk.run .bar{width:100%;transition:width var(--d,2200ms) linear}
+  .tk.done .bar{width:100%;opacity:0;transition:opacity .4s}
+  /* hàng mới trượt vào từ dưới, hàng xong thu gọn biến mất ở trên */
+  .tk.enter{opacity:0;transform:translateY(12px)}
+  .tk{transition:opacity .45s ease,transform .45s ease,height .45s ease,margin .45s ease,padding .45s ease}
+  .tk.leave{opacity:0;height:0;margin-top:0;padding-top:0;padding-bottom:0;border-width:0}
+
+  .agent{left:1120px;top:150px;width:280px}
+  .agent .lblwrap{position:relative;height:38px}
+  .agent .lblwrap .lbl{position:absolute;left:0;top:0}
+  .human{left:770px;top:336px;width:260px}
+  .human .tk{height:auto}
+  .clock{position:absolute;left:770px;top:286px;z-index:4;font:700 15px 'JetBrains Mono',monospace;padding:7px 11px;border-radius:7px;
+    background:rgba(8,12,30,.78);border:1px solid rgba(255,255,255,.2);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+  .clock small{font-size:10px;opacity:.75;margin-left:4px}
+  .human.night .tk{opacity:.55}
+
+  .hint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);font:700 11px 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;
+    color:rgba(255,255,255,.8);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:4}
+  .hint i{width:2px;height:26px;background:linear-gradient(var(--cyan),transparent);animation:drip 1.6s ease-in-out infinite}
+  @keyframes drip{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.2);transform-origin:bottom}}
+
+  /* section kế tiếp để thấy hero nhả ra sau khi chuyển xong */
+  .next{min-height:70vh;background:#F7F9FF;color:var(--ink);display:grid;place-items:center;padding:80px 24px;text-align:center}
+  .next h2{font-size:34px;color:var(--blue);margin-bottom:10px}
+  .next p{color:#55607A}
+
+  @media (prefers-reduced-motion:reduce){.tk,.tk.run .bar,.cb{transition:none}.hint i{animation:none}}
+</style>
+</head>
+<body>
+<section class="hero-wrap" id="wrap">
+  <div class="hero">
+    <div class="stage" id="stage">
+      <video class="photo day" src="video/clay-day.mp4" poster="img/clay-day.jpg" autoplay muted loop playsinline></video>
+      <video class="photo night" id="night" src="video/clay-night.mp4" poster="img/clay-night.jpg" autoplay muted loop playsinline></video>
+      <div class="shade"></div>
+
+      <header class="nav">
+        <img src="img/logo.png" alt="Innomation">
+        <ul id="menu"></ul>
+        <div class="r">
+          <div class="lang"><button id="b-vi" class="on">VI</button><button id="b-en">EN</button></div>
+          <span class="navcta" data-k="cta"></span>
+        </div>
+      </header>
+
+      <div class="copy">
+        <div class="lbl"><span class="ic"><svg width="11" height="11" viewBox="0 0 24 24" fill="#10CBFF"><path d="M13 2 4 14h7l-2 8 9-12h-7l2-8z"/></svg></span><span data-k="eyebrow"></span></div>
+        <h1><b data-k="titleA"></b><br><span data-k="titleB"></span></h1>
+        <p data-k="sub"></p>
+        <div class="meta"><i></i>Cloud · On-premise · Hybrid</div>
+      </div>
+
+      <div class="clock" id="clock"></div>
+
+      <div class="grp human day" id="humanDay">
+        <div class="lbl"><span class="av"><svg width="13" height="13" viewBox="0 0 24 24" fill="#001AAD"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z"/></svg></span><span data-k="humanDay"></span></div>
+        <div class="tk queue"><span class="t" data-k="humanDay1"></span><span class="cb"></span></div>
+        <div class="tk queue"><span class="t" data-k="humanDay2"></span><span class="cb"></span></div>
+      </div>
+      <div class="grp human night" id="humanNight" style="opacity:0">
+        <div class="lbl"><span class="av"><svg width="13" height="13" viewBox="0 0 24 24" fill="#001AAD"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z"/></svg></span><span data-k="humanNight"></span></div>
+        <div class="tk queue"><span class="t" data-k="humanNight1"></span><span class="cb"></span></div>
+      </div>
+
+      <div class="grp agent">
+        <div class="lblwrap">
+          <div class="lbl" id="agentDay"><span class="ic"><svg width="11" height="11" viewBox="0 0 24 24" fill="#10CBFF"><path d="M13 2 4 14h7l-2 8 9-12h-7l2-8z"/></svg></span><span data-k="agentDay"></span></div>
+          <div class="lbl" id="agentNight" style="opacity:0"><span class="ic"><svg width="11" height="11" viewBox="0 0 24 24" fill="#10CBFF"><path d="M13 2 4 14h7l-2 8 9-12h-7l2-8z"/></svg></span><span data-k="agentNight"></span></div>
+        </div>
+        <div id="feed"></div>
+      </div>
+
+      <div class="hint" id="hint"><span data-k="hint"></span><i></i></div>
+    </div>
+  </div>
+</section>
+
+<section class="next"><div><h2 data-k="nextTitle"></h2><p data-k="nextSub"></p></div></section>
+
+<script>
+  const TEXT = {
+    vi: {
+      menu: ['Trang chủ', 'Sản phẩm ▾', 'Khách hàng', 'Góc nhìn', 'Giới thiệu', 'Tuyển dụng'], cta: 'Đặt lịch Demo / Tư vấn',
+      eyebrow: 'AgentFlow · Vận hành 24/7', titleA: 'AI Agent', titleB: 'cho Doanh nghiệp',
+      sub: 'AI Agent vận hành quy trình nội bộ suốt ngày đêm. Con người chỉ phê duyệt những gì quan trọng.',
+      agentDay: 'AI Agent · Kế toán', agentNight: 'AI Agent · Vẫn đang làm việc',
+      humanDay: 'Trưởng phòng Kế toán', humanDay1: 'Duyệt 3 ngoại lệ hóa đơn', humanDay2: 'Họp giao ban',
+      humanNight: 'Trưởng phòng Kế toán · Đã về', humanNight1: 'Sáng mai: duyệt 3 ngoại lệ',
+      hint: 'Cuộn để xem buổi tối', nextTitle: 'Bản thử nghiệm banner', nextSub: 'Bản xem trước nội bộ, chưa đưa lên website innomation.vn.',
+      tasks: ['Bóc tách hóa đơn từ email', 'Đối chiếu với PO & biên nhận', 'Chuyển ngoại lệ cho người duyệt', 'Đồng bộ dữ liệu ERP',
+        'Tạo tài khoản cho nhân viên mới', 'Phân loại hồ sơ đến qua email', 'Cập nhật đơn hàng vào hệ thống', 'Nhắc hạn phê duyệt hợp đồng',
+        'Đối chiếu chứng từ cuối ngày', 'Báo cáo vận hành gửi lãnh đạo'],
+    },
+    en: {
+      menu: ['Home', 'Products ▾', 'Customers', 'Insights', 'About us', 'Careers'], cta: 'Book a Demo / Consultation',
+      eyebrow: 'AgentFlow · Runs 24/7', titleA: 'AI Agent', titleB: 'for Businesses',
+      sub: 'AI Agents run your internal processes around the clock. Your people approve only what matters.',
+      agentDay: 'AI Agent · Accounting', agentNight: 'AI Agent · Still working',
+      humanDay: 'Head of Accounting', humanDay1: 'Approve 3 invoice exceptions', humanDay2: 'Team stand-up',
+      humanNight: 'Head of Accounting · Signed off', humanNight1: 'Tomorrow: 3 approvals',
+      hint: 'Scroll to see the night shift', nextTitle: 'Banner prototype', nextSub: 'Internal preview, not live on innomation.vn.',
+      tasks: ['Extract invoices from email', 'Match against PO & receipts', 'Route exceptions for approval', 'Sync ERP data',
+        'Set up accounts for new hires', 'Sort incoming files from email', 'Update orders in the system', 'Remind contract approval deadlines',
+        'End-of-day document matching', 'Ops report sent to leadership'],
+    },
+  };
+  let lang = 'vi';
+  const $ = id => document.getElementById(id);
+
+  function applyText() {
+    const T = TEXT[lang];
+    document.documentElement.lang = lang;
+    $('menu').innerHTML = T.menu.map(m => `<li>${m}</li>`).join('');
+    document.querySelectorAll('[data-k]').forEach(el => { el.textContent = T[el.dataset.k] });
+    $('b-vi').classList.toggle('on', lang === 'vi');
+    $('b-en').classList.toggle('on', lang === 'en');
+    resetFeed();
+    update();
+  }
+  $('b-vi').onclick = () => { lang = 'vi'; applyText() };
+  $('b-en').onclick = () => { lang = 'en'; applyText() };
+
+  // phóng khung 1440x860 phủ kín màn hình (cover)
+  function fit() {
+    const s = Math.max(innerWidth / 1440, innerHeight / 860);
+    $('stage').style.transform = `translate(-50%,-50%) scale(${s})`;
+  }
+
+  // ===== chuyển ngày -> đêm theo vị trí cuộn =====
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const smooth = (a, b, v) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t) };
+  // ?p=0..1 cố định tiến độ (dùng khi xuất ảnh minh hoạ)
+  const FORCED = new URLSearchParams(location.search).get('p');
+  function progress() {
+    if (FORCED !== null) return clamp(+FORCED);
+    const r = $('wrap').getBoundingClientRect();
+    return clamp(-r.top / (r.height - innerHeight));
+  }
+  function update() {
+    const p = progress();
+    const e = smooth(.12, .88, p);                 // giữ ngày ở đầu, giữ đêm ở cuối
+    $('night').style.opacity = e;
+    // đồng hồ chạy từ 09:30 tới 23:00
+    const mins = Math.round((570 + (1380 - 570) * e) / 5) * 5;
+    const h = Math.floor(mins / 60), m = mins % 60;
+    const ap = h < 12 ? 'AM' : 'PM';
+    const hh = lang === 'en' ? ((h + 11) % 12) + 1 : h;
+    $('clock').innerHTML = `${String(hh).padStart(2, '0')}:${String(m).padStart(2, '0')}<small>${ap}</small>`;
+    // người về: thẻ việc ban ngày mờ dần, thẻ "đã về" hiện lên
+    // mờ hẳn bản ngày rồi mới hiện bản đêm, tránh hai nhãn chồng lên nhau
+    const out = smooth(.36, .48, e), inn = smooth(.5, .62, e);
+    $('humanDay').style.opacity = 1 - out;
+    $('humanNight').style.opacity = inn;
+    $('agentDay').style.opacity = 1 - out;
+    $('agentNight').style.opacity = inn;
+    $('hint').style.opacity = 1 - smooth(0, .15, p);
+  }
+  addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+  addEventListener('resize', () => { fit(); update() });
+
+  // ===== dòng việc AI Agent chạy liên tục =====
+  const RUN = 1800, HOLD = 550, VISIBLE = 4;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let next = 0, timer = null;
+  function row(state) {
+    const T = TEXT[lang].tasks;
+    const el = document.createElement('div');
+    el.className = 'tk ' + state;
+    el.innerHTML = `<span class="t">${T[next % T.length]}</span><span class="cb"></span><span class="bar"></span>`;
+    el.style.setProperty('--d', RUN + 'ms');
+    next++;
+    return el;
+  }
+  function resetFeed() {
+    clearTimeout(timer);
+    const feed = $('feed');
+    feed.innerHTML = '';
+    next = 0;
+    for (let i = 0; i < VISIBLE; i++) feed.appendChild(row(i === 0 ? 'queue' : 'queue'));
+    if (reduce) { feed.firstChild.className = 'tk run'; return }
+    timer = setTimeout(cycle, 400);
+  }
+  function cycle() {
+    const feed = $('feed');
+    const first = feed.firstElementChild;
+    first.className = 'tk run';                     // thanh tiến độ chạy
+    timer = setTimeout(() => {
+      first.className = 'tk done';
+      first.querySelector('.cb').textContent = '✓';
+      timer = setTimeout(() => {
+        first.classList.add('leave');               // thu gọn hàng đã xong
+        const n = row('queue enter');
+        feed.appendChild(n);
+        n.getBoundingClientRect();                  // ép trình duyệt tính layout để hiệu ứng trượt vào chạy
+        n.classList.remove('enter');
+        timer = setTimeout(() => { first.remove(); cycle() }, 460);
+      }, HOLD);
+    }, RUN);
+  }
+  // tạm dừng khi tab ẩn để vòng lặp không dồn
+  document.addEventListener('visibilitychange', () => { if (document.hidden) clearTimeout(timer); else resetFeed() });
+
+  fit();
+  applyText();
+</script>
+</body>
+</html>
