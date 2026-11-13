@@ -93,14 +93,14 @@
 
   /* Dải logo khách hàng */
   .logos{padding:44px 0 40px;border-bottom:1px solid #E3E8F6;background:#fff}
-  .logos .cap{text-align:center;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#6B7490}
+  .logos .lcap{text-align:center;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#6B7490}
   .marq{margin-top:26px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
   .track{display:flex;width:max-content;animation:marq 38s linear infinite}
   .marq:hover .track{animation-play-state:paused}
   @keyframes marq{to{transform:translateX(-50%)}}
   .lg{flex:none;width:200px;height:64px;margin:0 22px;display:grid;place-items:center;filter:grayscale(1);opacity:.62;transition:filter .3s,opacity .3s;color:#1E2540}
   .lg:hover{filter:none;opacity:1}
-  .lg img{max-width:150px;max-height:58px;object-fit:contain}
+  .lg img{width:auto;max-width:170px;object-fit:contain}
   .wm{font-family:Montserrat,sans-serif;text-align:center;line-height:1.1;white-space:nowrap}
   .wm.av{font-weight:500;font-size:22px;letter-spacing:.42em;padding-left:.42em}
   .wm.lof{font-weight:800;font-size:30px;letter-spacing:.04em}
@@ -316,7 +316,7 @@
 <main class="page">
   <!-- 1. Dải logo khách hàng -->
   <section class="logos" aria-label="Khách hàng">
-    <div class="cap" data-k="logosCap"></div>
+    <div class="lcap" data-k="logosCap"></div>
     <div class="marq"><div class="track" id="track"></div></div>
     <div class="stats" id="stats"></div>
   </section>
@@ -441,13 +441,16 @@
     stats: [['4 years', 'in automation'], ['~30', 'customers'], ['Top 4', 'RPA provider in Vietnam']],
   });
 
+  // chiều cao từng logo được chỉnh tay để các logo trông cân nặng thị giác như nhau
   const LOGOS = [
-    '<img src="img/logos/circlek.png" alt="Circle K">',
-    '<img src="img/logos/guardian.png" alt="Guardian">',
-    '<span class="wm av">AVENUE</span>',
+    '<img src="img/logos/circlek.png" alt="Circle K" style="height:38px">',
+    '<img src="img/logos/evn-genco3.png" alt="EVN Genco3" style="height:62px">',
+    '<img src="img/logos/guardian.png" alt="Guardian" style="height:34px">',
+    '<img src="img/logos/mobifone.png" alt="MobiFone" style="height:25px">',
     '<span class="wm dost">Sở Khoa học và Công nghệ<b>TP. HỒ CHÍ MINH</b></span>',
+    '<img src="img/logos/avenue.png" alt="Avenue" style="height:34px">',
+    '<img src="img/logos/gimasys.png" alt="Gimasys" style="height:42px">',
     '<span class="wm lof">LOF</span>',
-    '<span class="wm evn">EVN<small>GENCO 3</small></span>',
   ];
 
   const IC = {
