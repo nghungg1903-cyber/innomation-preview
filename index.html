@@ -82,9 +82,146 @@
   .hint i{width:2px;height:26px;background:linear-gradient(var(--cyan),transparent);animation:drip 1.6s ease-in-out infinite}
   @keyframes drip{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.2);transform-origin:bottom}}
 
-  .next{min-height:70vh;background:#F7F9FF;color:var(--ink);display:grid;place-items:center;padding:80px 24px;text-align:center}
-  .next h2{font-size:clamp(26px,3vw,34px);color:var(--blue);margin-bottom:10px}
-  .next p{color:#55607A}
+  /* ===== Các section dưới banner (nền sáng, bố cục theo kiểu Atomicwork) ===== */
+  .page{background:#F7F9FF;color:var(--ink)}
+  .wrapx{max-width:1240px;margin:0 auto;padding:0 var(--gx)}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#2563EB}
+  .eyebrow i{width:22px;height:2px;background:var(--cyan)}
+  .sec{padding:clamp(64px,9vw,120px) 0}
+  .sec h2{font-size:clamp(28px,3.4vw,48px);line-height:1.12;letter-spacing:-.02em;font-weight:700;color:var(--blue);margin-top:14px;max-width:18em}
+  .sec .lead{margin-top:14px;max-width:44em;font-size:clamp(15px,1.15vw,18px);line-height:1.65;color:#4A5372;font-weight:500}
+
+  /* Dải logo khách hàng */
+  .logos{padding:44px 0 40px;border-bottom:1px solid #E3E8F6;background:#fff}
+  .logos .cap{text-align:center;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#6B7490}
+  .marq{margin-top:26px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .track{display:flex;width:max-content;animation:marq 38s linear infinite}
+  .marq:hover .track{animation-play-state:paused}
+  @keyframes marq{to{transform:translateX(-50%)}}
+  .lg{flex:none;width:200px;height:64px;margin:0 22px;display:grid;place-items:center;filter:grayscale(1);opacity:.62;transition:filter .3s,opacity .3s;color:#1E2540}
+  .lg:hover{filter:none;opacity:1}
+  .lg img{max-width:150px;max-height:58px;object-fit:contain}
+  .wm{font-family:Montserrat,sans-serif;text-align:center;line-height:1.1;white-space:nowrap}
+  .wm.av{font-weight:500;font-size:22px;letter-spacing:.42em;padding-left:.42em}
+  .wm.lof{font-weight:800;font-size:30px;letter-spacing:.04em}
+  .wm.evn{font-weight:800;font-size:22px;letter-spacing:.02em}.wm.evn small{display:block;font-weight:600;font-size:11px;letter-spacing:.3em;margin-top:3px}
+  .wm.dost{font-weight:700;font-size:12.5px;letter-spacing:.02em}.wm.dost b{display:block;font-size:19px;letter-spacing:.06em;margin-top:2px}
+  .stats{display:flex;justify-content:center;gap:clamp(24px,6vw,90px);margin-top:34px;flex-wrap:wrap}
+  .stat{text-align:center}
+  .stat b{display:block;font-size:clamp(26px,2.6vw,36px);color:var(--blue);font-weight:700;letter-spacing:-.02em}
+  .stat span{font-size:13px;color:#6B7490;font-weight:600}
+
+  /* Năng lực theo phòng ban: tab trái, quy trình phải */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:36px}
+  .tab{font:600 14px Montserrat,sans-serif;padding:11px 18px;border-radius:999px;border:1px solid #D9E0F2;background:#fff;color:#3A4466;cursor:pointer;transition:all .25s}
+  .tab:hover{border-color:#9FB0E6}
+  .tab.on{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 8px 22px rgba(0,26,173,.22)}
+  .dept{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);margin-top:28px;align-items:stretch}
+  .flowcard{background:linear-gradient(160deg,#001AAD,#0B2BD0 60%,#2563EB);border-radius:24px;padding:clamp(22px,2.6vw,34px);color:#fff;position:relative;overflow:hidden}
+  .flowcard:before{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(16,203,255,.35),transparent 70%)}
+  .flowcard .k{font:700 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
+  .flowcard h3{font-size:clamp(19px,1.6vw,24px);margin-top:8px;line-height:1.3}
+  .steps{list-style:none;margin-top:22px;position:relative}
+  .steps:before{content:"";position:absolute;left:17px;top:18px;bottom:18px;width:2px;background:rgba(255,255,255,.18)}
+  .st{position:relative;display:flex;align-items:center;gap:14px;padding:7px 0;opacity:.55;transition:opacity .35s}
+  .st.on,.st.done{opacity:1}
+  .st .n{flex:none;width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);z-index:1;transition:all .35s}
+  .st .n svg{width:17px;height:17px}
+  .st.on .n{background:var(--cyan);border-color:var(--cyan);box-shadow:0 0 0 6px rgba(16,203,255,.22);color:#00163D}
+  .st.done .n{background:rgba(16,203,255,.25);border-color:var(--cyan)}
+  .st .tx{flex:1;min-width:0;font-weight:600;font-size:14.5px;line-height:1.35}
+  .st .who{flex:none;font:700 10px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.12)}
+  .st .who.agent{background:rgba(16,203,255,.2);color:#BFF0FF}
+  .st .who.human{background:#fff;color:var(--blue)}
+  .flowcard .out{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.18);font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.88)}
+  .roles{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:start}
+  .role{background:#fff;border:1px solid #E3E8F6;border-radius:18px;padding:20px;transition:transform .3s,box-shadow .3s}
+  .role:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(16,30,90,.08)}
+  .role .ri{width:38px;height:38px;border-radius:11px;background:#EEF2FF;display:grid;place-items:center;color:var(--blue)}
+  .role .ri svg{width:19px;height:19px}
+  .role h4{margin-top:14px;font-size:15.5px;color:var(--ink)}
+  .role p{margin-top:6px;font-size:13.5px;line-height:1.55;color:#5A6482}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:#6B7490;font-weight:600}
+  .legend span{display:inline-flex;align-items:center;gap:6px}.legend i{width:10px;height:10px;border-radius:3px}
+  .fade{animation:fadeup .45s ease both}
+  @keyframes fadeup{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  /* Sơ đồ tổ chức */
+  .orgsec{background:#fff;border-top:1px solid #E3E8F6;border-bottom:1px solid #E3E8F6}
+  .org{margin-top:44px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:start}
+  .chart{position:relative;background:#F7F9FF;border:1px solid #E3E8F6;border-radius:24px;padding:28px 22px 26px}
+  .chart .grid{background-image:radial-gradient(#D9E0F2 1px,transparent 1px);background-size:18px 18px;position:absolute;inset:0;border-radius:24px;opacity:.7;pointer-events:none}
+  .ceo{position:relative;margin:0 auto;width:max-content;max-width:100%}
+  .node{position:relative;background:#fff;border:1.5px solid #D9E0F2;border-radius:14px;padding:11px 14px;text-align:center;cursor:pointer;transition:all .25s;font:inherit;color:inherit;width:100%}
+  .node:hover{border-color:#9FB0E6}
+  .node.on{border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,26,173,.1),0 12px 26px rgba(0,26,173,.12)}
+  .node .nm{display:block;font-weight:700;font-size:13.5px;color:var(--ink);line-height:1.3}
+  .node .ag{display:inline-flex;align-items:center;gap:5px;margin-top:7px;font:700 10.5px 'JetBrains Mono',monospace;letter-spacing:.05em;color:var(--blue);background:#EEF5FF;border-radius:999px;padding:3px 8px}
+  .node .ag i{width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 6px var(--cyan);animation:blink 1.6s ease-in-out infinite}
+  @keyframes blink{50%{opacity:.35}}
+  .ceo .node{padding:13px 22px;background:var(--blue);border-color:var(--blue)}
+  .ceo .node .nm{color:#fff}.ceo .node .ag{background:rgba(255,255,255,.15);color:#fff}
+  .ceo .node.on{box-shadow:0 0 0 4px rgba(16,203,255,.35),0 12px 26px rgba(0,26,173,.25)}
+  .hub{position:relative;margin:30px auto 0;width:max-content;max-width:100%;display:flex;align-items:center;gap:10px;padding:9px 16px;border-radius:999px;background:linear-gradient(90deg,#001AAD,#2563EB);color:#fff;font:700 12px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 10px 24px rgba(0,26,173,.25)}
+  .hub svg{width:14px;height:14px}
+  .hub:before{content:"";position:absolute;left:50%;top:-30px;width:2px;height:30px;background:#C9D3EE}
+  .hub:after{content:"";position:absolute;left:50%;bottom:-15px;width:2px;height:15px;background:#C9D3EE}
+  .vline{position:absolute;left:50%;width:2px;background:#C9D3EE}
+  .depts{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 14px;margin-top:30px}
+  .depts:before{content:"";position:absolute;left:16.6%;right:16.6%;top:-15px;height:2px;background:#C9D3EE}
+  .depts .cell{position:relative}
+  .depts .cell:before{content:"";position:absolute;left:50%;top:-15px;width:2px;height:15px;background:#C9D3EE}
+  .depts .cell:nth-child(n+4):before{display:none}
+  .depts .cell:nth-child(n+4){margin-top:0}
+  .pulse{position:absolute;width:8px;height:8px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);pointer-events:none;opacity:0}
+  .detail{background:var(--ink);color:#fff;border-radius:24px;padding:clamp(22px,2.6vw,32px);position:sticky;top:24px}
+  .detail .k{font:700 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
+  .detail h3{font-size:clamp(20px,1.7vw,26px);margin-top:8px;line-height:1.25}
+  .detail .pain{margin-top:10px;font-size:14px;line-height:1.6;color:rgba(255,255,255,.72)}
+  .detail ul{list-style:none;margin-top:18px;display:grid;gap:10px}
+  .detail li{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.5;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+  .detail li b{flex:none;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:var(--cyan);color:#00163D;font-size:11px;margin-top:1px}
+  .detail .sol{margin-top:16px;display:flex;flex-wrap:wrap;gap:6px}
+  .detail .sol span{font:700 10.5px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.85)}
+
+  /* Nền tảng: năng lực cốt lõi + triển khai */
+  .caps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:40px}
+  .cap{background:#fff;border:1px solid #E3E8F6;border-radius:18px;padding:22px}
+  .cap .num{font:700 12px 'JetBrains Mono',monospace;color:#2563EB;letter-spacing:.08em}
+  .cap h4{margin-top:10px;font-size:16px;color:var(--ink)}
+  .cap p{margin-top:6px;font-size:13.5px;line-height:1.55;color:#5A6482}
+  .deploy{margin-top:18px;border-radius:24px;padding:clamp(22px,3vw,36px);background:linear-gradient(120deg,#001AAD,#2563EB);color:#fff;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px;align-items:center}
+  .deploy h3{font-size:clamp(20px,1.9vw,28px);line-height:1.25}
+  .deploy p{margin-top:8px;color:rgba(255,255,255,.85);font-size:14.5px;line-height:1.6}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips span{padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);font-weight:600;font-size:13.5px}
+
+  .ctaend{padding:clamp(64px,8vw,110px) 0;text-align:center}
+  .ctaend h2{margin:14px auto 0;max-width:20em}
+  .ctaend .lead{margin:14px auto 0}
+  .btn{display:inline-flex;align-items:center;gap:10px;margin-top:28px;background:var(--blue);color:#fff;text-decoration:none;padding:15px 26px;border-radius:999px;font-weight:700;font-size:15px;box-shadow:0 12px 28px rgba(0,26,173,.25);transition:transform .2s}
+  .btn:hover{transform:translateY(-2px)}
+  .ctaend .contact{margin-top:18px;font-size:14px;color:#5A6482;font-weight:600}
+  .foot{background:#05081A;color:rgba(255,255,255,.6);padding:26px 0;font-size:13px}
+  .foot .wrapx{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  @media (max-width:1023px){
+    .dept,.org{grid-template-columns:minmax(0,1fr)}
+    .detail{position:relative;top:0}
+    .caps{grid-template-columns:1fr 1fr}
+    .deploy{grid-template-columns:1fr}
+  }
+  @media (max-width:640px){
+    .roles,.caps{grid-template-columns:1fr}
+    .tabs{flex-wrap:nowrap;overflow-x:auto;margin-left:calc(-1*var(--gx));margin-right:calc(-1*var(--gx));padding:0 var(--gx) 6px;scrollbar-width:none}
+    .tab{flex:none}
+    .lg{width:150px;margin:0 12px}
+    .depts{grid-template-columns:1fr 1fr;gap:12px}
+    .depts:before,.depts .cell:before,.vline,.hub:before,.hub:after{display:none}
+    .hub{margin-top:16px;width:auto;justify-content:center;text-align:center;font-size:10.5px;letter-spacing:.05em}
+    .chart{padding:20px 14px}
+    .st .who{display:none}
+  }
 
   /* Màn hình vừa: menu rút gọn */
   @media (max-width:1180px){ .nav ul{display:none} .burger{display:grid} }
@@ -119,7 +256,7 @@
   /* Màn hình thấp (điện thoại xoay ngang): bỏ bớt mô tả */
   @media (max-height:520px){ .copy p,.copy .meta{display:none} .humancol{display:none} #feed .tk:nth-child(n+3){display:none} }
 
-  @media (prefers-reduced-motion:reduce){.tk,.tk.run .bar,.cb{transition:none}.hint i{animation:none}}
+  @media (prefers-reduced-motion:reduce){.track{animation:none}.tk,.tk.run .bar,.cb{transition:none}.hint i{animation:none}}
 </style>
 </head>
 <body>
@@ -176,7 +313,67 @@
   </div>
 </section>
 
-<section class="next"><div><h2 data-k="nextTitle"></h2><p data-k="nextSub"></p></div></section>
+<main class="page">
+  <!-- 1. Dải logo khách hàng -->
+  <section class="logos" aria-label="Khách hàng">
+    <div class="cap" data-k="logosCap"></div>
+    <div class="marq"><div class="track" id="track"></div></div>
+    <div class="stats" id="stats"></div>
+  </section>
+
+  <!-- 2. Năng lực theo phòng ban -->
+  <section class="sec" id="capability">
+    <div class="wrapx">
+      <div class="eyebrow"><i></i><span data-k="capEyebrow"></span></div>
+      <h2 data-k="capTitle"></h2>
+      <p class="lead" data-k="capLead"></p>
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <div class="dept" id="dept"></div>
+    </div>
+  </section>
+
+  <!-- 3. Sơ đồ tổ chức -->
+  <section class="sec orgsec" id="org">
+    <div class="wrapx">
+      <div class="eyebrow"><i></i><span data-k="orgEyebrow"></span></div>
+      <h2 data-k="orgTitle"></h2>
+      <p class="lead" data-k="orgLead"></p>
+      <div class="org">
+        <div class="chart" id="chart">
+          <div class="grid"></div>
+          <div class="ceo" id="ceo"></div>
+          <div class="hub" id="hub"><svg viewBox="0 0 24 24" fill="#10CBFF"><path d="M13 2 4 14h7l-2 8 9-12h-7l2-8z"/></svg><span data-k="hub"></span></div>
+          <div class="depts" id="depts"></div>
+        </div>
+        <aside class="detail" id="detail" aria-live="polite"></aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Nền tảng & triển khai -->
+  <section class="sec">
+    <div class="wrapx">
+      <div class="eyebrow"><i></i><span data-k="platEyebrow"></span></div>
+      <h2 data-k="platTitle"></h2>
+      <div class="caps" id="caps"></div>
+      <div class="deploy">
+        <div><h3 data-k="depTitle"></h3><p data-k="depText"></p></div>
+        <div class="chips" id="chips"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ctaend orgsec">
+    <div class="wrapx">
+      <div class="eyebrow"><i></i><span>AgentFlow</span></div>
+      <h2 data-k="endTitle"></h2>
+      <p class="lead" data-k="endLead"></p>
+      <a class="btn" href="mailto:sales@innomation.vn"><span data-k="cta"></span> →</a>
+      <div class="contact">sales@innomation.vn · 028 7309 9009</div>
+    </div>
+  </section>
+  <footer class="foot"><div class="wrapx"><span>© Innomation Technology Corporation</span><span data-k="footNote"></span></div></footer>
+</main>
 
 <script>
   const TEXT = {
@@ -208,11 +405,218 @@
   let lang = 'vi';
   const $ = id => document.getElementById(id);
 
+  // ===== Nội dung các section dưới banner (lấy từ innomation.vn + Guideline) =====
+  Object.assign(TEXT.vi, {
+    logosCap: 'Được tin dùng bởi doanh nghiệp lớn và cơ quan nhà nước',
+    capEyebrow: '01 · Năng lực hệ thống', capTitle: 'Mỗi phòng ban có một đội AI Agent làm việc cùng',
+    capLead: 'AgentFlow kết nối con người, dữ liệu, hệ thống và AI Agent trong cùng một luồng. Agent xử lý phần việc lặp lại, con người phê duyệt những điểm quan trọng.',
+    flowK: 'Quy trình mẫu', outK: 'Kết quả', who: { agent: 'AI Agent', human: 'Con người', system: 'Hệ thống' },
+    legend: ['AI Agent thực hiện', 'Con người phê duyệt', 'Tích hợp hệ thống'],
+    orgEyebrow: '02 · Sơ đồ tổ chức', orgTitle: 'AgentFlow vận hành xuyên suốt sơ đồ tổ chức của doanh nghiệp',
+    orgLead: 'Chọn một khối trong sơ đồ để xem AgentFlow đảm nhận những việc gì. Mọi luồng việc liên phòng ban đều đi qua một nền tảng điều phối chung.',
+    hub: 'AgentFlow · Điều phối liên phòng ban', agentsN: n => `${n} AI Agent`, solK: 'Giải pháp trên AgentFlow',
+    platEyebrow: '03 · Nền tảng', platTitle: 'Một nền tảng cho toàn bộ quy trình nghiệp vụ',
+    depTitle: 'Triển khai linh hoạt, dữ liệu nằm trong tầm kiểm soát',
+    depText: 'Dữ liệu lưu trữ tại Việt Nam. Hỗ trợ model AI chạy nội bộ (private LLM) để dữ liệu không bị đưa ra ngoài, phù hợp với cơ quan nhà nước và doanh nghiệp lớn.',
+    chips: ['Cloud', 'On-premise', 'Hybrid', 'Dữ liệu tại Việt Nam', 'Private LLM', 'SSO & phân quyền', 'Nhật ký kiểm toán'],
+    endTitle: 'Bắt đầu từ quy trình cần tối ưu nhất', endLead: 'Chia sẻ bài toán của doanh nghiệp, chúng tôi sẽ đề xuất luồng AI Agent phù hợp và demo trên chính quy trình đó.',
+    footNote: 'Bản xem trước nội bộ, chưa đưa lên innomation.vn',
+    stats: [['4 năm', 'kinh nghiệm tự động hóa'], ['~30', 'khách hàng'], ['Top 4', 'nhà cung cấp RPA tại Việt Nam']],
+  });
+  Object.assign(TEXT.en, {
+    logosCap: 'Trusted by large enterprises and public sector organizations',
+    capEyebrow: '01 · Capabilities', capTitle: 'Every department gets a team of AI Agents',
+    capLead: 'AgentFlow connects people, data, systems and AI Agents in one flow. Agents handle the repetitive work; people approve the decisions that matter.',
+    flowK: 'Sample workflow', outK: 'Outcome', who: { agent: 'AI Agent', human: 'Human', system: 'System' },
+    legend: ['Done by AI Agent', 'Approved by people', 'System integration'],
+    orgEyebrow: '02 · Org chart', orgTitle: 'AgentFlow works across your entire organization',
+    orgLead: 'Pick a unit on the chart to see what AgentFlow takes on. Every cross-department flow runs through one shared orchestration platform.',
+    hub: 'AgentFlow · Cross-team orchestration', agentsN: n => `${n} AI Agents`, solK: 'Solutions on AgentFlow',
+    platEyebrow: '03 · Platform', platTitle: 'One platform for every business process',
+    depTitle: 'Flexible deployment, data stays under your control',
+    depText: 'Data is stored in Vietnam. Internally hosted AI models (private LLM) keep data inside your walls, built for public sector and large enterprises.',
+    chips: ['Cloud', 'On-premise', 'Hybrid', 'Data in Vietnam', 'Private LLM', 'SSO & roles', 'Audit trail'],
+    endTitle: 'Start with the process you most want to improve', endLead: 'Share your challenge and we will propose the right AI Agent flow, then demo it on that exact process.',
+    footNote: 'Internal preview, not live on innomation.vn',
+    stats: [['4 years', 'in automation'], ['~30', 'customers'], ['Top 4', 'RPA provider in Vietnam']],
+  });
+
+  const LOGOS = [
+    '<img src="img/logos/circlek.png" alt="Circle K">',
+    '<img src="img/logos/guardian.png" alt="Guardian">',
+    '<span class="wm av">AVENUE</span>',
+    '<span class="wm dost">Sở Khoa học và Công nghệ<b>TP. HỒ CHÍ MINH</b></span>',
+    '<span class="wm lof">LOF</span>',
+    '<span class="wm evn">EVN<small>GENCO 3</small></span>',
+  ];
+
+  const IC = {
+    agent: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h7l-2 8 9-12h-7l2-8z"/></svg>',
+    human: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z"/></svg>',
+    system: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>',
+  };
+
+  // Mỗi phòng ban: quy trình mẫu (a = agent, h = human, s = system) + 4 vai trò AI Agent
+  const DEPTS = [
+    { id: 'fin',
+      vi: { name: 'Tài chính – Kế toán', flow: 'Xử lý hóa đơn đầu vào', out: 'Kế toán chỉ xử lý ngoại lệ thay vì nhập tay từng chứng từ; mọi bước đều có nhật ký để đối soát.',
+        steps: [['a', 'Nhận và bóc tách hóa đơn từ email'], ['a', 'Đối chiếu với PO, biên nhận, hợp đồng'], ['a', 'Gắn cờ sai lệch, chuyển ngoại lệ'], ['h', 'Kế toán trưởng phê duyệt'], ['s', 'Ghi nhận vào ERP, lên lịch thanh toán']],
+        roles: [['Agent Bóc tách chứng từ', 'Đọc hóa đơn, PO, biên nhận đa định dạng và chuẩn hóa dữ liệu.'], ['Agent Đối chiếu', 'So khớp ba bên theo ngưỡng sai lệch cho phép.'], ['Agent Nhắc công nợ', 'Theo dõi hạn thanh toán, nhắc nhà cung cấp và khách hàng.'], ['Agent Báo cáo', 'Tổng hợp báo cáo cuối ngày gửi lãnh đạo.']] },
+      en: { name: 'Finance & Accounting', flow: 'Inbound invoice processing', out: 'Accountants handle exceptions instead of keying in every document, with a full log for reconciliation.',
+        steps: [['a', 'Receive and extract invoices from email'], ['a', 'Match against PO, receipts and contracts'], ['a', 'Flag mismatches, route exceptions'], ['h', 'Chief accountant approves'], ['s', 'Post to ERP, schedule payment']],
+        roles: [['Document Extraction Agent', 'Reads invoices, POs and receipts in any format and normalizes the data.'], ['Matching Agent', 'Runs three-way matching within allowed tolerances.'], ['Receivables Agent', 'Tracks due dates and reminds suppliers and customers.'], ['Reporting Agent', 'Compiles the end-of-day report for leadership.']] } },
+    { id: 'hr',
+      vi: { name: 'Nhân sự', flow: 'Tiếp nhận nhân viên mới', out: 'Nhân viên mới có đủ tài khoản, thiết bị và lịch hội nhập ngay ngày đầu, không cần HR nhắc từng phòng.',
+        steps: [['h', 'Offer được phê duyệt'], ['a', 'Tạo hồ sơ nhân sự, gửi checklist giấy tờ'], ['s', 'Cấp email, tài khoản phần mềm'], ['h', 'Quản lý trực tiếp xác nhận'], ['a', 'Gửi lịch hội nhập và tài liệu tuần đầu']],
+        roles: [['Agent Sàng lọc CV', 'Đọc CV, so với mô tả công việc và đề xuất ứng viên phù hợp.'], ['Agent Onboarding', 'Điều phối các bước giữa HR, IT và quản lý.'], ['Agent Nghỉ phép', 'Kiểm tra quỹ phép, chuyển duyệt và cập nhật bảng công.'], ['Trợ lý chính sách', 'Trả lời câu hỏi về quy chế, kèm trích dẫn nguồn (Ragify).']] },
+      en: { name: 'Human Resources', flow: 'New hire onboarding', out: 'New hires have accounts, equipment and an onboarding plan on day one, without HR chasing every team.',
+        steps: [['h', 'Offer approved'], ['a', 'Create employee profile, send document checklist'], ['s', 'Provision email and software accounts'], ['h', 'Line manager confirms'], ['a', 'Send onboarding schedule and week-one materials']],
+        roles: [['CV Screening Agent', 'Reads CVs, compares them with the job description and shortlists.'], ['Onboarding Agent', 'Coordinates steps across HR, IT and managers.'], ['Leave Agent', 'Checks balances, routes approval and updates timesheets.'], ['Policy Assistant', 'Answers policy questions with cited sources (Ragify).']] } },
+    { id: 'buy',
+      vi: { name: 'Mua hàng', flow: 'Đề xuất mua hàng nhiều cấp', out: 'Yêu cầu mua hàng đi đúng tuyến phê duyệt theo ngân sách, minh bạch từ đề xuất tới thanh toán.',
+        steps: [['h', 'Phòng ban tạo đề xuất mua'], ['a', 'Kiểm tra ngân sách, chính sách mua hàng'], ['a', 'Tổng hợp và so sánh báo giá'], ['h', 'Phê duyệt nhiều cấp theo hạn mức'], ['s', 'Tạo PO, theo dõi giao nhận']],
+        roles: [['Agent Kiểm tra ngân sách', 'Đối chiếu đề xuất với ngân sách còn lại của phòng ban.'], ['Agent So sánh báo giá', 'Tóm tắt điểm khác biệt giữa các nhà cung cấp.'], ['Agent Theo dõi PO', 'Nhắc giao hàng, cập nhật trạng thái nhận hàng.'], ['Agent Đánh giá NCC', 'Tổng hợp lịch sử chất lượng và tiến độ nhà cung cấp.']] },
+      en: { name: 'Procurement', flow: 'Multi-level purchase request', out: 'Every request follows the right approval path for its budget, traceable from request to payment.',
+        steps: [['h', 'Team submits a purchase request'], ['a', 'Check budget and purchasing policy'], ['a', 'Collect and compare quotes'], ['h', 'Multi-level approval by limit'], ['s', 'Create PO, track delivery']],
+        roles: [['Budget Check Agent', 'Compares requests with the remaining team budget.'], ['Quote Comparison Agent', 'Summarizes differences between suppliers.'], ['PO Tracking Agent', 'Chases deliveries and updates receipt status.'], ['Supplier Review Agent', 'Compiles supplier quality and delivery history.']] } },
+    { id: 'sales',
+      vi: { name: 'Kinh doanh – CSKH', flow: 'Từ yêu cầu khách hàng đến báo giá', out: 'Không bỏ sót yêu cầu nào; đội kinh doanh dành thời gian cho khách hàng thay vì soạn giấy tờ.',
+        steps: [['a', 'Nhận yêu cầu từ website, email, chat'], ['a', 'Phân loại, gán cho nhân viên phụ trách'], ['a', 'Soạn báo giá từ bảng giá và mẫu'], ['h', 'Trưởng nhóm duyệt giá'], ['s', 'Gửi khách hàng, cập nhật CRM']],
+        roles: [['Agent Phân loại yêu cầu', 'Đọc nội dung, xác định nhu cầu và mức ưu tiên.'], ['Agent Soạn báo giá', 'Tạo báo giá theo mẫu, kiểm tra chiết khấu.'], ['Agent Chăm sóc', 'Nhắc lịch follow-up, gửi thông tin sau buổi gặp.'], ['Trợ lý sản phẩm', 'Trả lời câu hỏi sản phẩm từ kho tri thức.']] },
+      en: { name: 'Sales & Service', flow: 'From customer request to quote', out: 'No request slips through; sales spends time with customers instead of paperwork.',
+        steps: [['a', 'Capture requests from website, email, chat'], ['a', 'Classify and assign an owner'], ['a', 'Draft a quote from price list and template'], ['h', 'Team lead approves pricing'], ['s', 'Send to customer, update CRM']],
+        roles: [['Request Triage Agent', 'Reads each request and sets intent and priority.'], ['Quote Agent', 'Builds quotes from templates and checks discounts.'], ['Follow-up Agent', 'Schedules follow-ups and sends meeting recaps.'], ['Product Assistant', 'Answers product questions from the knowledge base.']] } },
+    { id: 'legal',
+      vi: { name: 'Hành chính – Pháp chế', flow: 'Soạn và phê duyệt hợp đồng', out: 'Hợp đồng được soạn từ mẫu chuẩn, rà soát có căn cứ và không bị trễ hạn gia hạn.',
+        steps: [['h', 'Phòng ban gửi yêu cầu hợp đồng'], ['a', 'Soạn bản thảo từ mẫu chuẩn'], ['a', 'Rà soát điều khoản, đánh dấu rủi ro'], ['h', 'Pháp chế và lãnh đạo phê duyệt'], ['s', 'Lưu trữ, nhắc hạn gia hạn']],
+        roles: [['Agent Soạn hợp đồng', 'Điền thông tin vào mẫu, giữ đúng điều khoản chuẩn.'], ['Agent Rà soát', 'So bản thảo với mẫu, tóm tắt điểm khác biệt.'], ['Agent Công văn', 'Phân loại, đánh số và chuyển công văn đến.'], ['Agent Nhắc hạn', 'Theo dõi hạn hợp đồng, giấy phép, chứng từ.']] },
+      en: { name: 'Admin & Legal', flow: 'Contract drafting and approval', out: 'Contracts start from approved templates, are reviewed with evidence and never miss a renewal date.',
+        steps: [['h', 'Team requests a contract'], ['a', 'Draft from the approved template'], ['a', 'Review clauses, flag risks'], ['h', 'Legal and leadership approve'], ['s', 'Archive, remind renewal dates']],
+        roles: [['Contract Drafting Agent', 'Fills templates while keeping standard clauses intact.'], ['Review Agent', 'Compares drafts with templates and summarizes changes.'], ['Correspondence Agent', 'Sorts, numbers and routes incoming documents.'], ['Deadline Agent', 'Tracks contract, license and document deadlines.']] } },
+    { id: 'it',
+      vi: { name: 'IT – Vận hành', flow: 'Cấp quyền truy cập hệ thống', out: 'Quyền được cấp đúng người, đúng lúc và thu hồi khi không còn cần, có nhật ký kiểm toán đầy đủ.',
+        steps: [['h', 'Nhân viên gửi yêu cầu cấp quyền'], ['a', 'Kiểm tra chính sách theo vai trò'], ['h', 'Quản lý phê duyệt'], ['s', 'RPA tạo tài khoản trên hệ thống'], ['a', 'Ghi nhật ký, đặt lịch rà soát quyền']],
+        roles: [['Agent Hỗ trợ IT', 'Tiếp nhận yêu cầu, hướng dẫn xử lý lỗi thường gặp.'], ['Agent Cấp quyền', 'Cấp và thu hồi quyền theo vai trò, có phê duyệt.'], ['Agent Đồng bộ dữ liệu', 'Đồng bộ dữ liệu giữa ERP, CRM và hệ thống nội bộ.'], ['Agent Giám sát', 'Theo dõi tác vụ tự động, cảnh báo khi có lỗi.']] },
+      en: { name: 'IT & Operations', flow: 'System access provisioning', out: 'The right people get access at the right time and lose it when it is no longer needed, fully audited.',
+        steps: [['h', 'Employee requests access'], ['a', 'Check role-based policy'], ['h', 'Manager approves'], ['s', 'RPA creates the account'], ['a', 'Log activity, schedule access review']],
+        roles: [['IT Help Agent', 'Takes requests and walks users through common fixes.'], ['Access Agent', 'Grants and revokes role-based access with approval.'], ['Data Sync Agent', 'Keeps ERP, CRM and internal systems in sync.'], ['Monitoring Agent', 'Watches automated jobs and alerts on errors.']] } },
+  ];
+
+  // Sơ đồ tổ chức: Ban Giám đốc + 6 khối, mỗi khối gắn giải pháp trên AgentFlow
+  const ORG = {
+    ceo: { n: 3,
+      vi: { name: 'Ban Giám đốc', pain: 'Cần nhìn toàn cảnh vận hành và ra quyết định nhanh, không phải chờ báo cáo tổng hợp thủ công.',
+        items: ['Dashboard vận hành theo thời gian thực trên toàn doanh nghiệp', 'Phê duyệt nhiều cấp ngay trên điện thoại, có SLA nhắc hạn', 'Analytics & Audit: truy vết mọi quyết định của người và AI Agent'], sol: ['BPM', 'Task Management'] },
+      en: { name: 'Board of Directors', pain: 'Needs a full view of operations and fast decisions, without waiting for manually compiled reports.',
+        items: ['Real-time operations dashboard across the company', 'Multi-level approvals on mobile, with SLA reminders', 'Analytics & Audit: trace every decision by people and AI Agents'], sol: ['BPM', 'Task Management'] } },
+    depts: {
+      fin: { n: 4, sol: ['ERP', 'BPM'], vi: { pain: 'Khối lượng chứng từ lớn, đối chiếu thủ công giữa nhiều hệ thống, dễ sai sót cuối kỳ.', items: ['Bóc tách và đối chiếu hóa đơn, PO, biên nhận, hợp đồng (AutoMatching)', 'Chuyển ngoại lệ đúng người duyệt theo hạn mức', 'Đồng bộ bút toán vào ERP và báo cáo cuối ngày'] },
+        en: { pain: 'High document volume and manual matching across systems lead to month-end errors.', items: ['Extract and match invoices, POs, receipts and contracts (AutoMatching)', 'Route exceptions to the right approver by limit', 'Sync entries to ERP and send end-of-day reports'] } },
+      hr: { n: 4, sol: ['HRM', 'Task Management'], vi: { pain: 'Tuyển dụng, onboarding và nghỉ phép đi qua nhiều phòng ban, dễ sót bước.', items: ['Sàng lọc CV và lên lịch phỏng vấn', 'Onboarding tự động giữa HR, IT và quản lý', 'Trợ lý hỏi đáp quy chế nội bộ có trích dẫn nguồn (Ragify)'] },
+        en: { pain: 'Hiring, onboarding and leave span many teams, so steps get missed.', items: ['Screen CVs and schedule interviews', 'Automated onboarding across HR, IT and managers', 'Policy Q&A assistant with cited sources (Ragify)'] } },
+      buy: { n: 4, sol: ['ERP', 'BPM'], vi: { pain: 'Đề xuất mua hàng chờ duyệt lâu, khó theo dõi ngân sách và tiến độ giao hàng.', items: ['Kiểm tra ngân sách và chính sách trước khi trình duyệt', 'Phê duyệt nhiều cấp theo hạn mức, có SLA', 'Tạo PO và theo dõi giao nhận tới thanh toán'] },
+        en: { pain: 'Purchase requests wait for approval while budget and delivery are hard to track.', items: ['Check budget and policy before routing for approval', 'Multi-level approval by limit, with SLAs', 'Create POs and track delivery through to payment'] } },
+      sales: { n: 4, sol: ['CRM'], vi: { pain: 'Yêu cầu đến từ nhiều kênh, phản hồi chậm, dữ liệu khách hàng rời rạc.', items: ['Gom yêu cầu từ website, email, chat về một nơi', 'Soạn báo giá theo mẫu, duyệt giá trong luồng', 'Nhắc follow-up và cập nhật CRM tự động'] },
+        en: { pain: 'Requests arrive from many channels, replies are slow and customer data is scattered.', items: ['Bring website, email and chat requests into one place', 'Draft quotes from templates, approve pricing in-flow', 'Automated follow-ups and CRM updates'] } },
+      legal: { n: 4, sol: ['BPM', 'Task Management'], vi: { pain: 'Hợp đồng và công văn xử lý bằng tay, khó kiểm soát phiên bản và thời hạn.', items: ['Soạn hợp đồng từ mẫu chuẩn và rà soát điều khoản', 'Phân loại, đánh số và chuyển công văn đến', 'Nhắc hạn hợp đồng, giấy phép, chứng từ'] },
+        en: { pain: 'Contracts and correspondence are handled manually, versions and deadlines slip.', items: ['Draft contracts from templates and review clauses', 'Sort, number and route incoming correspondence', 'Remind contract, license and document deadlines'] } },
+      it: { n: 4, sol: ['BPM'], vi: { pain: 'Nhiều hệ thống rời rạc, cấp quyền và đồng bộ dữ liệu tốn công, khó kiểm toán.', items: ['Cấp và thu hồi quyền theo vai trò, có phê duyệt', 'Tích hợp API, MCP, RPA, database, SSO', 'Giám sát tác vụ tự động và nhật ký kiểm toán'] },
+        en: { pain: 'Many disconnected systems make access and data sync costly and hard to audit.', items: ['Grant and revoke role-based access with approval', 'Integrate via API, MCP, RPA, database and SSO', 'Monitor automated jobs with a full audit trail'] } },
+    },
+  };
+
+  const CAPS = {
+    vi: [['Visual Process Designer', 'Thiết kế quy trình kéo thả, no-code / low-code.'], ['Workflow Engine', 'Tuần tự, song song, rẽ nhánh, phê duyệt nhiều cấp.'], ['AI Agents', 'Phân loại, tóm tắt, trích xuất, đề xuất trong từng bước.'], ['Human Task & Approval', 'Giao việc cho người, theo dõi SLA, AI with Human-in-the-Loop.'], ['Enterprise Integration', 'Kết nối API, MCP, RPA, database và SSO.'], ['Analytics & Audit', 'Theo dõi trạng thái, ngoại lệ và lịch sử xử lý tập trung.']],
+    en: [['Visual Process Designer', 'Drag-and-drop process design, no-code / low-code.'], ['Workflow Engine', 'Sequential, parallel, branching, multi-level approvals.'], ['AI Agents', 'Classify, summarize, extract and recommend at every step.'], ['Human Task & Approval', 'Assign work to people with SLAs, AI with Human-in-the-Loop.'], ['Enterprise Integration', 'Connect via API, MCP, RPA, database and SSO.'], ['Analytics & Audit', 'Track status, exceptions and history in one place.']],
+  };
+
+  let deptIdx = 0, orgSel = 'ceo', orgTouched = false, flowTimer = null, orgTimer = null;
+
+  function renderSections() {
+    const T = TEXT[lang];
+    // logo: nhân đôi danh sách để dải chạy liền mạch
+    const one = LOGOS.map(l => `<div class="lg">${l}</div>`).join('');
+    $('track').innerHTML = one + one + one + one;
+    $('stats').innerHTML = T.stats.map(([b, s]) => `<div class="stat"><b>${b}</b><span>${s}</span></div>`).join('');
+    $('tabs').innerHTML = DEPTS.map((d, i) => `<button class="tab${i === deptIdx ? ' on' : ''}" role="tab" data-i="${i}">${d[lang].name}</button>`).join('');
+    renderDept();
+    renderOrg();
+    $('caps').innerHTML = CAPS[lang].map(([h, p], i) => `<div class="cap"><div class="num">${String(i + 1).padStart(2, '0')}</div><h4>${h}</h4><p>${p}</p></div>`).join('');
+    $('chips').innerHTML = T.chips.map(c => `<span>${c}</span>`).join('');
+  }
+
+  function renderDept() {
+    const T = TEXT[lang], D = DEPTS[deptIdx][lang];
+    const kind = { a: 'agent', h: 'human', s: 'system' };
+    document.querySelectorAll('.tab').forEach((b, i) => b.classList.toggle('on', i === deptIdx));
+    $('dept').innerHTML = `
+      <div class="flowcard fade">
+        <div class="k">${T.flowK}</div><h3>${D.flow}</h3>
+        <ol class="steps">${D.steps.map(([k, t]) => `<li class="st"><span class="n">${IC[kind[k]]}</span><span class="tx">${t}</span><span class="who ${kind[k]}">${T.who[kind[k]]}</span></li>`).join('')}</ol>
+        <div class="out"><b>${T.outK}:</b> ${D.out}</div>
+      </div>
+      <div class="fade">
+        <div class="roles">${D.roles.map(([h, p]) => `<div class="role"><div class="ri">${IC.agent}</div><h4>${h}</h4><p>${p}</p></div>`).join('')}</div>
+        <div class="legend"><span><i style="background:#10CBFF"></i>${T.legend[0]}</span><span><i style="background:#001AAD"></i>${T.legend[1]}</span><span><i style="background:#9FB0E6"></i>${T.legend[2]}</span></div>
+      </div>`;
+    playFlow();
+  }
+
+  // các bước trong quy trình sáng lần lượt, lặp lại
+  function playFlow() {
+    clearInterval(flowTimer);
+    const st = [...document.querySelectorAll('#dept .st')];
+    let k = 0;
+    const tick = () => {
+      st.forEach((el, i) => { el.classList.toggle('done', i < k); el.classList.toggle('on', i === k) });
+      k = k >= st.length + 1 ? 0 : k + 1;
+    };
+    tick();
+    if (!reduce) flowTimer = setInterval(tick, 1100);
+  }
+
+  $('tabs').addEventListener('click', e => {
+    const b = e.target.closest('.tab'); if (!b) return;
+    deptIdx = +b.dataset.i; renderDept();
+  });
+
+  function renderOrg() {
+    const T = TEXT[lang];
+    const C = ORG.ceo;
+    $('ceo').innerHTML = `<button class="node${orgSel === 'ceo' ? ' on' : ''}" data-id="ceo"><span class="nm">${C[lang].name}</span><span class="ag"><i></i>${T.agentsN(C.n)}</span></button>`;
+    $('depts').innerHTML = DEPTS.map(d => `<div class="cell"><button class="node${orgSel === d.id ? ' on' : ''}" data-id="${d.id}"><span class="nm">${d[lang].name}</span><span class="ag"><i></i>${T.agentsN(ORG.depts[d.id].n)}</span></button></div>`).join('');
+    renderDetail();
+  }
+  function renderDetail() {
+    const T = TEXT[lang];
+    let name, x, sol;
+    if (orgSel === 'ceo') { x = ORG.ceo[lang]; name = x.name; sol = x.sol }
+    else { const o = ORG.depts[orgSel]; x = o[lang]; name = DEPTS.find(d => d.id === orgSel)[lang].name; sol = o.sol }
+    document.querySelectorAll('#chart .node').forEach(n => n.classList.toggle('on', n.dataset.id === orgSel));
+    $('detail').innerHTML = `<div class="fade"><div class="k">AgentFlow ×</div><h3>${name}</h3><p class="pain">${x.pain}</p>
+      <ul>${x.items.map((t, i) => `<li><b>${i + 1}</b><span>${t}</span></li>`).join('')}</ul>
+      <div class="k" style="margin-top:18px">${T.solK}</div><div class="sol">${sol.map(s => `<span>${s}</span>`).join('')}</div></div>`;
+  }
+  $('chart').addEventListener('click', e => {
+    const n = e.target.closest('.node'); if (!n) return;
+    orgTouched = true; clearInterval(orgTimer);
+    orgSel = n.dataset.id; renderDetail();
+  });
+  // tự chuyển lần lượt các khối cho tới khi người xem tự bấm
+  const ORDER = ['ceo', ...DEPTS.map(d => d.id)];
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) orgTimer = setInterval(() => {
+    if (orgTouched) return;
+    const r = $('org').getBoundingClientRect();
+    if (r.bottom < 0 || r.top > innerHeight) return;
+    orgSel = ORDER[(ORDER.indexOf(orgSel) + 1) % ORDER.length]; renderDetail();
+  }, 4500);
+
   function applyText() {
     const T = TEXT[lang];
     document.documentElement.lang = lang;
     $('menu').innerHTML = T.menu.map(m => `<li>${m}</li>`).join('');
     document.querySelectorAll('[data-k]').forEach(el => { el.textContent = T[el.dataset.k] });
+    renderSections();
     $('b-vi').classList.toggle('on', lang === 'vi');
     $('b-en').classList.toggle('on', lang === 'en');
     resetFeed();
