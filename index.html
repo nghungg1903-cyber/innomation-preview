@@ -120,9 +120,14 @@
   .side>p{font-size:15px;line-height:1.6;color:var(--mute)}
   .side .mono{display:block;margin-top:40px;padding-bottom:10px;border-bottom:1px solid var(--line);color:var(--ink)}
   .chan{margin-top:12px;display:grid;gap:8px}
-  .chan div{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:6px;background:#fff;font-size:14px;font-weight:500;transition:all .3s}
-  .chan div svg{width:16px;height:16px;color:#6B7490}
-  .chan div.on{border-color:#8EA2EA;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+  .chan button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 12px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font:inherit;cursor:pointer;transition:all .3s}
+  .chan button:hover{border-color:#B9C6EE}
+  .chan svg{flex:none;width:18px;height:18px;color:#6B7490;transition:color .3s}
+  .chan small{display:block;font:600 10px 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#8A93AE;margin-bottom:3px}
+  .chan b{display:block;font-size:14px;font-weight:600;line-height:1.3}
+  .chan button.on{border-color:#8EA2EA;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+  .chan button.on svg{color:var(--blue)}
+  #ch1 .visual{min-height:600px}
 
   /* Nền gradient mờ thay cho ảnh hoa của Atomicwork, theo màu thương hiệu */
   .visual{position:relative;border-radius:6px;overflow:hidden;min-height:clamp(340px,38vw,540px)}
@@ -448,6 +453,10 @@
     ['dost-hcm', 'Sở Khoa học và Công nghệ TP.HCM', 62], ['avenue', 'Avenue', 34], ['gimasys', 'Gimasys', 42],
   ];
   const ICO = {
+    cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.2a1.5 1.5 0 0 0 1.5 1.2h8.7a1.5 1.5 0 0 0 1.5-1.1L21 8H6"/></svg>',
+    sales: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
+    cal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+    key: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 8.7-8.7M16 7l3 3M14 9l2 2"/></svg>',
     bolt: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h7l-2 8 9-12h-7l2-8z"/></svg>',
     user: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8z"/></svg>',
     web: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14.5 0 18M12 3c-3 3.5-3 14.5 0 18"/></svg>',
@@ -525,12 +534,29 @@
       sub: 'AgentFlow · Nền tảng AI Workflow', ch: ['1. Cho nhân viên', '2. Cho từng phòng ban', '3. Cho ban lãnh đạo'],
       c1: 'Nhân viên chỉ cần yêu cầu, <em>AI Agent lo phần còn lại.</em>',
       c1p: 'Từ đề xuất mua hàng, xin nghỉ phép đến cấp quyền hệ thống, nhân viên gửi yêu cầu trên kênh quen thuộc. AI Agent của AgentFlow xử lý từng bước và chỉ hỏi con người ở điểm cần phê duyệt.',
-      c1k: 'Hoạt động trên các kênh', chans: [['web', 'Cổng web nội bộ'], ['mail', 'Email'], ['chat', 'Chat widget nhúng'], ['plug', 'API & MCP']],
-      winT: 'AgentFlow · Trợ lý nội bộ', me: 'Nhân viên', ag: 'AI Agent',
-      q: 'Mình cần mua 5 laptop cho nhóm mới vào tháng sau.',
-      a1: 'Đã tiếp nhận. Mình đang xử lý đề xuất mua hàng:',
-      acts: [['Kiểm tra ngân sách phòng ban', 'ĐẠT'], ['Tạo đề xuất từ mẫu chuẩn', 'XONG'], ['Tổng hợp báo giá nhà cung cấp', 'XONG'], ['Chuyển Trưởng phòng phê duyệt', 'CHỜ DUYỆT']],
-      a2: 'Đề xuất đã gửi Trưởng phòng. Khi được duyệt, mình sẽ tạo PO và báo bạn.',
+      c1k: 'Quy trình mẫu theo phòng ban', me: 'Nhân viên', ag: 'AI Agent',
+      flows: [
+        { ico: 'cart', dept: 'Phòng Mua hàng', name: 'Đề xuất mua sắm', me: 'Nhân viên',
+          q: 'Mình cần mua 5 laptop cho nhóm mới vào tháng sau.',
+          a1: 'Đã tiếp nhận. Mình đang xử lý đề xuất mua sắm:',
+          acts: [['Kiểm tra ngân sách phòng ban', 'ĐẠT'], ['Tạo đề xuất từ mẫu chuẩn', 'XONG'], ['Tổng hợp báo giá nhà cung cấp', 'XONG'], ['Chuyển Trưởng phòng phê duyệt', 'CHỜ DUYỆT']],
+          a2: 'Đề xuất đã gửi Trưởng phòng. Khi được duyệt, mình sẽ tạo PO và báo bạn.' },
+        { ico: 'sales', dept: 'Phòng Kinh doanh', name: 'Báo giá & chốt đơn', me: 'Nhân viên kinh doanh',
+          q: 'Khách hàng ABC cần báo giá 200 license, triển khai trong quý này.',
+          a1: 'Đã tiếp nhận. Mình đang chuẩn bị báo giá:',
+          acts: [['Tra cứu khách hàng trên CRM', 'XONG'], ['Lập báo giá theo bảng giá', 'XONG'], ['Kiểm tra mức chiết khấu', 'ĐẠT'], ['Chuyển Giám đốc KD duyệt giá', 'CHỜ DUYỆT']],
+          a2: 'Báo giá đã gửi Giám đốc Kinh doanh. Khi được duyệt, mình sẽ gửi khách và cập nhật CRM.' },
+        { ico: 'cal', dept: 'Phòng Nhân sự', name: 'Đơn xin nghỉ phép', me: 'Nhân viên',
+          q: 'Mình muốn nghỉ phép từ ngày 20 đến 22/11.',
+          a1: 'Đã tiếp nhận. Mình đang xử lý đơn nghỉ phép:',
+          acts: [['Kiểm tra số ngày phép còn lại', 'ĐẠT'], ['Kiểm tra lịch trực của nhóm', 'XONG'], ['Tạo đơn nghỉ phép', 'XONG'], ['Chuyển Quản lý trực tiếp', 'CHỜ DUYỆT']],
+          a2: 'Đơn đã gửi quản lý của bạn. Khi được duyệt, mình sẽ cập nhật bảng chấm công.' },
+        { ico: 'key', dept: 'Phòng IT', name: 'Cấp quyền hệ thống', me: 'Nhân viên',
+          q: 'Mình cần quyền xem phân hệ Kho trên ERP để làm báo cáo tồn.',
+          a1: 'Đã tiếp nhận. Mình đang xử lý yêu cầu cấp quyền:',
+          acts: [['Xác minh vai trò người dùng', 'ĐẠT'], ['Đối chiếu chính sách phân quyền', 'XONG'], ['Chuẩn bị quyền chỉ xem', 'XONG'], ['Chuyển Trưởng phòng IT duyệt', 'CHỜ DUYỆT']],
+          a2: 'Yêu cầu đã gửi Trưởng phòng IT. Khi được duyệt, mình sẽ cấp quyền và ghi nhật ký.' },
+      ],
       k1: [['Hoàn tất việc, không chỉ trả lời', 'Agent thao tác trực tiếp trên hệ thống: tạo đề xuất, cập nhật dữ liệu, chuyển duyệt.'], ['Phê duyệt đúng người, đúng lúc', 'Luồng phê duyệt nhiều cấp theo hạn mức, có SLA nhắc hạn.'], ['Trả lời có trích dẫn nguồn', 'Hỏi đáp quy chế, tài liệu nội bộ với nguồn rõ ràng nhờ Ragify.'], ['Con người luôn kiểm soát', 'AI with Human-in-the-Loop ở mọi điểm quan trọng.']],
       c2: 'Mở rộng vận hành với đội AI Agent <em>đảm nhận vai trò</em>, không chỉ từng tác vụ.',
       c2p: 'Dùng AI Agent dựng sẵn theo mẫu hoặc tự thiết kế trên AgentFlow. Mỗi Agent có vai trò, kỹ năng và quyền truy cập riêng, làm việc như một thành viên trong sơ đồ tổ chức.',
@@ -558,12 +584,29 @@
       sub: 'AgentFlow · AI Workflow Platform', ch: ['1. For employees', '2. For every department', '3. For leadership'],
       c1: 'Employees just ask, <em>AI Agents handle the rest.</em>',
       c1p: 'From purchase requests and leave to system access, employees ask in the channels they already use. AgentFlow AI Agents work through each step and only bring people in where approval is needed.',
-      c1k: 'Works across channels', chans: [['web', 'Internal web portal'], ['mail', 'Email'], ['chat', 'Embedded chat widget'], ['plug', 'API & MCP']],
-      winT: 'AgentFlow · Internal assistant', me: 'Employee', ag: 'AI Agent',
-      q: 'I need 5 laptops for the new team next month.',
-      a1: 'Got it. I am processing the purchase request:',
-      acts: [['Check team budget', 'PASSED'], ['Create request from template', 'DONE'], ['Collect supplier quotes', 'DONE'], ['Route to department head', 'PENDING']],
-      a2: 'Sent to your department head. Once approved, I will create the PO and let you know.',
+      c1k: 'Sample workflows by department', me: 'Employee', ag: 'AI Agent',
+      flows: [
+        { ico: 'cart', dept: 'Procurement', name: 'Purchase request', me: 'Employee',
+          q: 'I need 5 laptops for the new team next month.',
+          a1: 'Got it. I am processing the purchase request:',
+          acts: [['Check team budget', 'PASSED'], ['Create request from template', 'DONE'], ['Collect supplier quotes', 'DONE'], ['Route to department head', 'PENDING']],
+          a2: 'Sent to your department head. Once approved, I will create the PO and let you know.' },
+        { ico: 'sales', dept: 'Sales', name: 'Quote to close', me: 'Sales rep',
+          q: 'Customer ABC needs a quote for 200 licenses, rolling out this quarter.',
+          a1: 'Got it. I am preparing the quote:',
+          acts: [['Look up the account in CRM', 'DONE'], ['Build quote from price list', 'DONE'], ['Check discount level', 'PASSED'], ['Route to Sales Director', 'PENDING']],
+          a2: 'Sent to the Sales Director. Once approved, I will send it to the customer and update CRM.' },
+        { ico: 'cal', dept: 'HR', name: 'Leave request', me: 'Employee',
+          q: 'I would like to take leave from Nov 20 to 22.',
+          a1: 'Got it. I am processing your leave request:',
+          acts: [['Check remaining leave days', 'PASSED'], ['Check team on-call schedule', 'DONE'], ['Create leave request', 'DONE'], ['Route to your manager', 'PENDING']],
+          a2: 'Sent to your manager. Once approved, I will update the timesheet.' },
+        { ico: 'key', dept: 'IT', name: 'System access', me: 'Employee',
+          q: 'I need view access to the ERP Inventory module for a stock report.',
+          a1: 'Got it. I am processing the access request:',
+          acts: [['Verify user role', 'PASSED'], ['Check access policy', 'DONE'], ['Prepare view-only access', 'DONE'], ['Route to IT Manager', 'PENDING']],
+          a2: 'Sent to the IT Manager. Once approved, I will grant access and log it.' },
+      ],
       k1: [['Work done, not just answered', 'Agents act on your systems: create requests, update data, route approvals.'], ['Right approver, right time', 'Multi-level approvals by limit, with SLA reminders.'], ['Answers with sources', 'Policy and document Q&A with clear citations, powered by Ragify.'], ['People stay in control', 'AI with Human-in-the-Loop at every critical step.']],
       c2: 'Scale operations with AI Agents that <em>own roles</em>, not just tasks.',
       c2p: 'Use template AI Agents or design your own on AgentFlow. Each Agent has its own role, skills and access, and works like a member of your org chart.',
@@ -589,7 +632,7 @@
     },
   };
 
-  let baIdx = 0, chatTimer = null;
+  let baIdx = 0, chatTimer = null, flowIdx = 0;
   const checks = list => `<div class="checks">${list.map(([h, p]) => `<div><h4>${h}</h4><p>${p}</p></div>`).join('')}</div>`;
   const logoRow = () => { const one = LOGOS.map(([f, a, h]) => `<div class="lg"><img src="img/logos/${f}.png" alt="${a}" style="height:${h}px"></div>`).join(''); return `<div class="marq"><div class="track">${one + one + one}</div></div>` };
 
@@ -632,14 +675,9 @@
       <h2 class="big">${t.c1}</h2>
       <div class="split">
         <div class="side"><p>${t.c1p}</p><a class="more" href="https://www.innomation.vn/product/agentflow">${t.c2a}</a>
-          <span class="mono">${t.c1k}</span><div class="chan" id="chan">${t.chans.map(([i, n], k) => `<div class="${k ? '' : 'on'}">${ICO[i]}${n}</div>`).join('')}</div></div>
-        <div class="visual mesh"><div class="win"><div class="bar"><i></i><span>${t.winT}</span><span id="wclock">09:41</span></div>
-          <div class="body" id="chatbody">
-            <div class="msg me"><span class="av">${ICO.user}</span><div><div class="who">${t.me}</div><div class="bub">${t.q}</div></div></div>
-            <div class="msg"><span class="av" style="color:#10CBFF">${ICO.bolt}</span><div><div class="who">${t.ag}</div><div class="bub">${t.a1}
-              <div class="acts">${t.acts.map(([a, s], i) => `<div class="act"><span class="ck">✓</span>${a}<span class="s${i === 3 ? ' wait' : ''}">${s}</span></div>`).join('')}</div></div></div></div>
-            <div class="msg"><span class="av" style="color:#10CBFF">${ICO.bolt}</span><div><div class="who">${t.ag}</div><div class="bub">${t.a2}</div></div></div>
-          </div></div></div>
+          <span class="mono">${t.c1k}</span><div class="chan" id="chan">${t.flows.map((f, k) => `<button type="button" data-f="${k}" class="${k === flowIdx ? 'on' : ''}">${ICO[f.ico]}<span><small>${f.dept}</small><b>${f.name}</b></span></button>`).join('')}</div></div>
+        <div class="visual mesh"><div class="win"><div class="bar"><i></i><span id="wtitle"></span><span id="wclock">09:41</span></div>
+          <div class="body" id="chatbody"></div></div></div>
       </div>
       ${checks(t.k1)}
     </div></section>
@@ -736,15 +774,39 @@
   }
 
   // hội thoại chương 1: tin nhắn hiện lần lượt, các bước được tích dần, rồi lặp lại
+  function chatHTML(t, f) {
+    return `<div class="msg me"><span class="av">${ICO.user}</span><div><div class="who">${f.me}</div><div class="bub">${f.q}</div></div></div>
+            <div class="msg"><span class="av" style="color:#10CBFF">${ICO.bolt}</span><div><div class="who">${t.ag}</div><div class="bub">${f.a1}
+              <div class="acts">${f.acts.map(([a, s], i) => `<div class="act"><span class="ck">✓</span>${a}<span class="s${i === f.acts.length - 1 ? ' wait' : ''}">${s}</span></div>`).join('')}</div></div></div></div>
+            <div class="msg"><span class="av" style="color:#10CBFF">${ICO.bolt}</span><div><div class="who">${t.ag}</div><div class="bub">${f.a2}</div></div></div>`;
+  }
+
+  // chọn một quy trình: đánh dấu thẻ bên trái và nạp hội thoại tương ứng vào cửa sổ
+  function setFlow(i) {
+    const t = P[lang], f = t.flows[i];
+    flowIdx = i;
+    document.querySelectorAll('#chan button').forEach((b, k) => b.classList.toggle('on', k === i));
+    $('wtitle').textContent = 'AgentFlow · ' + f.dept;
+    $('chatbody').innerHTML = chatHTML(t, f);
+  }
+
+  // hội thoại chương 1: tin nhắn hiện lần lượt, các bước được tích dần, rồi chuyển sang quy trình kế tiếp
   function playChat() {
     clearTimeout(chatTimer);
-    const msgs = [...document.querySelectorAll('#chatbody .msg')], acts = [...document.querySelectorAll('#chatbody .act')], chans = [...document.querySelectorAll('#chan div')];
-    const steps = [() => msgs[0].classList.add('show'), () => msgs[1].classList.add('show'), ...acts.map(a => () => a.classList.add('done')), () => msgs[2].classList.add('show'), () => {}, () => {}];
-    let k = 0, round = 0;
-    const reset = () => { msgs.forEach(m => m.classList.remove('show')); acts.forEach(a => a.classList.remove('done')); chans.forEach((c, i) => c.classList.toggle('on', i === round % chans.length)) };
+    const chan = $('chan');
+    if (!chan.dataset.bound) {
+      chan.dataset.bound = 1;
+      chan.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { flowIdx = +b.dataset.f; playChat() } });
+    }
+    let msgs, acts, steps, k = 0;
+    const load = () => {
+      setFlow(flowIdx);
+      msgs = [...document.querySelectorAll('#chatbody .msg')]; acts = [...document.querySelectorAll('#chatbody .act')];
+      steps = [() => msgs[0].classList.add('show'), () => msgs[1].classList.add('show'), ...acts.map(a => () => a.classList.add('done')), () => msgs[2].classList.add('show'), () => {}, () => {}, () => {}];
+    };
+    load();
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { steps.forEach(f => f()); return }
-    reset();
-    const tick = () => { if (k < steps.length) { steps[k++](); chatTimer = setTimeout(tick, k < 2 ? 900 : 750) } else { k = 0; round++; reset(); chatTimer = setTimeout(tick, 700) } };
+    const tick = () => { if (k < steps.length) { steps[k++](); chatTimer = setTimeout(tick, k < 2 ? 900 : 750) } else { k = 0; flowIdx = (flowIdx + 1) % P[lang].flows.length; load(); chatTimer = setTimeout(tick, 700) } };
     chatTimer = setTimeout(tick, 600);
   }
 
