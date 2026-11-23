@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AgentFlow – Bản thử nghiệm banner | Innomation</title>
 <meta name="robots" content="noindex, nofollow">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap&subset=vietnamese" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=IBM+Plex+Mono:wght@500;600;700&display=swap&subset=vietnamese" rel="stylesheet">
 <style>
   /* Bố cục responsive: video phủ kín nền (object-fit: cover), lớp chữ và thẻ đặt theo viewport,
      kích thước thẻ tính bằng em từ một cỡ chữ gốc co giãn theo bề rộng màn hình. */
   :root{--blue:#001AAD;--cyan:#10CBFF;--ink:#171C2B;--gx:clamp(16px,5.5vw,96px)}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:Montserrat,sans-serif;background:#05081A;color:#fff}
+  body{font-family:Inter,Arial,sans-serif;background:#05081A;color:#fff}
 
   /* Hero ghim trong lúc cuộn: đoạn cuộn 260 chiều cao màn hình dùng để chuyển ngày -> đêm */
   .hero-wrap{position:relative;height:260vh;height:260svh}
@@ -29,14 +29,14 @@
   .nav li:first-child{color:var(--blue)}
   .nav .r{margin-left:auto;display:flex;align-items:center;gap:12px}
   .lang{display:flex;border:1px solid #D9E0F2;border-radius:999px;padding:3px}
-  .lang button{font:700 12px Montserrat,sans-serif;padding:5px 10px;border-radius:999px;border:0;background:none;color:#4F587A;cursor:pointer}
+  .lang button{font:700 12px Inter,Arial,sans-serif;padding:5px 10px;border-radius:999px;border:0;background:none;color:#4F587A;cursor:pointer}
   .lang button.on{background:var(--blue);color:#fff}
   .navcta{background:var(--blue);color:#fff;padding:12px 20px;font-size:13.5px;border-radius:999px;font-weight:700;white-space:nowrap}
   .burger{display:none;width:38px;height:38px;border-radius:10px;border:1px solid #D9E0F2;background:#fff;place-items:center}
   .burger i{display:block;width:16px;height:2px;background:#2B3350;box-shadow:0 5px 0 #2B3350,0 -5px 0 #2B3350}
 
   .lbl{display:inline-flex;align-items:center;gap:.6em;white-space:nowrap;padding:.42em .85em .42em .42em;border-radius:999px;background:rgba(8,12,30,.6);
-    backdrop-filter:blur(8px);font:700 .885em Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.7em}
+    backdrop-filter:blur(8px);font:700 .885em 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.7em}
   .lbl .ic{width:1.75em;height:1.75em;border-radius:.5em;background:var(--blue);display:grid;place-items:center;box-shadow:0 0 0 1px rgba(255,255,255,.35)}
   .lbl .av{width:1.9em;height:1.9em;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center}
   .lbl svg{width:55%;height:55%}
@@ -46,7 +46,7 @@
   .copy h1{font-size:clamp(34px,3.5vw,64px);line-height:1.1;font-weight:700;letter-spacing:-.02em}
   .copy h1 b{font-weight:700;background:linear-gradient(90deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
   .copy p{margin-top:.8em;max-width:31em;font-size:clamp(14px,1.05vw,18px);line-height:1.6;font-weight:500;color:rgba(255,255,255,.9)}
-  .copy .meta{display:inline-block;margin-top:1.5em;padding:.4em .8em;border-radius:999px;background:rgba(8,12,30,.55);font:700 .8em Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+  .copy .meta{display:inline-block;margin-top:1.5em;padding:.4em .8em;border-radius:999px;background:rgba(8,12,30,.55);font:700 .8em 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}
   .copy .meta i{display:inline-block;width:.5em;height:.5em;border-radius:50%;background:var(--cyan);margin-right:.6em;box-shadow:0 0 8px var(--cyan)}
 
   /* Hai cột thẻ: cột AI Agent bên phải, cột việc của người lệch xuống ngang ô thứ 3 */
@@ -70,259 +70,24 @@
 
   .agent .lblwrap{position:relative;height:2.92em}
   .agent .lblwrap .lbl{position:absolute;left:0;top:0}
-  .clock{display:inline-block;margin-bottom:1.1em;font:700 1.15em Montserrat,sans-serif;padding:.45em .7em;border-radius:.45em;
+  .clock{display:inline-block;margin-bottom:1.1em;font:700 1.15em Inter,Arial,sans-serif;padding:.45em .7em;border-radius:.45em;
     background:rgba(8,12,30,.8);border:1px solid rgba(255,255,255,.2);letter-spacing:.04em;font-variant-numeric:tabular-nums}
   .clock small{font-size:.66em;opacity:.75;margin-left:.3em}
   .humans{position:relative}
   .human.night{position:absolute;left:0;top:0;width:100%}
   .human.night .tk{opacity:.6}
 
-  .hint{position:absolute;left:50%;bottom:clamp(14px,3vh,26px);transform:translateX(-50%);font:700 11px Montserrat,sans-serif;letter-spacing:.06em;text-transform:uppercase;
+  .hint{position:absolute;left:50%;bottom:clamp(14px,3vh,26px);transform:translateX(-50%);font:700 11px 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;
     color:rgba(255,255,255,.85);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:4;text-shadow:0 1px 8px rgba(0,0,0,.5)}
   .hint i{width:2px;height:26px;background:linear-gradient(var(--cyan),transparent);animation:drip 1.6s ease-in-out infinite}
   @keyframes drip{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.2);transform-origin:bottom}}
 
-  /* ===== Phần dưới banner: bố cục theo Atomicwork (chương đánh số, chữ lớn nét mảnh, hình minh họa lớn trên nền gradient) ===== */
-  :root{--bg:#F7F9FF;--line:#DCE3F3;--mute:#5A6482;--dark:#060A20}
-  .page{background:var(--bg);color:var(--ink)}
-  .wrapx{max-width:1360px;margin:0 auto;padding:0 clamp(16px,2.8vw,40px)}
-  .mono{font:600 12px Montserrat,sans-serif;letter-spacing:.06em;text-transform:uppercase}
-  .big{font-size:clamp(30px,3.3vw,50px);line-height:1.12;font-weight:500;letter-spacing:-.025em}
-  .big em{font-style:normal;color:var(--blue)}
-  .more{display:inline-block;margin-top:16px;font-size:13.5px;font-weight:600;color:var(--ink);text-decoration:none}
-  .more:hover{color:var(--blue)}
-
   /* Logo khách hàng nằm trên mép dưới banner */
-  .herologos{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:70px 0 20px;background:linear-gradient(180deg,rgba(3,6,24,0),rgba(3,6,24,.78))}
-  .herologos .lg img{filter:brightness(0) invert(1);opacity:.82}
-  .hero .hint{bottom:118px}
   .marq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
   .track{display:flex;width:max-content;animation:marq 44s linear infinite}
   @keyframes marq{to{transform:translateX(-50%)}}
   .lg{flex:none;width:180px;height:66px;margin:0 18px;display:grid;place-items:center}
   .lg img{width:auto;max-width:160px;object-fit:contain}
-  .logos{display:none;background:#fff;border-bottom:1px solid var(--line);padding:22px 0}
-  .logos .lg img{filter:grayscale(1);opacity:.7}
-
-  /* Thanh chương dính trên cùng */
-  .subnav{position:sticky;top:0;z-index:30;background:rgba(247,249,255,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-  .subnav .wrapx{display:flex;align-items:center;justify-content:space-between;height:50px;gap:16px}
-  .subnav .mono{font-size:11.5px;white-space:nowrap}
-  .subnav nav{display:flex;gap:clamp(14px,3vw,44px);overflow-x:auto;scrollbar-width:none}
-  .subnav nav a{color:#9AA3BF;text-decoration:none;white-space:nowrap;transition:color .25s}
-  .subnav nav a.on{color:var(--ink)}
-
-  .chap{padding:clamp(56px,6.5vw,104px) 0 clamp(44px,5vw,76px);border-bottom:1px solid var(--line);scroll-margin-top:50px}
-  .headrow{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:clamp(20px,4vw,72px);align-items:end}
-  .headrow p{font-size:15px;line-height:1.6;color:var(--mute)}
-  .headrow p a{color:var(--blue);text-decoration:none;font-weight:600}
-  .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.3fr);gap:clamp(20px,3vw,44px);margin-top:clamp(28px,3.5vw,48px)}
-  .side>p{font-size:15px;line-height:1.6;color:var(--mute)}
-  .side .mono{display:block;margin-top:40px;padding-bottom:10px;border-bottom:1px solid var(--line);color:var(--ink)}
-  .chan{margin-top:12px;display:grid;gap:8px}
-  .chan button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 12px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font:inherit;cursor:pointer;transition:all .3s}
-  .chan button:hover{border-color:#B9C6EE}
-  .chan svg{flex:none;width:18px;height:18px;color:#6B7490;transition:color .3s}
-  .chan small{display:block;font:600 10px Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A93AE;margin-bottom:3px}
-  .chan b{display:block;font-size:14px;font-weight:600;line-height:1.3}
-  .chan button.on{border-color:#8EA2EA;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-  .chan button.on svg{color:var(--blue)}
-  #ch1 .visual{min-height:600px}
-
-  /* Nền gradient mờ thay cho ảnh hoa của Atomicwork, theo màu thương hiệu */
-  .visual{position:relative;border-radius:6px;overflow:hidden;min-height:clamp(340px,38vw,540px)}
-  .mesh{background:radial-gradient(55% 65% at 12% 18%,rgba(16,203,255,.95),transparent 62%),radial-gradient(50% 60% at 88% 22%,rgba(124,140,255,.9),transparent 62%),radial-gradient(65% 70% at 62% 105%,rgba(0,26,173,.95),transparent 66%),radial-gradient(40% 50% at 30% 85%,rgba(255,170,120,.55),transparent 70%),linear-gradient(135deg,#BFE6FF,#DCD9FF)}
-  .mesh.warm{background:radial-gradient(50% 60% at 20% 25%,rgba(255,196,140,.9),transparent 62%),radial-gradient(55% 60% at 80% 20%,rgba(16,203,255,.85),transparent 60%),radial-gradient(60% 70% at 50% 110%,rgba(37,99,235,.95),transparent 66%),linear-gradient(135deg,#FFE3CC,#CFE3FF)}
-  .mesh:after{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.4) 1px,transparent 1.3px);background-size:7px 7px;mix-blend-mode:overlay}
-
-  .checks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.2vw,36px);margin-top:clamp(28px,3vw,44px)}
-  .checks h4{display:flex;gap:9px;font-size:15px;font-weight:600;line-height:1.35}
-  .checks h4:before{content:"";flex:none;width:12px;height:7px;margin-top:4px;border-left:2px solid #2563EB;border-bottom:2px solid #2563EB;transform:rotate(-45deg)}
-  .checks p{margin-top:8px;padding-left:21px;font-size:14px;line-height:1.55;color:var(--mute)}
-
-  /* Chương 1: cửa sổ trò chuyện với AI Agent */
-  .win{position:absolute;left:8%;right:8%;top:8%;bottom:8%;z-index:1;background:rgba(9,13,38,.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.14);border-radius:12px;color:#fff;display:flex;flex-direction:column;box-shadow:0 30px 60px rgba(0,10,60,.3)}
-  .win .bar{flex:none;height:40px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:10px;padding:0 16px;font:600 11px Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7)}
-  .win .bar i{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
-  .win .bar span:last-child{margin-left:auto}
-  .win .body{flex:1;min-height:0;padding:clamp(14px,2vw,26px);display:flex;flex-direction:column;justify-content:flex-end;gap:12px;overflow:hidden}
-  .msg{display:flex;gap:10px;max-width:84%;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s}
-  .msg.show{opacity:1;transform:none}
-  .msg .av{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#2563EB}
-  .msg .av svg{width:15px;height:15px}
-  .msg.me{align-self:flex-end;flex-direction:row-reverse}
-  .msg.me .av{background:#F2C7A5;color:#7A3E12}
-  .msg .who{font:600 10.5px Montserrat,sans-serif;letter-spacing:.06em;color:rgba(255,255,255,.55);margin-bottom:4px}
-  .msg.me .who{text-align:right}
-  .msg .bub{background:rgba(255,255,255,.08);border-radius:10px;padding:10px 13px;font-size:13.5px;line-height:1.5}
-  .msg.me .bub{background:#2563EB}
-  .acts{display:grid;gap:6px;margin-top:9px}
-  .act{display:flex;align-items:center;gap:9px;font-size:12.5px;padding:7px 10px;border-radius:7px;background:rgba(255,255,255,.06);opacity:.35;transition:opacity .4s}
-  .act.done{opacity:1}
-  .act .ck{flex:none;width:15px;height:15px;border-radius:4px;border:1.5px solid rgba(255,255,255,.4);display:grid;place-items:center;font-size:9px;font-weight:800;color:#00163D}
-  .act.done .ck{background:var(--cyan);border-color:var(--cyan)}
-  .act .s{margin-left:auto;font:700 10px Montserrat,sans-serif;letter-spacing:.06em;color:var(--cyan);white-space:nowrap}
-  .act .s.wait{color:#FFC27A}
-
-  /* Chương 2: sơ đồ tổ chức người + AI Agent */
-  .orgv{overflow-x:auto;scrollbar-width:thin;display:flex;align-items:center}
-  .tree{min-width:1000px;width:100%;padding:clamp(36px,3vw,44px) 20px;position:relative;z-index:1}
-  .tree ul{display:flex;justify-content:center;padding-top:36px;position:relative;margin:0}
-  .tree>ul{padding-top:0}
-  .tree li{list-style:none;position:relative;padding:36px 5px 0;text-align:center;display:flex;flex-direction:column;align-items:center}
-  .tree>ul>li{padding-top:0}
-  .tree li:before,.tree li:after{content:"";position:absolute;top:0;right:50%;width:50%;height:36px;border-top:1.5px dashed rgba(255,255,255,.85)}
-  .tree li:after{right:auto;left:50%;border-left:1.5px dashed rgba(255,255,255,.85)}
-  .tree li:only-child:before,.tree li:only-child:after,.tree>ul>li:before,.tree>ul>li:after{display:none}
-  .tree li:first-child:before,.tree li:last-child:after{border:0}
-  .tree li:last-child:before{border-right:1.5px dashed rgba(255,255,255,.85);border-radius:0 8px 0 0}
-  .tree li:first-child:after{border-radius:8px 0 0 0}
-  .tree ul ul:before{content:"";position:absolute;top:0;left:50%;height:36px;border-left:1.5px dashed rgba(255,255,255,.85)}
-  .nd{display:flex;flex-direction:column;align-items:center;gap:8px;width:104px}
-  .nd .pic{position:relative;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.55),0 6px 16px rgba(0,10,60,.18)}
-  .nd .pic svg{width:24px;height:24px}
-  .nd.h .pic{color:#fff}
-  .nd.a .pic{background:#0A0F2E;color:var(--cyan);box-shadow:0 0 0 3px rgba(16,203,255,.35),0 0 0 9px rgba(16,203,255,.12),0 6px 16px rgba(0,10,60,.25)}
-  .nd.a .pic:after{content:"";position:absolute;right:-3px;top:-3px;width:14px;height:14px;border-radius:50%;background:#2563EB url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/9px no-repeat;border:2px solid #fff}
-  .nd .tag{font:600 10.5px Montserrat,sans-serif;letter-spacing:.02em;line-height:1.35;padding:4px 7px;border-radius:4px;background:rgba(255,255,255,.92);color:var(--ink);box-shadow:0 2px 6px rgba(0,10,60,.1)}
-  .nd.a .tag{background:#0A0F2E;color:#fff}
-  .nd.a.blink .pic{animation:agentpulse 2.4s ease-in-out infinite}
-  @keyframes agentpulse{50%{box-shadow:0 0 0 3px rgba(16,203,255,.6),0 0 0 14px rgba(16,203,255,.0),0 6px 16px rgba(0,10,60,.25)}}
-
-  /* Chương 3: bảng điều khiển */
-  .dash{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:16px;margin-top:clamp(28px,3.5vw,48px)}
-  .panel{background:#fff;border:1px solid var(--line);border-radius:6px;padding:clamp(16px,2vw,26px)}
-  .legend2{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 18px;font-size:12px;color:var(--mute);font-weight:500}
-  .legend2 i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-  .chart2{margin-top:14px;width:100%;height:auto;display:block}
-  .chart2 .ar{transform-origin:0 100%;transform:scaleY(0);transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
-  .chart2.in .ar{transform:scaleY(1)}
-  .kv{display:grid;grid-template-columns:1fr 1fr;gap:22px 14px}
-  .kv .k{font:600 10.5px Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#7A84A3}
-  .kv .v{margin-top:6px;font:600 16px Montserrat,sans-serif;color:var(--ink)}
-  .kv .v i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#22C55E;margin-right:7px;box-shadow:0 0 8px rgba(34,197,94,.7)}
-  .kv .head{grid-column:1/-1;padding-bottom:16px;border-bottom:1px solid var(--line)}
-  .kv .head .v{font-size:15px;color:#16A34A}
-
-  /* Triển khai & bảo mật (thay cho dải chứng chỉ của Atomicwork) */
-  .trust{padding:clamp(56px,6vw,96px) 0;text-align:center;border-bottom:1px solid var(--line)}
-  .trust .row{display:flex;justify-content:center;flex-wrap:wrap;margin-top:36px}
-  .trust .it{display:flex;flex-direction:column;align-items:center;gap:10px;padding:0 clamp(14px,2.4vw,36px);border-left:1px solid var(--line);font-size:13px;font-weight:600;color:#3A4466}
-  .trust .it:first-child{border-left:0}
-  .trust .it span{width:52px;height:52px;border-radius:50%;border:1.5px solid #B9C4E6;display:grid;place-items:center;color:var(--blue)}
-  .trust .it svg{width:24px;height:24px}
-
-  /* Section tối: trước / sau theo phòng ban */
-  .darksec{background:var(--dark);color:#fff;padding:clamp(60px,7vw,110px) 0}
-  .darksec .headrow p{color:rgba(255,255,255,.65)}
-  .dtabs{display:flex;gap:clamp(14px,2.4vw,34px);margin-top:36px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid rgba(255,255,255,.12)}
-  .dtabs button{flex:none;background:none;border:0;cursor:pointer;padding:0 0 14px;color:rgba(255,255,255,.45);border-bottom:2px solid transparent;margin-bottom:-1px;font:600 12px Montserrat,sans-serif;letter-spacing:.08em;text-transform:uppercase}
-  .dtabs button.on{color:#fff;border-color:var(--cyan)}
-  .ba{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
-  .bcard{position:relative;border-radius:6px;overflow:hidden;min-height:clamp(330px,30vw,430px)}
-  .bcard .pill{position:absolute;left:16px;top:16px;z-index:2;font:700 10.5px Montserrat,sans-serif;letter-spacing:.08em;padding:5px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.35)}
-  .before{background:#1A1D2E}
-  .before:after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.3px);background-size:7px 7px}
-  .note{position:absolute;z-index:1;display:flex;align-items:center;gap:9px;width:min(64%,300px);padding:10px 12px;border-radius:6px;background:#2A2E44;border:1px solid rgba(255,255,255,.1);font-size:13px;line-height:1.35;box-shadow:0 10px 24px rgba(0,0,0,.35)}
-  .note b{margin-left:auto;flex:none;font:700 9.5px Montserrat,sans-serif;color:#FF8A7A;background:rgba(255,138,122,.12);padding:3px 6px;border-radius:4px}
-  .after .win{left:9%;right:9%;top:13%;bottom:10%}
-  .after .act{opacity:1;font-size:13px;padding:9px 11px}
-  .after .act .s{color:var(--cyan)}
-  .after .act .s.h{color:#FFC27A}
-  .outrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,64px);margin-top:10px;padding:clamp(22px,3vw,40px);border:1px solid rgba(255,255,255,.1);border-radius:6px}
-  .outrow blockquote{font-size:clamp(20px,1.9vw,28px);line-height:1.35;font-weight:500;letter-spacing:-.01em}
-  .outrow .mono{display:block;color:rgba(255,255,255,.55);margin-bottom:14px}
-  .rl{display:grid;gap:16px}
-  .rl>div{display:flex;gap:14px;align-items:flex-start}
-  .rl span{flex:none;width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,#001AAD,#2563EB);color:var(--cyan)}
-  .rl span svg{width:16px;height:16px}
-  .rl h4{font-size:14.5px}.rl p{margin-top:3px;font-size:13px;line-height:1.5;color:rgba(255,255,255,.6)}
-
-  /* Nền tảng & tích hợp */
-  .duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:clamp(28px,3.5vw,48px)}
-  .card{position:relative;border-radius:6px;overflow:hidden;min-height:clamp(420px,38vw,540px);padding:clamp(20px,2.4vw,32px)}
-  .card h3{position:relative;z-index:1;font-size:clamp(19px,1.6vw,24px);font-weight:500}
-  .card>p{position:relative;z-index:1;margin-top:10px;max-width:30em;font-size:14px;line-height:1.6}
-  .eco{background:radial-gradient(70% 80% at 80% 100%,rgba(16,203,255,.55),transparent 60%),radial-gradient(60% 70% at 10% 0%,rgba(124,140,255,.5),transparent 60%),linear-gradient(160deg,#0A0F2E,#001AAD);color:#fff}
-  .eco>p{color:rgba(255,255,255,.75)}
-  .orbit{position:absolute;left:50%;bottom:clamp(28px,3vw,44px);width:min(290px,66%);aspect-ratio:1;transform:translateX(-50%)}
-  .orbit .ring{position:absolute;inset:0;border-radius:50%;border:1.5px dashed rgba(255,255,255,.3);animation:spin 60s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .orbit .core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:38%;aspect-ratio:1;border-radius:24px;display:grid;place-items:center;text-align:center;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(8px);font-weight:700;font-size:15px;box-shadow:0 0 40px rgba(16,203,255,.35)}
-  .orbit .core small{display:block;font:600 9.5px Montserrat,sans-serif;letter-spacing:.08em;color:var(--cyan);margin-top:4px}
-  .orbit .sat{position:absolute;transform:translate(-50%,-50%);padding:8px 12px;border-radius:999px;background:#fff;color:var(--blue);font-weight:700;font-size:13px;box-shadow:0 8px 20px rgba(0,0,0,.25);white-space:nowrap}
-  .integ{background:#fff;border:1px solid var(--line)}
-  .integ>p{color:var(--mute)}
-  .iso{position:absolute;left:50%;bottom:-6%;width:min(520px,96%);transform:translateX(-50%) rotateX(56deg) rotateZ(-40deg);transform-style:preserve-3d;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .tile{aspect-ratio:1;border-radius:12px;background:#fff;border:1px solid #CFD8F1;display:grid;place-items:center;font:700 12px Montserrat,sans-serif;color:var(--blue);box-shadow:6px 8px 0 #E1E7F7,6px 8px 0 1px #CFD8F1}
-  .tile.hl{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:6px 8px 0 #0A1A80}
-  .tile.cy{color:#0A0F2E;background:#DDF6FF;border-color:#9FE3FF}
-  .feat{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.2vw,36px);margin-top:clamp(26px,3vw,40px)}
-  .feat>div{display:flex;gap:12px;align-items:flex-start;font-size:14px;line-height:1.5;color:var(--mute)}
-  .feat span{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid #B9C4E6;display:grid;place-items:center;color:var(--blue)}
-  .feat span svg{width:16px;height:16px}
-  .feat b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
-
-  /* Góc nhìn */
-  .ins{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(20px,3vw,44px);margin-top:clamp(28px,3.5vw,44px)}
-  .post{display:block;color:inherit;text-decoration:none}
-  .cover{position:relative;border-radius:6px;overflow:hidden;aspect-ratio:16/9;padding:clamp(16px,2vw,26px);display:flex;flex-direction:column;justify-content:space-between;color:#fff}
-  .cover .mono{font-size:10.5px;opacity:.85}
-  .cover strong{position:relative;z-index:1;font-size:clamp(18px,1.8vw,28px);font-weight:600;line-height:1.2;max-width:14em}
-  .cover img{position:absolute;right:16px;top:16px;height:16px;filter:brightness(0) invert(1);opacity:.9}
-  .post h4{margin-top:14px;font-size:16px;font-weight:600;line-height:1.4}
-  .post .more{margin-top:8px}
-  .ins .list{display:grid;gap:22px}
-  .ins .list .post{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start}
-  .ins .list .cover strong{font-size:clamp(14px,1.15vw,17px)}
-  .ins .list h4{margin-top:0}
-  .ins .list .cover img{display:none}
-
-  /* CTA cuối dùng ảnh văn phòng ban đêm */
-  .final{position:relative;padding:clamp(90px,11vw,170px) 0;text-align:center;color:#fff;overflow:hidden;background:#05081A}
-  .final:before{content:"";position:absolute;inset:0;background:url(img/clay-night.jpg) center/cover;opacity:.55}
-  .final:after{content:"";position:absolute;inset:0;background:radial-gradient(60% 70% at 50% 50%,rgba(5,8,26,.35),rgba(5,8,26,.85))}
-  .final .wrapx{position:relative;z-index:1}
-  .final .big{max-width:17em;margin:0 auto}
-  .final p{margin:16px auto 0;max-width:36em;color:rgba(255,255,255,.8);font-size:16px;line-height:1.6}
-  .btn{display:inline-flex;align-items:center;gap:10px;margin-top:30px;background:#fff;color:var(--blue);text-decoration:none;padding:15px 26px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .2s}
-  .btn:hover{transform:translateY(-2px)}
-  .foot{background:#05081A;color:rgba(255,255,255,.65);padding:56px 0 28px;font-size:13.5px;border-top:1px solid rgba(255,255,255,.08)}
-  .foot .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:28px}
-  .foot img{height:22px;filter:brightness(0) invert(1)}
-  .foot h5{font:600 11px Montserrat,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#fff;margin-bottom:12px}
-  .foot a{display:block;color:inherit;text-decoration:none;margin-bottom:8px}
-  .foot a:hover{color:#fff}
-  .foot .tag{margin-top:14px;line-height:1.6;max-width:24em}
-  .foot .bot{margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px}
-
-  @media (max-width:1023px){
-    .herologos{display:none}
-    .logos{display:block}
-    .headrow,.split,.dash,.outrow,.ins{grid-template-columns:minmax(0,1fr)}
-    .checks,.feat{grid-template-columns:1fr 1fr}
-    .duo{grid-template-columns:minmax(0,1fr)}
-    .foot .cols{grid-template-columns:1fr 1fr}
-  }
-  @media (max-width:640px){
-    .subnav>.wrapx>.mono{display:none}
-    .subnav nav{width:100%;justify-content:space-between;gap:16px}
-    .subnav nav a{font-size:10.5px}
-    .checks,.feat,.ba,.kv{grid-template-columns:minmax(0,1fr)}
-    .win{left:4%;right:4%;top:5%;bottom:5%}
-    .visual{min-height:540px}
-    .trust .it{width:33.33%;border-left:0;padding:10px 4px;font-size:12px}
-    .note{width:84%;left:6%!important;font-size:12px}
-    .msg{max-width:100%}
-    .bcard{min-height:400px}
-    .after .win{top:52px;bottom:14px;left:4%;right:4%}
-    .act{font-size:11.5px;padding:6px 8px}
-    .win .body{padding:12px}
-    .msg .bub{font-size:12.5px;padding:9px 11px}
-    .ins .list .post{grid-template-columns:minmax(0,1fr)}
-    .lg{width:130px;margin:0 10px}
-    .foot .cols{grid-template-columns:minmax(0,1fr)}
-  }
 
   /* Màn hình vừa: menu rút gọn */
   @media (max-width:1180px){ .nav ul{display:none} .burger{display:grid} }
@@ -358,6 +123,224 @@
   @media (max-height:520px){ .copy p,.copy .meta{display:none} .humancol{display:none} #feed .tk:nth-child(n+3){display:none} }
 
   @media (prefers-reduced-motion:reduce){.track{animation:none}.tk,.tk.run .bar,.cb{transition:none}.hint i{animation:none}}
+  /* ===== v2: nền sáng, một khuôn section, một sợi chuyện xuyên suốt ===== */
+  :root{--bg:#F7F9FF;--line:#E3E8F5;--mute:#5A6482}
+  .page{background:#fff;color:var(--ink)}
+  .wrapx{max-width:1200px;margin:0 auto;padding:0 clamp(16px,3vw,40px)}
+  .mono{font:600 12px 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:#fff;color:var(--blue);text-decoration:none;padding:15px 26px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .2s}
+  .btn.pri{background:var(--blue);color:#fff;box-shadow:0 14px 30px -14px rgba(0,26,173,.7)}.btn:hover{transform:translateY(-2px)}
+  .herologos{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:70px 0 20px;background:linear-gradient(180deg,rgba(3,6,24,0),rgba(3,6,24,.78))}
+  .herologos .lg img{filter:brightness(0) invert(1);opacity:.82}.hero .hint{bottom:118px}
+  .logos{display:none;background:#fff;border-bottom:1px solid var(--line);padding:22px 0}.logos .lg img{filter:grayscale(1);opacity:.7}
+  @media (max-width:1023px){.herologos{display:none}.logos{display:block}}
+
+  .subnav{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .subnav .wrapx{display:flex;align-items:center;justify-content:space-between;height:52px;gap:16px}
+  .subnav .mono{font-size:11.5px;white-space:nowrap}
+  .subnav nav{display:flex;gap:clamp(14px,3vw,40px);overflow-x:auto;scrollbar-width:none}
+  .subnav nav a{color:#9AA3BF;text-decoration:none;white-space:nowrap;transition:color .25s}.subnav nav a b{color:var(--blue)}.subnav nav a.on{color:var(--ink)}
+
+  .sec{padding:clamp(64px,7vw,112px) 0;border-bottom:1px solid var(--line);scroll-margin-top:52px}
+  .sec.alt{background:var(--bg)}
+  .head{max-width:820px;margin:0 auto;text-align:center}
+  .story{display:inline-flex;align-items:center;gap:12px;padding:7px 16px 7px 12px;border:1px solid var(--line);background:#fff;border-radius:99px;font-size:13px;color:var(--mute);box-shadow:0 6px 18px -12px rgba(0,26,173,.4)}
+  .story b{color:var(--ink);font-weight:600}.story .dots{display:flex;gap:4px}.story .dots i{width:16px;height:4px;border-radius:2px;background:#D5DEFA}.story .dots i.on{background:var(--blue)}
+  .eyebrow{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:22px;font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+  .eyebrow b{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;letter-spacing:0}
+  .head h2,.cta2 h2{margin-top:14px;font-size:clamp(30px,3.6vw,52px);line-height:1.1;font-weight:700;letter-spacing:-.03em}
+  .head h2 em{font-style:normal;color:var(--blue)}
+  .lede{margin:18px auto 0;max-width:40em;font-size:17px;line-height:1.65;color:var(--mute)}
+  .ctas{display:flex;justify-content:center;margin-top:28px}
+
+  /* 01 Discover */
+  .chatcard{display:grid;grid-template-columns:1fr 1.25fr;gap:0;margin:clamp(36px,4vw,56px) auto 0;max-width:1000px;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 30px 70px -40px rgba(0,26,173,.45);overflow:hidden}
+  .cc{padding:clamp(22px,3vw,36px)}.cc.ag{background:linear-gradient(160deg,#F2F6FF,#E8EFFF);border-left:1px solid var(--line)}
+  .cc .mono{color:var(--blue);font-size:11px}
+  .bub{margin-top:16px;padding:16px 18px;border-radius:14px 14px 14px 4px;background:var(--blue);color:#fff;font-size:17px;line-height:1.5;font-weight:500}
+  .who{margin-top:10px;font-size:13px;color:var(--mute)}
+  .alist{display:grid;gap:10px;margin-top:16px}
+  .arow{display:flex;align-items:center;gap:10px;padding:13px 14px;border-radius:10px;background:#fff;border:1px solid #D5DEFA;font-size:14px;font-weight:600;opacity:0;animation:rise .5s ease forwards}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .arow .ck{flex:none;width:20px;height:20px;border-radius:6px;background:var(--cyan);display:grid;place-items:center;font-size:11px;font-weight:800;color:#00163D}
+  .arow b{margin-left:auto;font:700 10px 'IBM Plex Mono',monospace;letter-spacing:.05em;color:#0A55C8;background:#E3F6FF;padding:4px 8px;border-radius:5px}
+  .arow.wait .ck{background:#fff;border:2px solid #F0A93B}.arow.wait b{background:#FFF1DC;color:#8A5200}
+  .why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);max-width:1000px;margin:clamp(40px,5vw,64px) auto 0}
+  .why em{font:600 12px 'IBM Plex Mono',monospace;font-style:normal;color:var(--blue)}.why h4{margin-top:8px;font-size:18px;font-weight:600}.why p{margin-top:8px;font-size:14.5px;line-height:1.6;color:var(--mute)}
+
+  /* 02 Visualize: tiêu đề và hai khung cùng được ghim */
+  .vzwrap{height:190vh}
+  .vzstick{position:sticky;top:60px;height:calc(100vh - 76px);min-height:480px;max-height:720px}
+  .vzcol{height:100%;display:flex;flex-direction:column}
+  .vzhead .head{max-width:none;display:flex;align-items:center;justify-content:space-between;gap:20px;text-align:left;margin-bottom:14px}
+  .vzhead .story,.vzhead .eyebrow{display:none}
+  .vzhead h2{margin:0!important;font-size:clamp(22px,2.6vw,36px)!important}
+  .vzstage{position:relative;flex:1;min-height:0}
+  .vzp{position:absolute;top:0;bottom:0;width:calc(50% - 8px);border-radius:16px;overflow:hidden;z-index:0}
+  .vzp.l{left:0;background:#fff;border:1.5px dashed #C5D0EE}
+  .vzp.r{right:0;background:#EEF3FF;border:1.5px solid #C9D6FF;transition:border-color .5s,box-shadow .5s}
+  .vzp.r.lit{border-color:var(--blue);box-shadow:0 0 0 5px rgba(0,26,173,.08)}
+  .vzlab{position:absolute;left:16px;top:16px;z-index:3;font:700 10.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;padding:6px 12px;border-radius:99px;background:#F1F3FA;color:var(--mute);transition:background .4s,color .4s}
+  .vzlab.on{background:var(--blue);color:#fff}
+  .vzp p{position:absolute;left:18px;right:18px;bottom:16px;font-size:13px;line-height:1.5;color:var(--mute)}
+  .slot{position:absolute;z-index:0;border:1.5px dashed #9FB2EA;border-radius:10px}
+  .vzline{position:absolute;z-index:0;width:0;border-left:2px dashed var(--blue);transform-origin:top}
+  .vc{position:absolute;z-index:1;height:64px;border-radius:10px;background:#fff;border:1px solid #D5DEFA;color:var(--ink);box-shadow:0 10px 22px -12px rgba(0,26,173,.35);transition:background .45s,color .45s,border-color .45s}
+  .vc.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .vc>div{position:absolute;inset:0;display:flex;align-items:center;gap:8px;padding:0 12px}
+  .vc span{font-size:clamp(11.5px,.95vw,13.5px);font-weight:600;line-height:1.3}
+  .vc b{margin-left:auto;flex:none;font:700 9px 'IBM Plex Mono',monospace;letter-spacing:.05em;padding:3px 6px;border-radius:4px}
+  .vc .cb1 b{color:#B04030;background:#FDE9E5}.vc .ca1 b{color:#fff;background:rgba(255,255,255,.2)}.vc .ca1 b.h{background:#fff;color:var(--blue)}
+  .eras{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:clamp(32px,4vw,56px)}
+  .eras>div{padding:22px;border:1px solid var(--line);border-radius:12px;background:#fff}
+  .eras em{font:600 12px 'IBM Plex Mono',monospace;font-style:normal;color:#9AA3BF}.eras h4{margin-top:8px;font-size:17px;font-weight:600}.eras p{margin-top:8px;font-size:13.5px;line-height:1.55;color:var(--mute)}
+  .eras .now{background:var(--blue);border-color:var(--blue);color:#fff}.eras .now em{color:var(--cyan)}.eras .now p{color:rgba(255,255,255,.8)}
+
+  /* 03 Understand */
+  .lay{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:16px;margin-top:clamp(32px,4vw,52px)}
+  .stack{display:grid;gap:10px}
+  .stack button{display:flex;align-items:center;gap:14px;text-align:left;padding:18px;border:1px solid var(--line);border-radius:12px;background:#fff;font:inherit;color:var(--ink);cursor:pointer;transition:all .25s}
+  .stack button:hover{border-color:#9FB2EA}
+  .stack em{font:700 12px 'IBM Plex Mono',monospace;font-style:normal;color:#9AA3BF;width:22px}
+  .stack span{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#EEF2FF;color:var(--blue)}.stack span svg{width:18px;height:18px}
+  .stack b{display:block;font-size:15.5px;font-weight:600}.stack small{display:block;margin-top:2px;font-size:12.5px;color:var(--mute)}
+  .stack button.on{border-color:var(--blue);background:#F2F5FF;box-shadow:0 0 0 4px rgba(0,26,173,.08)}.stack button.on em{color:var(--blue)}
+  .laypanel{display:flex;flex-direction:column;padding:clamp(24px,3vw,40px);border:1px solid var(--line);border-top:4px solid var(--cyan);border-radius:12px;background:#fff;box-shadow:0 24px 60px -36px rgba(0,26,173,.4);min-height:420px}
+  .laypanel .mono{color:var(--blue);font-size:11px}.laypanel h3{margin-top:12px;font-size:clamp(22px,2.2vw,30px);font-weight:700;letter-spacing:-.02em}
+  .laypanel p{margin-top:12px;font-size:15px;line-height:1.65;color:var(--mute)}
+  .laypanel ul{list-style:none;margin-top:22px;display:grid;gap:10px}.laypanel li{padding:12px 14px;border-radius:8px;background:#EEF2FF;color:var(--blue);font-size:14px;font-weight:600}
+  .req{position:relative;margin-top:auto;padding-top:34px}.req:before{content:"";position:absolute;left:0;right:0;top:12px;border-top:1.5px dashed #B9C4E6}
+  .req i{position:absolute;top:6px;width:13px;height:13px;margin-left:-6px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 5px rgba(0,26,173,.15);transition:left .6s cubic-bezier(.3,.8,.3,1)}
+  .req span{font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.06em;color:var(--mute);text-transform:uppercase}
+
+  /* 04 Explore */
+  .ltabs{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:clamp(28px,3vw,40px)}
+  .ltabs button{padding:12px 24px;border-radius:99px;border:1.5px solid var(--line);background:#fff;color:#4F587A;font:700 13px 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all .25s}
+  .ltabs button:hover{border-color:#9FB2EA}.ltabs button.on{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 12px 26px -12px rgba(0,26,173,.7)}
+  .modgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(24px,4vw,64px);margin-top:clamp(28px,3vw,44px);align-items:center}
+  .modgrid h3{font-size:clamp(28px,2.8vw,40px);font-weight:700;letter-spacing:-.02em}.modgrid p{margin-top:12px;font-size:16px;line-height:1.65;color:var(--mute)}
+  .mchecks{margin-top:22px;display:grid;gap:12px}.mchecks>div{display:flex;gap:11px;font-size:15px;font-weight:600}
+  .ck2{flex:none;width:12px;height:7px;margin-top:6px;border-left:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(-45deg)}
+  .mock{padding:22px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 30px 70px -40px rgba(0,26,173,.45);display:grid;gap:10px}
+  .mbar{display:flex;align-items:center;gap:10px;font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+  .mbar i{width:8px;height:8px;border-radius:50%;background:var(--cyan)}.mbar span{margin-left:auto}
+  .mh{margin-top:8px;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#9AA3BF}.mh.ai{color:var(--blue)}
+  .mr{display:flex;align-items:center;gap:10px;padding:13px 14px;border-radius:10px;background:var(--bg);border:1px solid var(--line);font-size:14px;font-weight:600}
+  .mr b{margin-left:auto;font:700 10px 'IBM Plex Mono',monospace;letter-spacing:.05em;color:var(--blue);background:#E6EBFF;padding:4px 8px;border-radius:5px}
+  .mr.ai{background:#EAF8FF;border-color:#BDEBFF;color:#0A3C66}.mr .ck{flex:none;width:20px;height:20px;border-radius:6px;background:var(--cyan);display:grid;place-items:center;font-size:11px;font-weight:800;color:#00163D}
+  .libhead{margin-top:clamp(48px,5vw,80px);text-align:center}.libhead h3{font-size:clamp(24px,2.4vw,34px);font-weight:700;letter-spacing:-.02em}.libhead p{margin:10px auto 0;max-width:34em;font-size:15px;color:var(--mute)}
+  .chips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .chips button{padding:8px 15px;border-radius:99px;border:1px solid var(--line);background:#fff;font:600 12.5px Inter,sans-serif;color:#4F587A;cursor:pointer;transition:all .25s}
+  .chips button:hover{border-color:#9FB2EA}.chips button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .libgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+  .wf{padding:20px;border:1px solid var(--line);border-radius:12px;background:#fff;transition:border-color .25s,transform .25s}.wf:hover{border-color:#9FB2EA;transform:translateY(-2px)}
+  .wf .mono{font-size:10.5px;color:var(--blue)}.wf h4{margin:8px 0 14px;font-size:15.5px;font-weight:600;line-height:1.35}
+  .st{display:grid;gap:6px}.st i{position:relative;font-style:normal;font-size:12.5px;padding:6px 10px 6px 26px;border-radius:6px;background:#EAF8FF;color:#0A3C66;font-weight:600}
+  .st i:before{content:"";position:absolute;left:10px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--cyan)}
+  .st i.h{background:#E6EBFF;color:var(--blue)}.st i.h:before{background:var(--blue)}
+  .legend3{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:16px;font-size:12px;color:var(--mute)}
+  .legend3 i{width:9px;height:9px;border-radius:50%;background:var(--cyan)}.legend3 i.h{background:var(--blue);margin-left:14px}
+
+  /* 05 Validate */
+  .appr{display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:clamp(14px,2vw,28px);margin:clamp(32px,4vw,52px) auto 0;max-width:1000px;align-items:stretch}
+  .acol{display:grid;align-content:start;gap:10px}.acol>.mono{font-size:11px;color:var(--mute)}
+  .ai-row{display:flex;align-items:center;gap:10px;padding:14px;border-radius:10px;background:var(--bg);border:1px solid var(--line);font-size:14px;font-weight:600;opacity:.5;transition:opacity .45s,border-color .45s,background .45s}
+  .ai-row.on{opacity:1;background:#EAF8FF;border-color:#BDEBFF}
+  .ai-row .ck{flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid #B9C4E6;display:grid;place-items:center;font-size:11px;font-weight:800;color:#00163D;background:#fff}.ai-row.on .ck{background:var(--cyan);border-color:var(--cyan)}
+  .acard{display:flex;flex-direction:column;padding:28px;border-radius:16px;background:#fff;border:1.5px solid var(--blue);box-shadow:0 30px 60px -30px rgba(0,26,173,.55)}
+  .acard .mono{font-size:11px;color:var(--blue)}.acard h4{margin-top:10px;font-size:22px;font-weight:700;letter-spacing:-.02em}.acard p{margin-top:8px;font-size:14px;line-height:1.6;color:var(--mute)}
+  .acts2{display:flex;gap:12px;margin-top:auto;padding-top:24px}
+  .acts2 button{flex:1;padding:14px;border-radius:99px;font:700 15px Inter,sans-serif;cursor:pointer;transition:transform .2s}.acts2 button:hover{transform:translateY(-2px)}
+  .acts2 .yes{background:var(--blue);color:#fff;border:0;box-shadow:0 14px 28px -12px rgba(0,26,173,.8)}.acts2 .no{background:#fff;color:#4F587A;border:1.5px solid #CBD3EA}
+  .trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(44px,5vw,72px)}
+  .tc{padding:clamp(22px,2.4vw,30px);border:1px solid var(--line);border-radius:16px;background:#fff}
+  .tc .mono{color:var(--blue);font-size:11px}.tc h4{margin-top:10px;font-size:19px;font-weight:700;letter-spacing:-.01em;line-height:1.3}.tc>p{margin-top:8px;font-size:14px;line-height:1.6;color:var(--mute)}
+  .tiles{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.tiles span{padding:8px 12px;border-radius:8px;background:#EEF2FF;color:var(--blue);font:700 12px 'IBM Plex Mono',monospace}
+  .gl{list-style:none;margin-top:16px;display:grid;gap:12px}.gl li{font-size:13.5px;line-height:1.55;color:var(--mute)}.gl b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:2px}
+  .seg{display:inline-flex;margin-top:16px;padding:3px;border:1.5px solid var(--line);border-radius:99px;background:#fff}
+  .seg button{padding:8px 14px;border:0;border-radius:99px;background:none;font:700 12.5px Inter,sans-serif;color:var(--mute);cursor:pointer;transition:all .3s}.seg button.on{background:var(--blue);color:#fff}
+  .zones{display:grid;grid-template-columns:1.4fr 1fr;gap:8px;margin-top:12px}
+  .zone{padding:12px;min-height:150px;border-radius:12px;border:1.5px dashed var(--blue);background:#fff;display:flex;flex-direction:column;gap:8px}.zone.c{border-color:#9FB2EA;background:#F1F5FF}.zone.off{border-style:dotted;border-color:#D5DEFA;background:var(--bg)}
+  .zone .mono{font-size:9.5px;color:var(--blue);line-height:1.3}.zone.c .mono{color:#5A6BA8}.zone em{margin:auto;font-style:normal;font-size:12px;color:#9AA3BF;font-weight:600}
+  .nodez{padding:9px 10px;border-radius:8px;font-weight:700;font-size:12.5px;animation:pop .4s ease}.nodez.a{background:var(--blue);color:#fff}.nodez.l{background:#DDF6FF;color:#0A55C8}.nodez.d{background:#E6EBFF;color:var(--blue)}
+  @keyframes pop{from{transform:scale(.92);opacity:0}}
+  .depcap{margin-top:12px;font-size:13px;line-height:1.55;color:var(--mute)}
+  .nums{margin-top:clamp(44px,5vw,72px);padding:clamp(28px,3.4vw,48px);border-radius:20px;background:var(--bg);border:1px solid var(--line)}
+  .nh .mono{color:var(--blue)}.nh h3{margin-top:10px;max-width:30em;font-size:clamp(20px,2vw,28px);font-weight:600;line-height:1.3}
+  .ng{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(14px,2vw,32px);margin-top:clamp(24px,3vw,36px);padding-top:clamp(20px,2.4vw,30px);border-top:1px solid var(--line)}
+  .ng b{display:block;font-size:clamp(40px,4.6vw,68px);font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--blue)}
+  .ng u{text-decoration:none;display:block;margin-top:6px;font:700 12px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}
+  .ng p{margin-top:8px;font-size:13px;line-height:1.5;color:var(--mute)}
+  .tm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+  .tmc{padding:clamp(20px,2.2vw,28px);border:1.5px dashed #B9C4E6;border-radius:12px;background:#fff}
+  .tmc .mono{font-size:10px;color:#9AA3BF}.tmc blockquote{margin-top:14px;font-size:clamp(15px,1.3vw,18px);line-height:1.5;font-weight:500;color:#6B7490}.tmc p{margin-top:16px;font-size:13px;font-weight:600;color:#9AA3BF}
+
+  .cta2{padding:clamp(56px,6vw,96px) 0;background:var(--bg)}
+  .ctabox{position:relative;overflow:hidden;text-align:center;padding:clamp(48px,6vw,88px) clamp(20px,4vw,60px);border-radius:24px;color:#fff;background:radial-gradient(60% 80% at 100% 0%,rgba(16,203,255,.45),transparent 60%),linear-gradient(135deg,#001AAD,#0A2BC8)}
+  .ctabox:before{content:"";position:absolute;right:-30px;top:-40px;width:300px;height:380px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310CBFF' stroke-width='.4' stroke-linejoin='round'%3E%3Cpath d='M13 2 4 14h7l-2 8 9-12h-7l2-8z'/%3E%3C/svg%3E") center/contain no-repeat;opacity:.35}
+  .ctabox>*{position:relative}.ctabox h2{max-width:17em;margin:0 auto;color:#fff}.ctabox p{margin:16px auto 0;max-width:36em;font-size:16px;line-height:1.6;color:rgba(255,255,255,.85)}
+  .foot{background:#fff;color:var(--mute);padding:56px 0 28px;font-size:13.5px;border-top:1px solid var(--line)}
+  .foot .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:28px}.foot img{height:22px}
+  .foot h5{font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+  .foot a{display:block;color:inherit;text-decoration:none;margin-bottom:8px}.foot a:hover{color:var(--blue)}.foot .tag{margin-top:14px;line-height:1.6;max-width:24em}
+  .foot .bot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px}
+
+  @media (max-width:1023px){
+    .chatcard,.lay,.modgrid,.appr,.trio{grid-template-columns:minmax(0,1fr)}
+    .cc.ag{border-left:0;border-top:1px solid var(--line)}
+    .why,.tm{grid-template-columns:minmax(0,1fr)}
+    .eras,.libgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .ng{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .foot .cols{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:899px){
+    .vzp{width:100%;left:0;right:0}.vzp.l{bottom:auto;height:48%}.vzp.r{top:auto;height:48%}.vzp p{display:none}
+    .vc{height:56px}.vzhead .head{display:block}
+  }
+  @media (max-width:640px){
+    .subnav>.wrapx>.mono{display:none}.subnav nav{width:100%;justify-content:space-between;gap:16px}.subnav nav a{font-size:10.5px}
+    .eras,.libgrid{grid-template-columns:minmax(0,1fr)}.ng{grid-template-columns:repeat(2,minmax(0,1fr))}.foot .cols{grid-template-columns:minmax(0,1fr)}
+    .lg{width:130px;margin:0 10px}.story{font-size:12px;flex-wrap:wrap;justify-content:center}
+  }
+
+  /* Explore: mỗi phân hệ một flow đại diện */
+  .modgrid{grid-template-columns:minmax(0,.8fr) minmax(0,1.7fr)}
+  .wfv{border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 30px 70px -40px rgba(0,26,173,.45);overflow:hidden}
+  .wfh{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .wfh .mono{font-size:11px;color:var(--blue)}.wfh b{font-size:15px;font-weight:700}.wfh em{margin-left:auto;font:600 10.5px 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;font-style:normal;color:#9AA3BF}
+  .wfscroll{overflow-x:auto;background:#fff;background-image:radial-gradient(#C9D2EA 1.2px,transparent 1.4px);background-size:20px 20px}
+  .wfc{position:relative;height:400px;min-width:720px}
+  .wfc>svg{position:absolute;inset:0;width:100%;height:100%}
+  .wfc path{fill:none;stroke:var(--blue);stroke-width:2;stroke-dasharray:6 6;vector-effect:non-scaling-stroke;animation:wfdash 1.2s linear infinite}
+  @keyframes wfdash{to{stroke-dashoffset:-24}}
+  .fe{position:absolute;transform:translate(-50%,-50%);padding:3px 9px;border-radius:99px;background:#fff;border:1px solid #C9D6FF;font:700 10px 'IBM Plex Mono',monospace;letter-spacing:.04em;color:var(--blue);white-space:nowrap}
+  .fn{position:absolute;width:17.5%;transform:translate(-50%,-50%);padding:11px 12px;border-radius:10px;border:1.5px solid transparent;animation:wfglow 7s ease-in-out infinite}
+  .fn small{display:block;font:700 9px 'IBM Plex Mono',monospace;letter-spacing:.06em;margin-bottom:5px;opacity:.85}
+  .fn b{display:block;font-size:12px;line-height:1.35;font-weight:600}
+  .fn.k-a{background:#E3F6FF;color:#0A55C8}.fn.k-h{background:#E6EBFF;color:var(--blue)}.fn.k-i{background:#DDF6FF;color:#0A3C66}.fn.k-c{background:#F1F3FA;color:#4F587A;border:1.5px dashed #9AA3BF}
+  @keyframes wfglow{0%,14%,100%{box-shadow:0 8px 20px -14px rgba(0,26,173,.4)}7%{box-shadow:0 0 0 3px var(--cyan),0 14px 28px -10px rgba(16,203,255,.55)}}
+  .wfl{display:flex;flex-wrap:wrap;gap:8px 20px;padding:14px 20px;border-top:1px solid var(--line);font-size:12px;color:var(--mute)}
+  .wfl span{display:flex;align-items:center;gap:7px}.wfl i{width:12px;height:12px;border-radius:4px;background:#E3F6FF;border:1.5px solid #0A55C8}
+  .wfl i.h{background:#E6EBFF;border-color:var(--blue)}.wfl i.i{background:#DDF6FF;border-color:#0A3C66}.wfl i.c{background:#F1F3FA;border:1.5px dashed #9AA3BF}
+  @media (max-width:1023px){.modgrid{grid-template-columns:minmax(0,1fr)}}
+
+  /* Icon theo loại node */
+  .fh{display:flex;align-items:center;gap:7px;margin-bottom:7px}
+  .fh small{margin:0!important}
+  .fi{flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:8px;font-style:normal}
+  .fi svg{width:15px;height:15px}
+  .fn.k-a .fi{background:#0A55C8;color:#fff}.fn.k-h .fi{background:var(--blue);color:#fff}.fn.k-i .fi{background:#0A3C66;color:#fff}.fn.k-c .fi{background:#fff;color:#4F587A;border:1.5px dashed #9AA3BF}
+  .wfl span{gap:8px}.wfl .fi{width:22px;height:22px;border-radius:7px}.wfl .fi svg{width:13px;height:13px}
+  .wfl .k-a .fi{background:#0A55C8;color:#fff}.wfl .k-h .fi{background:var(--blue);color:#fff}.wfl .k-i .fi{background:#0A3C66;color:#fff}.wfl .k-c .fi{background:#fff;color:#4F587A;border:1.5px dashed #9AA3BF}
+
+  .vzhead .head>h2{flex:1.15}
+  .vzhead .lede{flex:1;margin:0;max-width:none;font-size:14px;line-height:1.55;text-align:left}
+  @media (max-width:899px){.vzhead .lede{display:none}}
+
+  /* Visualize: subheading nằm ngay dưới heading */
+  .vzhead .head{display:block}
+  .vzhead .head>h2{flex:none}
+  .vzhead .head .lede{margin:6px 0 0;max-width:52em;font-size:14px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -473,61 +456,7 @@
     db: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>',
     tpl: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>',
   };
-  const HUES = ['#F2A65A', '#6C8CFF', '#3BB3A8', '#E07A9B', '#8B7CF6'];
 
-  // Sơ đồ tổ chức: h = người, a = AI Agent
-  const TREE = { vi: ['h', 'Tổng Giám đốc', [
-      ['h', 'Giám đốc Tài chính', [['h', 'Kế toán trưởng'], ['a', 'Agent Đối chiếu chứng từ'], ['a', 'Agent Nhắc công nợ']]],
-      ['h', 'Giám đốc Nhân sự', [['h', 'Trưởng phòng Tuyển dụng'], ['a', 'Agent Sàng lọc CV'], ['a', 'Agent Onboarding']]],
-      ['h', 'Giám đốc Vận hành', [['h', 'Trưởng phòng Mua hàng'], ['a', 'Agent Mua hàng'], ['a', 'Agent Hỗ trợ IT'], ['a', 'Agent Đồng bộ dữ liệu']]]]],
-    en: ['h', 'CEO', [
-      ['h', 'CFO', [['h', 'Chief Accountant'], ['a', 'Document Matching Agent'], ['a', 'Receivables Agent']]],
-      ['h', 'HR Director', [['h', 'Recruiting Lead'], ['a', 'CV Screening Agent'], ['a', 'Onboarding Agent']]],
-      ['h', 'COO', [['h', 'Procurement Lead'], ['a', 'Purchasing Agent'], ['a', 'IT Help Agent'], ['a', 'Data Sync Agent']]]]] };
-
-  // Trước / sau theo phòng ban
-  const BA = [
-    { vi: { tab: 'Tài chính – Kế toán', before: ['Nhận hóa đơn rải rác qua email', 'Nhập tay từng dòng vào Excel', 'Dò PO và biên nhận để đối chiếu', 'Email xin duyệt, chờ phản hồi', 'Nhập lại vào ERP'],
-        after: [['Bóc tách hóa đơn từ email', 'AI AGENT'], ['Đối chiếu PO, biên nhận, hợp đồng', 'AI AGENT'], ['Chuyển ngoại lệ đúng người', 'AI AGENT'], ['Kế toán trưởng phê duyệt', 'CON NGƯỜI'], ['Ghi nhận vào ERP', 'TÍCH HỢP']],
-        quote: 'Kế toán chỉ còn xử lý ngoại lệ thay vì nhập tay từng chứng từ, mọi bước đều có nhật ký để đối soát.',
-        roles: [['Agent Bóc tách chứng từ', 'Đọc hóa đơn, PO, biên nhận đa định dạng.'], ['Agent Đối chiếu', 'So khớp ba bên theo ngưỡng sai lệch cho phép.'], ['Agent Nhắc công nợ', 'Theo dõi hạn thanh toán, tự động nhắc.'], ['Agent Báo cáo', 'Tổng hợp báo cáo cuối ngày gửi lãnh đạo.']] },
-      en: { tab: 'Finance & Accounting', before: ['Invoices scattered across inboxes', 'Keyed into Excel line by line', 'Hunting POs and receipts to match', 'Email for approval, then wait', 'Re-enter everything into ERP'],
-        after: [['Extract invoices from email', 'AI AGENT'], ['Match PO, receipts, contracts', 'AI AGENT'], ['Route exceptions to the right person', 'AI AGENT'], ['Chief accountant approves', 'HUMAN'], ['Post to ERP', 'INTEGRATION']],
-        quote: 'Accountants handle exceptions instead of keying in every document, with a full log for reconciliation.',
-        roles: [['Document Extraction Agent', 'Reads invoices, POs and receipts in any format.'], ['Matching Agent', 'Three-way matching within allowed tolerances.'], ['Receivables Agent', 'Tracks due dates and sends reminders.'], ['Reporting Agent', 'Compiles the end-of-day report for leadership.']] } },
-    { vi: { tab: 'Nhân sự', before: ['HR nhắc từng phòng chuẩn bị', 'Gửi checklist giấy tờ thủ công', 'Chờ IT cấp email, tài khoản', 'Quản lý quên xác nhận', 'Nhân viên mới ngồi chờ'],
-        after: [['Tạo hồ sơ nhân sự khi offer được duyệt', 'AI AGENT'], ['Gửi checklist, nhắc bổ sung giấy tờ', 'AI AGENT'], ['Cấp email, tài khoản phần mềm', 'TÍCH HỢP'], ['Quản lý trực tiếp xác nhận', 'CON NGƯỜI'], ['Gửi lịch hội nhập tuần đầu', 'AI AGENT']],
-        quote: 'Nhân viên mới có đủ tài khoản, thiết bị và lịch hội nhập ngay ngày đầu, HR không phải nhắc từng phòng.',
-        roles: [['Agent Sàng lọc CV', 'So CV với mô tả công việc, đề xuất ứng viên.'], ['Agent Onboarding', 'Điều phối các bước giữa HR, IT và quản lý.'], ['Agent Nghỉ phép', 'Kiểm tra quỹ phép, chuyển duyệt, cập nhật công.'], ['Trợ lý chính sách', 'Trả lời quy chế kèm trích dẫn nguồn (Ragify).']] },
-      en: { tab: 'Human Resources', before: ['HR chases every team to prepare', 'Paper checklists sent by hand', 'Waiting on IT for accounts', 'Managers forget to confirm', 'New hire sits and waits'],
-        after: [['Create profile when offer is approved', 'AI AGENT'], ['Send checklist, chase missing documents', 'AI AGENT'], ['Provision email and software accounts', 'INTEGRATION'], ['Line manager confirms', 'HUMAN'], ['Send week-one onboarding plan', 'AI AGENT']],
-        quote: 'New hires have accounts, equipment and an onboarding plan on day one, without HR chasing every team.',
-        roles: [['CV Screening Agent', 'Compares CVs with the job description and shortlists.'], ['Onboarding Agent', 'Coordinates HR, IT and managers.'], ['Leave Agent', 'Checks balances, routes approval, updates timesheets.'], ['Policy Assistant', 'Answers policy questions with cited sources (Ragify).']] } },
-    { vi: { tab: 'Mua hàng', before: ['Đề xuất mua gửi qua email', 'Tự dò ngân sách còn lại', 'Gom báo giá bằng tay', 'Trình ký giấy nhiều cấp', 'Không rõ hàng đã giao chưa'],
-        after: [['Kiểm tra ngân sách và chính sách', 'AI AGENT'], ['Tổng hợp, so sánh báo giá', 'AI AGENT'], ['Phê duyệt nhiều cấp theo hạn mức', 'CON NGƯỜI'], ['Tạo PO trên hệ thống', 'TÍCH HỢP'], ['Theo dõi giao nhận, nhắc nhà cung cấp', 'AI AGENT']],
-        quote: 'Mỗi đề xuất mua hàng đi đúng tuyến phê duyệt theo ngân sách, minh bạch từ đề xuất tới thanh toán.',
-        roles: [['Agent Kiểm tra ngân sách', 'Đối chiếu đề xuất với ngân sách phòng ban.'], ['Agent So sánh báo giá', 'Tóm tắt khác biệt giữa các nhà cung cấp.'], ['Agent Theo dõi PO', 'Nhắc giao hàng, cập nhật trạng thái nhận hàng.'], ['Agent Đánh giá NCC', 'Tổng hợp lịch sử chất lượng, tiến độ.']] },
-      en: { tab: 'Procurement', before: ['Requests sent by email', 'Checking budgets by hand', 'Collecting quotes manually', 'Paper sign-off at every level', 'No idea if goods arrived'],
-        after: [['Check budget and policy', 'AI AGENT'], ['Collect and compare quotes', 'AI AGENT'], ['Multi-level approval by limit', 'HUMAN'], ['Create the PO in the system', 'INTEGRATION'], ['Track delivery, chase suppliers', 'AI AGENT']],
-        quote: 'Every request follows the right approval path for its budget, traceable from request to payment.',
-        roles: [['Budget Check Agent', 'Compares requests with the team budget.'], ['Quote Comparison Agent', 'Summarizes differences between suppliers.'], ['PO Tracking Agent', 'Chases deliveries and updates receipts.'], ['Supplier Review Agent', 'Compiles supplier quality and delivery history.']] } },
-    { vi: { tab: 'Kinh doanh – CSKH', before: ['Yêu cầu đến từ nhiều kênh', 'Phân công bằng tin nhắn', 'Soạn báo giá từ đầu', 'Chờ trưởng nhóm duyệt giá', 'Quên cập nhật CRM'],
-        after: [['Gom yêu cầu từ website, email, chat', 'AI AGENT'], ['Phân loại, gán người phụ trách', 'AI AGENT'], ['Soạn báo giá từ mẫu', 'AI AGENT'], ['Trưởng nhóm duyệt giá', 'CON NGƯỜI'], ['Gửi khách, cập nhật CRM', 'TÍCH HỢP']],
-        quote: 'Không yêu cầu nào bị bỏ sót, đội kinh doanh dành thời gian cho khách hàng thay vì giấy tờ.',
-        roles: [['Agent Phân loại yêu cầu', 'Xác định nhu cầu và mức ưu tiên.'], ['Agent Soạn báo giá', 'Tạo báo giá theo mẫu, kiểm tra chiết khấu.'], ['Agent Chăm sóc', 'Nhắc follow-up, gửi tóm tắt sau buổi gặp.'], ['Trợ lý sản phẩm', 'Trả lời câu hỏi sản phẩm từ kho tri thức.']] },
-      en: { tab: 'Sales & Service', before: ['Requests from many channels', 'Assigned over chat messages', 'Quotes written from scratch', 'Waiting on pricing approval', 'CRM never updated'],
-        after: [['Capture website, email, chat requests', 'AI AGENT'], ['Classify and assign an owner', 'AI AGENT'], ['Draft quote from template', 'AI AGENT'], ['Team lead approves pricing', 'HUMAN'], ['Send to customer, update CRM', 'INTEGRATION']],
-        quote: 'No request slips through, and sales spends time with customers instead of paperwork.',
-        roles: [['Request Triage Agent', 'Sets intent and priority for every request.'], ['Quote Agent', 'Builds quotes from templates, checks discounts.'], ['Follow-up Agent', 'Schedules follow-ups and sends recaps.'], ['Product Assistant', 'Answers product questions from the knowledge base.']] } },
-    { vi: { tab: 'IT – Vận hành', before: ['Yêu cầu cấp quyền qua chat', 'IT tự tra chính sách', 'Chờ quản lý trả lời', 'Tạo tài khoản thủ công', 'Không ai thu hồi quyền cũ'],
-        after: [['Tiếp nhận yêu cầu cấp quyền', 'AI AGENT'], ['Kiểm tra chính sách theo vai trò', 'AI AGENT'], ['Quản lý phê duyệt', 'CON NGƯỜI'], ['RPA tạo tài khoản (AutoFlow)', 'TÍCH HỢP'], ['Ghi nhật ký, đặt lịch rà soát', 'AI AGENT']],
-        quote: 'Quyền được cấp đúng người, đúng lúc và thu hồi khi không còn cần, có nhật ký kiểm toán đầy đủ.',
-        roles: [['Agent Hỗ trợ IT', 'Hướng dẫn xử lý các lỗi thường gặp.'], ['Agent Cấp quyền', 'Cấp và thu hồi quyền theo vai trò.'], ['Agent Đồng bộ dữ liệu', 'Đồng bộ ERP, CRM và hệ thống nội bộ.'], ['Agent Giám sát', 'Theo dõi tác vụ tự động, cảnh báo lỗi.']] },
-      en: { tab: 'IT & Operations', before: ['Access requests over chat', 'IT looks up policy by hand', 'Waiting on manager replies', 'Accounts created manually', 'Old access never revoked'],
-        after: [['Take the access request', 'AI AGENT'], ['Check role-based policy', 'AI AGENT'], ['Manager approves', 'HUMAN'], ['RPA creates the account (AutoFlow)', 'INTEGRATION'], ['Log it, schedule an access review', 'AI AGENT']],
-        quote: 'The right people get access at the right time and lose it when it is no longer needed, fully audited.',
-        roles: [['IT Help Agent', 'Walks users through common fixes.'], ['Access Agent', 'Grants and revokes role-based access.'], ['Data Sync Agent', 'Keeps ERP, CRM and internal systems in sync.'], ['Monitoring Agent', 'Watches automated jobs, alerts on errors.']] } },
-  ];
 
   const P = {
     vi: {
@@ -632,21 +561,14 @@
     },
   };
 
-  let baIdx = 0, chatTimer = null, flowIdx = 0;
+  const x = (v, e) => lang === 'vi' ? v : e;
+  let modIdx = 0, libF = 'all', layIdx = 1;
   const checks = list => `<div class="checks">${list.map(([h, p]) => `<div><h4>${h}</h4><p>${p}</p></div>`).join('')}</div>`;
   const logoRow = () => { const one = LOGOS.map(([f, a, h]) => `<div class="lg"><img src="img/logos/${f}.png" alt="${a}" style="height:${h}px"></div>`).join(''); return `<div class="marq"><div class="track">${one + one + one}</div></div>` };
 
-  function treeHTML(n, i = 0) {
-    const [k, name, kids] = n;
-    const pic = k === 'a' ? ICO.bolt : `<span style="display:contents">${ICO.user}</span>`;
-    const bg = k === 'h' ? ` style="background:${HUES[(name.length + i) % HUES.length]}"` : '';
-    const node = `<div class="nd ${k}${k === 'a' && i % 2 ? ' blink' : ''}"><span class="pic"${bg}>${pic}</span><span class="tag">${name}</span></div>`;
-    return `<li>${node}${kids ? `<ul>${kids.map((c, j) => treeHTML(c, i + j + 1)).join('')}</ul>` : ''}</li>`;
-  }
-
   // biểu đồ vùng xếp chồng, chỉ để minh họa (không có trục số)
   function chartSVG(t) {
-    const W = 640, H = 230, N = 13, cols = ['#8B7CF6', '#3BB3A8', '#F2A65A', '#FFD27A'];
+    const W = 640, H = 230, N = 13, cols = ['#001AAD', '#2563EB', '#10CBFF', '#9FE3FF'];
     const base = [6, 4, 3, 2.5], grow = [1.18, 1.16, 1.15, 1.12];
     const vals = base.map((b, s) => Array.from({ length: N }, (_, i) => b * Math.pow(grow[s], i) * (1 + .12 * Math.sin(i * 1.3 + s))));
     const max = Array.from({ length: N }, (_, i) => vals.reduce((a, v) => a + v[i], 0)).reduce((a, b) => Math.max(a, b)) * 1.08;
@@ -659,76 +581,253 @@
     });
     const pats = cols.map((c, s) => `<pattern id="p${s}" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="${c}" opacity=".55"/><circle cx="2" cy="2" r="1.1" fill="${c}"/></pattern>`).join('');
     const grid = [0, 1, 2, 3].map(g => `<line x1="30" x2="${W - 10}" y1="${16 + g * (H - 40) / 3}" y2="${16 + g * (H - 40) / 3}" stroke="#E6EBF7"/>`).join('');
-    const mo = t.months.map((m, i) => `<text x="${30 + i * (W - 40) / 2}" y="${H - 4}" font-size="11" fill="#7A84A3" text-anchor="${['start', 'middle', 'end'][i]}" font-family="Montserrat">${m}</text>`).join('');
+    const mo = t.months.map((m, i) => `<text x="${30 + i * (W - 40) / 2}" y="${H - 4}" font-size="11" fill="#7A84A3" text-anchor="${['start', 'middle', 'end'][i]}" font-family="Inter">${m}</text>`).join('');
     return `<svg class="chart2" id="chart2" viewBox="0 0 ${W} ${H}"><defs>${pats}</defs>${grid}${paths}${mo}</svg>`;
   }
 
+  // ===== Dữ liệu 5 chặng hành trình =====
+  const stages = () => ['Discover', 'Visualize', 'Understand', 'Explore', 'Validate'];
+
+  const whyCards = () => [
+    [x('Công cụ rời rạc', 'Disconnected tools'), x('Dữ liệu và quy trình nằm rải rác ở nhiều hệ thống, con người phải làm cầu nối giữa các bước.', 'Data and processes are scattered across systems, and people end up bridging every step.')],
+    [x('AI chưa chạm tới việc thật', 'AI that stops at answers'), x('Chatbot trả lời được nhưng không thao tác trên hệ thống nghiệp vụ, việc vẫn phải làm tay.', 'Chatbots can answer, but they do not act on business systems, so the work is still manual.')],
+    [x('Khó kiểm soát và tuân thủ', 'Hard to govern'), x('Doanh nghiệp lớn và cơ quan nhà nước cần phê duyệt, phân quyền, nhật ký và dữ liệu lưu tại Việt Nam.', 'Large enterprises and government need approvals, access control, audit logs and data kept in Vietnam.')],
+  ];
+
+  const vzNodes = () => [
+    [x('Yêu cầu qua email', 'Requests by email'), x('Tiếp nhận yêu cầu', 'Take the request'), 'AI AGENT'],
+    [x('Nhập tay vào Excel', 'Typing into Excel'), x('Bóc tách, kiểm tra dữ liệu', 'Extract and validate data'), 'AI AGENT'],
+    [x('Hỏi quy định qua chat', 'Asking policy over chat'), x('Tra chính sách, có trích dẫn', 'Check policy with citations'), 'AI AGENT'],
+    [x('Trình ký giấy', 'Paper sign-off'), x('Phê duyệt nhiều cấp, có SLA', 'Multi-level approval with SLA'), x('CON NGƯỜI', 'HUMAN')],
+    [x('Nhập lại vào ERP', 'Re-keying into ERP'), x('Ghi nhận vào ERP', 'Post to ERP'), x('TÍCH HỢP', 'INTEGRATION')],
+  ];
+
+  const eras = () => [
+    [x('Tác vụ riêng lẻ', 'Isolated tasks'), x('Mỗi công cụ giải một việc, con người nối các mảnh bằng tay.', 'Each tool solves one job and people stitch the pieces together.')],
+    ['RPA', x('Tự động hóa tác vụ lặp lại, nhưng theo kịch bản cố định.', 'Automates repetitive tasks, but on fixed scripts.')],
+    [x('Trợ lý AI', 'AI assistants'), x('Trả lời và gợi ý nhanh, nhưng chưa tự hoàn tất công việc.', 'Fast answers and suggestions, but they do not finish the work.')],
+    [x('Workflow hợp nhất', 'Unified workflow'), x('AI Agent, con người, dữ liệu và hệ thống chạy trong một luồng có kiểm soát.', 'AI Agents, people, data and systems run in one governed flow.')],
+  ];
+
+  const layers = () => [
+    { ic: 'chat', n: x('Kênh giao tiếp', 'Channels'), s: x('Nơi yêu cầu bắt đầu', 'Where requests start'),
+      d: x('Nhân viên gửi yêu cầu trên kênh quen thuộc, người xử lý nhận việc trong một hộp việc chung.', 'People raise requests in the channels they already use, and assignees pick up work from one shared inbox.'),
+      b: [x('Chat, web, email', 'Chat, web, email'), x('Biểu mẫu tiếp nhận yêu cầu', 'Request intake forms'), x('Hộp việc cho người xử lý', 'Task inbox for assignees')] },
+    { ic: 'flow', n: x('AI Agent và Workflow Engine', 'AI Agents and Workflow Engine'), s: x('Nơi việc được điều phối', 'Where work is orchestrated'),
+      d: x('Quy trình thiết kế bằng kéo thả. AI Agent xử lý từng bước, con người tham gia ở điểm cần phê duyệt.', 'Processes are designed by drag and drop. AI Agents handle each step and people join where approval is needed.'),
+      b: [x('AI Agent: phân loại, tóm tắt, trích xuất, đề xuất', 'AI Agents: classify, summarize, extract, recommend'), x('Tuần tự, song song, rẽ nhánh', 'Sequential, parallel, branching'), x('Phê duyệt nhiều cấp theo SLA', 'Multi-level approval with SLA')] },
+    { ic: 'db', n: x('Dữ liệu và tri thức', 'Data and knowledge'), s: x('Nơi Agent lấy ngữ cảnh', 'Where Agents get context'),
+      d: x('Dữ liệu nghiệp vụ và tài liệu nội bộ cung cấp ngữ cảnh để Agent quyết định đúng và trả lời có nguồn.', 'Business data and internal documents give Agents the context to decide well and answer with sources.'),
+      b: ['Business Data Entities', x('Ragify: hỏi đáp có trích dẫn nguồn', 'Ragify: Q&A with source citations'), x('SharePoint, Google Drive', 'SharePoint, Google Drive')] },
+    { ic: 'plug', n: x('Tích hợp hệ thống', 'Integration'), s: x('Nơi Agent hành động', 'Where Agents act'),
+      d: x('Agent thao tác trực tiếp trên ERP, CRM, email và cơ sở dữ liệu hiện có, không cần thay hạ tầng.', 'Agents act directly on your existing ERP, CRM, email and databases, with no rip-and-replace.'),
+      b: ['API, MCP', x('RPA qua AutoFlow', 'RPA via AutoFlow'), x('Database, SSO', 'Database, SSO')] },
+    { ic: 'lock', n: x('Quản trị và triển khai', 'Governance and deployment'), s: x('Nơi mọi thứ được kiểm soát', 'Where everything is controlled'),
+      d: x('Mọi quyết định của người và AI Agent đều được ghi lại. Triển khai linh hoạt, dữ liệu lưu tại Việt Nam.', 'Every decision by people and AI Agents is logged. Flexible deployment, with data stored in Vietnam.'),
+      b: ['Analytics & Audit', x('Phân quyền theo vai trò', 'Role-based access'), x('Cloud, On-premise, Hybrid · Private LLM', 'Cloud, On-premise, Hybrid · Private LLM')] },
+  ];
+
+  // Phân hệ: mockup do thiết kế dựng, không dùng ảnh chụp hệ thống thật
+  const mods = () => [
+    { n: 'Marketing', ico: 'web', d: x('Lên kế hoạch, soạn và duyệt nội dung chiến dịch với AI Agent hỗ trợ ở từng bước.', 'Plan, draft and approve campaign content with AI Agents supporting every step.'),
+      b: [x('Soạn nội dung theo thương hiệu', 'Brand-aligned content drafts'), x('Duyệt nội dung nhiều cấp', 'Multi-level content approval'), x('Báo cáo chiến dịch tự động', 'Automated campaign reports')],
+      rows: [[x('Chiến dịch ra mắt sản phẩm', 'Product launch campaign'), x('CHỜ DUYỆT', 'IN REVIEW')], [x('Bản tin khách hàng tháng này', 'This month\'s customer newsletter'), x('ĐANG SOẠN', 'DRAFTING')], [x('Nội dung webinar', 'Webinar content'), x('ĐÃ LÊN LỊCH', 'SCHEDULED')]],
+      ag: [x('Soạn bản nháp từ brief', 'Draft copy from the brief'), x('Kiểm tra giọng văn thương hiệu', 'Check brand voice'), x('Chuyển Trưởng phòng duyệt', 'Route to marketing lead')] },
+    { n: 'CRM', ico: 'sales', d: x('Từ khách hàng tiềm năng đến báo giá và chốt đơn, Agent cập nhật dữ liệu để đội kinh doanh tập trung vào khách.', 'From lead to quote to close, Agents keep records current so sales can focus on customers.'),
+      b: [x('Phân loại và gán lead', 'Lead triage and assignment'), x('Soạn báo giá từ bảng giá', 'Quotes from the price list'), x('Nhắc follow-up đúng hạn', 'Timely follow-up reminders')],
+      rows: [[x('Công ty ABC · 200 license', 'ABC Corp · 200 licenses'), x('CHỜ DUYỆT GIÁ', 'PRICE APPROVAL')], [x('Công ty XYZ · Demo', 'XYZ Co · Demo'), x('ĐÃ LÊN LỊCH', 'SCHEDULED')], [x('Công ty DEF · Lead mới', 'DEF Co · New lead'), x('MỚI', 'NEW')]],
+      ag: [x('Phân loại lead theo nhu cầu', 'Classify the lead by need'), x('Lập báo giá, kiểm tra chiết khấu', 'Build quote, check discount'), x('Đặt lịch follow-up', 'Schedule the follow-up')] },
+    { n: 'HRM', ico: 'user', d: x('Tuyển dụng, onboarding, nghỉ phép và chính sách nhân sự chạy trong một luồng, HR không phải nhắc từng phòng.', 'Recruiting, onboarding, leave and HR policy run in one flow, so HR stops chasing every team.'),
+      b: [x('Sàng lọc CV theo mô tả công việc', 'CV screening against job descriptions'), x('Onboarding liên phòng ban', 'Cross-team onboarding'), x('Hỏi đáp chính sách có trích dẫn', 'Policy Q&A with citations')],
+      rows: [[x('Ứng viên · Chuyên viên Kế toán', 'Candidate · Accountant'), x('ĐÃ SÀNG LỌC', 'SCREENED')], [x('Nhân viên mới · Tuần 1', 'New hire · Week 1'), x('ĐANG ONBOARDING', 'ONBOARDING')], [x('Đơn nghỉ phép 20–22/11', 'Leave request Nov 20–22'), x('CHỜ DUYỆT', 'PENDING')]],
+      ag: [x('Tạo hồ sơ khi offer được duyệt', 'Create profile when offer is approved'), x('Cấp tài khoản qua tích hợp', 'Provision accounts via integration'), x('Gửi lịch hội nhập tuần đầu', 'Send week-one plan')] },
+    { n: 'WMS', ico: 'cart', d: x('Nhập, xuất và đối chiếu chứng từ kho, cảnh báo sớm các ngoại lệ về tồn và giao nhận.', 'Receiving, dispatch and document matching, with early alerts on stock and delivery exceptions.'),
+      b: [x('Đối chiếu phiếu nhập với PO', 'Match receipts to POs'), x('Cảnh báo tồn kho bất thường', 'Unusual stock alerts'), x('Đồng bộ với ERP', 'Sync with ERP')],
+      rows: [[x('Phiếu nhập kho #A102', 'Goods receipt #A102'), x('LỆCH SỐ LƯỢNG', 'QTY MISMATCH')], [x('Lệnh xuất kho #B218', 'Dispatch order #B218'), x('ĐANG XỬ LÝ', 'IN PROGRESS')], [x('Kiểm kê định kỳ', 'Cycle count'), x('ĐÃ XONG', 'DONE')]],
+      ag: [x('Đối chiếu phiếu nhập với PO', 'Match the receipt to the PO'), x('Gắn cờ chênh lệch số lượng', 'Flag the quantity gap'), x('Chuyển thủ kho xác nhận', 'Route to warehouse lead')] },
+    { n: 'Work', ico: 'cal', d: x('Giao việc, nhắc hạn và tổng hợp tiến độ cho từng nhóm, Agent theo dõi để không việc nào bị bỏ sót.', 'Assign work, chase deadlines and roll up progress per team, with Agents making sure nothing slips.'),
+      b: [x('Giao việc từ yêu cầu', 'Turn requests into tasks'), x('Nhắc hạn tự động', 'Automatic deadline reminders'), x('Tổng hợp tiến độ cho quản lý', 'Progress roll-ups for managers')],
+      rows: [[x('Chuẩn bị báo cáo quý', 'Prepare quarterly report'), x('SẮP ĐẾN HẠN', 'DUE SOON')], [x('Rà soát hợp đồng nhà cung cấp', 'Review supplier contract'), x('ĐANG LÀM', 'IN PROGRESS')], [x('Cập nhật quy trình nội bộ', 'Update internal process'), x('ĐÃ XONG', 'DONE')]],
+      ag: [x('Tạo việc từ yêu cầu đến', 'Create tasks from incoming requests'), x('Nhắc người phụ trách', 'Nudge the owner'), x('Tổng hợp tiến độ tuần', 'Compile the weekly summary')] },
+  ];
+
+  // Thư viện workflow. Bước đánh dấu @ là bước con người
+  const LIB = [
+    ['fin', 'Finance', 'Đối chiếu hóa đơn, PO, biên nhận', 'Invoice, PO and receipt matching', 'Bóc tách|Đối chiếu|@Duyệt ngoại lệ|Ghi ERP', 'Extract|Match|@Approve exceptions|Post to ERP'],
+    ['pro', 'Procurement', 'Đề xuất mua sắm', 'Purchase request', 'Kiểm tra ngân sách|So sánh báo giá|@Duyệt nhiều cấp|Tạo PO', 'Check budget|Compare quotes|@Multi-level approval|Create PO'],
+    ['hr', 'HR', 'Onboarding nhân viên mới', 'New hire onboarding', 'Tạo hồ sơ|Gửi checklist|@Quản lý xác nhận|Cấp tài khoản', 'Create profile|Send checklist|@Manager confirms|Provision accounts'],
+    ['hr', 'HR', 'Đơn xin nghỉ phép', 'Leave request', 'Kiểm tra quỹ phép|Kiểm tra lịch nhóm|@Quản lý duyệt|Cập nhật công', 'Check balance|Check team calendar|@Manager approves|Update timesheet'],
+    ['sal', 'Sales', 'Báo giá và chốt đơn', 'Quote to close', 'Tra cứu CRM|Lập báo giá|@Duyệt giá|Gửi khách, cập nhật CRM', 'Look up CRM|Build quote|@Approve price|Send, update CRM'],
+    ['it', 'IT', 'Cấp quyền hệ thống', 'System access request', 'Xác minh vai trò|Đối chiếu chính sách|@Duyệt|Cấp quyền, ghi nhật ký', 'Verify role|Check policy|@Approve|Grant access, log it'],
+    ['mkt', 'Marketing', 'Duyệt nội dung chiến dịch', 'Campaign content approval', 'Soạn nội dung|Kiểm tra thương hiệu|@Duyệt nội dung|Lên lịch đăng', 'Draft copy|Check brand|@Approve content|Schedule publishing'],
+    ['wh', 'Warehouse', 'Đối chiếu phiếu nhập kho', 'Goods receipt matching', 'Đọc phiếu nhập|Đối chiếu PO|@Xác nhận chênh lệch|Cập nhật tồn', 'Read receipt|Match PO|@Confirm variance|Update stock'],
+  ];
+  const libDepts = () => [['all', x('Tất cả', 'All')], ['fin', x('Tài chính', 'Finance')], ['pro', x('Mua hàng', 'Procurement')], ['hr', x('Nhân sự', 'HR')], ['sal', x('Kinh doanh', 'Sales')], ['it', 'IT'], ['mkt', 'Marketing'], ['wh', x('Kho', 'Warehouse')]];
+  const DEPTN = { fin: ['Tài chính', 'Finance'], pro: ['Mua hàng', 'Procurement'], hr: ['Nhân sự', 'HR'], sal: ['Kinh doanh', 'Sales'], it: ['IT', 'IT'], mkt: ['Marketing', 'Marketing'], wh: ['Kho', 'Warehouse'] };
+
+  function layHTML() {
+    const L = layers(), c = L[layIdx];
+    return `<div class="lay">
+      <div class="stack">${L.map((l, i) => `<button type="button" data-i="${i}" class="${i === layIdx ? 'on' : ''}"><em>0${i + 1}</em><span>${ICO[l.ic]}</span><div><b>${l.n}</b><small>${l.s}</small></div></button>`).join('')}</div>
+      <div class="laypanel"><span class="mono">${x('Layer', 'Layer')} 0${layIdx + 1}</span><h3>${c.n}</h3><p>${c.d}</p>
+        <ul>${c.b.map(b => `<li>${b}</li>`).join('')}</ul>
+        <div class="req"><i style="left:${10 + layIdx * 20}%"></i><span>${x('Yêu cầu của Minh đang ở layer này', 'The request is at this layer')}</span></div></div></div>`;
+  }
+
+  function libHTML() {
+    const i = lang === 'vi' ? 0 : 1;
+    return LIB.filter(w => libF === 'all' || w[0] === libF).map(w => {
+      const steps = w[4 + i].split('|');
+      return `<div class="wf"><span class="mono">${DEPTN[w[0]][i]}</span><h4>${w[2 + i]}</h4>
+        <div class="st">${steps.map(s => s[0] === '@' ? `<i class="h">${s.slice(1)}</i>` : `<i>${s}</i>`).join('')}</div></div>`;
+    }).join('');
+  }
+
+  // ===== v2: nền sáng, một sợi chuyện xuyên suốt (yêu cầu mua 5 laptop) =====
+  let apprState = 0, depIdx = 1;
+  const storyStrip = n => {
+    const st = [x('Gửi yêu cầu', 'Request sent'), x('Gom thành một luồng', 'Into one flow'), x('Đi qua 5 layer', 'Through 5 layers'), x('Nhân rộng cho mọi bộ phận', 'Scaled to every team'), x('Chờ bạn phê duyệt', 'Waiting for your approval')];
+    return `<div class="story"><span class="dots">${[0, 1, 2, 3, 4].map(i => `<i class="${i < n ? 'on' : ''}"></i>`).join('')}</span><span><b>${x('Yêu cầu mua 5 laptop', 'Request: 5 laptops')}</b> · ${x('Bước', 'Step')} ${n}/5: ${st[n - 1]}</span></div>`;
+  };
+  const head = (n, name, h, p) => `<div class="head">${storyStrip(n)}<div class="eyebrow"><b>0${n}</b>${name}</div><h2>${h}</h2>${p ? `<p class="lede">${p}</p>` : ''}</div>`;
+
+  function chatHTML() {
+    const acts = [[x('Kiểm tra ngân sách phòng ban', 'Check team budget'), x('ĐẠT', 'PASSED')], [x('Tạo đề xuất từ mẫu chuẩn', 'Create request from template'), x('XONG', 'DONE')], [x('Tổng hợp báo giá nhà cung cấp', 'Collect supplier quotes'), x('XONG', 'DONE')], [x('Chuyển Trưởng phòng phê duyệt', 'Route to department head'), x('CHỜ DUYỆT', 'PENDING')]];
+    return `<div class="chatcard"><div class="cc"><span class="mono">${x('Nhân viên gửi yêu cầu', 'An employee asks')}</span>
+        <div class="bub">${x('Mình cần mua 5 laptop cho nhóm mới vào tháng sau.', 'I need 5 laptops for the new team next month.')}</div><div class="who">Minh · ${x('Phòng Kinh doanh', 'Sales')}</div></div>
+      <div class="cc ag"><span class="mono">${x('AgentFlow xử lý', 'AgentFlow handles it')}</span>
+        <div class="alist">${acts.map(([a, s], i) => `<div class="arow${i === 3 ? ' wait' : ''}" style="animation-delay:${i * .5}s"><span class="ck">${i === 3 ? '' : '✓'}</span>${a}<b>${s}</b></div>`).join('')}</div></div></div>`;
+  }
+
+  // Mỗi phân hệ có một flow đại diện. Loại nút: a = AI Agent, h = Con người, i = Tích hợp, c = Điều kiện
+  const FI = {
+    a: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V5"/><circle cx="12" cy="3.6" r="1.2"/><path d="M9 13.2h.01M15 13.2h.01M9.5 16.8h5"/></svg>',
+    h: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>',
+    i: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4"/></svg>',
+    c: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 21.5 12 12 21.5 2.5 12z"/><path d="M12 8v4.5M12 15.8h.01"/></svg>',
+  };
+  const KIND = () => ({ a: ['AI AGENT', FI.a], h: [x('CON NGƯỜI', 'HUMAN'), FI.h], i: [x('TÍCH HỢP', 'INTEGRATION'), FI.i], c: [x('ĐIỀU KIỆN', 'CONDITION'), FI.c] });
+  const flows = () => [
+    { t: x('Duyệt và đăng nội dung chiến dịch', 'Campaign content approval and publishing'),
+      n: [['a', x('Soạn nội dung từ brief', 'Draft copy from the brief'), 10, 50], ['a', x('Kiểm tra giọng văn thương hiệu', 'Check brand voice'), 34, 50], ['h', x('Trưởng phòng duyệt nội dung', 'Marketing lead approves'), 58, 50], ['i', x('Lên lịch đăng đa kênh', 'Schedule multi-channel publishing'), 84, 27], ['a', x('Quay lại chỉnh sửa', 'Back to revisions'), 84, 73]],
+      e: [[0, 1], [1, 2], [2, 3, x('Duyệt', 'Approved')], [2, 4, x('Cần sửa', 'Needs changes')]] },
+    { t: x('Từ lead đến báo giá', 'From lead to quote'),
+      n: [['a', x('Phân loại lead theo nhu cầu', 'Classify the lead by need'), 10, 50], ['a', x('Lập báo giá theo bảng giá', 'Build the quote from the price list'), 34, 50], ['c', x('Chiết khấu vượt 10%?', 'Discount over 10%?'), 58, 50], ['h', x('Giám đốc Kinh doanh duyệt giá', 'Sales director approves price'), 84, 27], ['i', x('Gửi khách, cập nhật CRM', 'Send to customer, update CRM'), 84, 73]],
+      e: [[0, 1], [1, 2], [2, 3, x('Có', 'Yes')], [2, 4, x('Không', 'No')], [3, 4]] },
+    { t: x('Onboarding nhân viên mới', 'New hire onboarding'),
+      n: [['a', x('Tạo hồ sơ khi offer được duyệt', 'Create the profile once the offer is approved'), 10, 50], ['a', x('Gửi checklist, nhắc giấy tờ', 'Send checklist, chase documents'), 34, 50], ['h', x('Quản lý trực tiếp xác nhận', 'Line manager confirms'), 58, 50], ['i', x('Cấp email và tài khoản', 'Provision email and accounts'), 84, 27], ['a', x('Gửi lịch hội nhập tuần đầu', 'Send the week-one plan'), 84, 73]],
+      e: [[0, 1], [1, 2], [2, 3], [2, 4]] },
+    { t: x('Đối chiếu phiếu nhập kho', 'Goods receipt matching'),
+      n: [['a', x('Đọc phiếu nhập kho', 'Read the goods receipt'), 10, 50], ['a', x('Đối chiếu với PO', 'Match against the PO'), 34, 50], ['c', x('Lệch số lượng?', 'Quantity mismatch?'), 58, 50], ['h', x('Thủ kho xác nhận chênh lệch', 'Warehouse lead confirms variance'), 84, 27], ['i', x('Cập nhật tồn kho trên ERP', 'Update stock in ERP'), 84, 73]],
+      e: [[0, 1], [1, 2], [2, 3, x('Có', 'Yes')], [2, 4, x('Không', 'No')], [3, 4]] },
+    { t: x('Giao việc từ yêu cầu', 'Turn requests into tasks'),
+      n: [['a', x('Tạo việc từ yêu cầu đến', 'Create a task from the request'), 10, 50], ['a', x('Gán người phụ trách phù hợp', 'Assign the right owner'), 34, 50], ['h', x('Người phụ trách thực hiện', 'The owner does the work'), 58, 50], ['a', x('Nhắc khi sắp đến hạn', 'Nudge when the deadline nears'), 84, 27], ['a', x('Tổng hợp tiến độ cho quản lý', 'Compile progress for managers'), 84, 73]],
+      e: [[0, 1], [1, 2], [2, 3], [2, 4]] },
+  ];
+
+  function modHTML() {
+    const m = mods()[modIdx], f = flows()[modIdx], K = KIND();
+    const HW = 8.75, HH = 11;
+    const paths = f.e.map(([a, b]) => {
+      const A = f.n[a], B = f.n[b];
+      if (Math.abs(A[2] - B[2]) < 1) { const d = B[3] > A[3] ? 1 : -1; return `<path d="M${A[2]} ${A[3] + d * HH} L${B[2]} ${B[3] - d * HH}"/>`; }
+      const x1 = A[2] + HW, x2 = B[2] - HW, xm = (x1 + x2) / 2;
+      return `<path d="M${x1} ${A[3]} C${xm} ${A[3]} ${xm} ${B[3]} ${x2} ${B[3]}"/>`;
+    }).join('');
+    const labels = f.e.filter(e => e[2]).map(([a, b, l]) => {
+      const A = f.n[a], B = f.n[b], xm = (A[2] + HW + B[2] - HW) / 2, ym = (A[3] + B[3]) / 2;
+      return `<span class="fe" style="left:${xm}%;top:${ym}%">${l}</span>`;
+    }).join('');
+    const nodes = f.n.map(([k, lb, px, py], i) => `<div class="fn k-${k}" style="left:${px}%;top:${py}%;animation-delay:${i * .9}s"><div class="fh"><span class="fi">${K[k][1]}</span><small>${K[k][0]}</small></div><b>${lb}</b></div>`).join('');
+    return `<div class="modgrid"><div><h3>${m.n}</h3><p>${m.d}</p><div class="mchecks">${m.b.map(b => `<div><span class="ck2"></span>${b}</div>`).join('')}</div></div>
+      <div class="wfv"><div class="wfh"><span class="mono">${x('Flow nổi bật', 'Signature flow')}</span><b>${f.t}</b><em>${x('Minh họa', 'Illustration')}</em></div>
+        <div class="wfscroll"><div class="wfc"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${paths}</svg>${labels}${nodes}</div></div>
+        <div class="wfl"><span class="k-a"><em class="fi">${FI.a}</em>AI Agent</span><span class="k-i"><em class="fi">${FI.i}</em>${x('Tích hợp', 'Integration')}</span><span class="k-h"><em class="fi">${FI.h}</em>${x('Con người', 'Human')}</span><span class="k-c"><em class="fi">${FI.c}</em>${x('Điều kiện', 'Condition')}</span></div></div></div>`;
+  }
+
+  function apprHTML() {
+    const st = apprState;
+    const done = [x('Kiểm tra ngân sách', 'Check budget'), x('Tạo đề xuất từ mẫu chuẩn', 'Create request from template'), x('Tổng hợp 3 báo giá', 'Compare 3 quotes')];
+    const after = st === 2 ? [x('Báo người gửi: chưa được duyệt', 'Tell the requester: not approved'), x('Ghi nhật ký kiểm toán', 'Write the audit log')]
+      : [x('Tạo PO trên ERP', 'Create the PO in ERP'), x('Báo người gửi', 'Notify the requester'), x('Ghi nhật ký kiểm toán', 'Write the audit log')];
+    const card = st === 0
+      ? `<span class="mono">${x('Chờ duyệt · SLA còn 3 giờ', 'Pending · 3 hours left on SLA')}</span><h4>${x('Đề xuất mua 5 laptop', 'Purchase request: 5 laptops')}</h4><p>${x('Nhóm mới vào tháng sau. Ngân sách đạt, 3 báo giá đã được so sánh.', 'New team next month. Budget passed and 3 quotes compared.')}</p><div class="acts2"><button type="button" data-a="ok" class="yes">${x('Duyệt', 'Approve')}</button><button type="button" data-a="no" class="no">${x('Từ chối', 'Reject')}</button></div>`
+      : `<span class="mono">${st === 1 ? x('Đã duyệt bởi bạn', 'Approved by you') : x('Đã từ chối bởi bạn', 'Rejected by you')}</span><h4>${st === 1 ? x('AI Agent chạy tiếp, việc hoàn tất', 'The AI Agent carries on, work completed') : x('AI Agent dừng và báo người gửi', 'The AI Agent stops and tells the requester')}</h4><p>${x('Quyết định của bạn được ghi vào nhật ký kiểm toán.', 'Your decision is written to the audit log.')}</p><div class="acts2"><button type="button" data-a="reset" class="no">${x('Thử lại', 'Try again')}</button></div>`;
+    return `<div class="appr"><div class="acol"><span class="mono">${x('AI Agent đã làm', 'Done by the AI Agent')}</span>${done.map(d => `<div class="ai-row on"><span class="ck">✓</span>${d}</div>`).join('')}</div>
+      <div class="acard">${card}</div>
+      <div class="acol"><span class="mono">${x('Sau quyết định của bạn', 'After your decision')}</span>${after.map((d, i) => `<div class="ai-row${st ? ' on' : ''}" style="transition-delay:${i * .25}s"><span class="ck">${st ? '✓' : ''}</span>${d}</div>`).join('')}</div></div>`;
+  }
+
+  const DEPS = () => [
+    { n: 'Cloud', z: { a: 'c', l: 'c', d: 'c' }, t: x('AgentFlow chạy trên đám mây, dữ liệu vẫn lưu tại Việt Nam.', 'AgentFlow runs in the cloud, with data still stored in Vietnam.') },
+    { n: 'On-premise', z: { a: 'o', l: 'o', d: 'o' }, t: x('Toàn bộ nền tảng, model AI và dữ liệu nằm trên hạ tầng của doanh nghiệp.', 'The whole platform, AI model and data stay on your own infrastructure.') },
+    { n: 'Hybrid', z: { a: 'c', l: 'o', d: 'o' }, t: x('Nền tảng trên đám mây, dữ liệu nhạy cảm và model AI giữ trên hạ tầng của doanh nghiệp.', 'Platform in the cloud, sensitive data and the AI model kept on your own infrastructure.') },
+  ];
+  function depHTML() {
+    const D = DEPS(), d = D[depIdx];
+    const nodes = [['a', 'AgentFlow'], ['l', 'Private LLM'], ['d', x('Cơ sở dữ liệu', 'Database')]];
+    const zone = (k, name) => { const inz = nodes.filter(([id]) => d.z[id] === k); return `<div class="zone ${k}${inz.length ? '' : ' off'}"><span class="mono">${name}</span>${inz.length ? inz.map(([id, n]) => `<div class="nodez ${id}">${n}</div>`).join('') : `<em>${x('Không sử dụng', 'Not used')}</em>`}</div>`; };
+    return `<div class="seg" id="depseg">${D.map((m, i) => `<button type="button" data-i="${i}" class="${i === depIdx ? 'on' : ''}">${m.n}</button>`).join('')}</div>
+      <div class="zones">${zone('o', x('Hạ tầng doanh nghiệp · Việt Nam', 'Your infrastructure · Vietnam'))}${zone('c', x('Đám mây', 'Cloud'))}</div><p class="depcap">${d.t}</p>`;
+  }
+
   function renderSections() {
-    const t = P[lang], T = TEXT[lang];
+    const t = P[lang], T = TEXT[lang], S = stages();
     $('herologos').innerHTML = logoRow();
-    const b = BA[baIdx][lang];
+    const nums = [['4', x('năm', 'years'), x('Kinh nghiệm trong lĩnh vực tự động hóa', 'In automation')], ['~30', x('khách hàng', 'customers'), x('Doanh nghiệp lớn và cơ quan nhà nước', 'Enterprises and government')], ['Top 4', 'RPA', x('Nhà cung cấp giải pháp RPA tại Việt Nam', 'RPA providers in Vietnam')], ['4', 'platform', 'AgentFlow, Ragify, AutoMatching, AutoFlow'], ['~40', x('nhân sự', 'people'), x('Kỹ sư và chuyên gia', 'Engineers and experts')]];
     $('page').innerHTML = `
     <section class="logos">${logoRow()}</section>
-    <div class="subnav"><div class="wrapx"><span class="mono">${t.sub}</span><nav class="mono">${t.ch.map((c, i) => `<a href="#ch${i + 1}" data-i="${i}">${c}</a>`).join('')}</nav></div></div>
+    <div class="subnav"><div class="wrapx"><span class="mono">${t.sub}</span><nav class="mono">${S.map((c, i) => `<a href="#ch${i + 1}"><b>0${i + 1}</b> ${c}</a>`).join('')}</nav></div></div>
 
-    <section class="chap" id="ch1"><div class="wrapx">
-      <h2 class="big">${t.c1}</h2>
-      <div class="split">
-        <div class="side"><p>${t.c1p}</p><a class="more" href="https://www.innomation.vn/product/agentflow">${t.c2a}</a>
-          <span class="mono">${t.c1k}</span><div class="chan" id="chan">${t.flows.map((f, k) => `<button type="button" data-f="${k}" class="${k === flowIdx ? 'on' : ''}">${ICO[f.ico]}<span><small>${f.dept}</small><b>${f.name}</b></span></button>`).join('')}</div></div>
-        <div class="visual mesh"><div class="win"><div class="bar"><i></i><span id="wtitle"></span><span id="wclock">09:41</span></div>
-          <div class="body" id="chatbody"></div></div></div>
+    <section class="sec" id="ch1"><div class="wrapx">
+      ${head(1, 'Discover', x('AgentFlow giúp việc <em>được hoàn tất</em>, không chỉ được trả lời.', 'AgentFlow gets work <em>done</em>, not just answered.'), x('Nền tảng AI workflow giúp doanh nghiệp thiết kế, điều phối và thực thi quy trình nghiệp vụ, kết nối con người, dữ liệu, hệ thống và AI Agent trong một luồng duy nhất.', 'The AI workflow platform that helps enterprises design, orchestrate and run business processes, connecting people, data, systems and AI Agents in a single flow.'))}
+      <div class="ctas"><a class="btn pri" href="mailto:sales@innomation.vn">${T.cta} →</a></div>
+      ${chatHTML()}
+      <div class="why">${whyCards().map(([h, p], i) => `<div><em>0${i + 1}</em><h4>${h}</h4><p>${p}</p></div>`).join('')}</div>
+    </div></section>
+
+    <section class="sec alt vz" id="ch2"><div class="wrapx"><div class="vzwrap" id="vzwrap"><div class="vzstick"><div class="vzcol">
+      <div class="vzhead">${head(2, 'Visualize', x('Từ tác vụ rời rạc đến <em>một luồng hợp nhất</em>.', 'From scattered tasks to <em>one unified flow</em>.'), x('Trước đây mỗi bước là một công cụ, một người nhập tay. Với AgentFlow, các bước nối với nhau: AI Agent làm phần lặp lại, con người chỉ quyết định ở điểm quan trọng.', 'Before, every step meant another tool and another person keying data. With AgentFlow the steps connect: AI Agents do the repetitive part and people only decide where it matters.'))}</div>
+      <div class="vzstage" id="vzstage">
+        <div class="vzp l"><span class="vzlab">${x('TRƯỚC · TÁC VỤ RỜI RẠC', 'BEFORE · SILOED TASKS')}</span><p>${x('Mỗi tác vụ một công cụ, một người nhập tay.', 'Every task in its own tool, keyed in by hand.')}</p></div>
+        <div class="vzp r"><span class="vzlab" id="vzlab">${x('SAU · WORKFLOW HỢP NHẤT', 'AFTER · UNIFIED WORKFLOW')}</span><p>${x('Một luồng: AI Agent, con người và hệ thống nối với nhau.', 'One flow: AI Agents, people and systems connected.')}</p></div>
+        ${[0, 1, 2, 3, 4].map(() => '<div class="slot"></div>').join('')}<div class="vzline" id="vzline"></div>
+        ${vzNodes().map(([b, a, k]) => `<div class="vc"><div class="cb1"><span>${b}</span><b>${x('THỦ CÔNG', 'MANUAL')}</b></div><div class="ca1"><span>${a}</span><b class="${/NGƯỜI|HUMAN/.test(k) ? 'h' : ''}">${k}</b></div></div>`).join('')}
+      </div></div></div></div>
+      <div class="eras">${eras().map(([h, p], i) => `<div class="${i === 3 ? 'now' : ''}"><em>0${i + 1}</em><h4>${h}</h4><p>${p}</p></div>`).join('')}</div>
+    </div></section>
+
+    <section class="sec" id="ch3"><div class="wrapx">
+      ${head(3, 'Understand', x('Yêu cầu đi qua <em>5 layer</em> của AgentFlow.', 'The request travels through <em>5 layers</em>.'), x('Bấm vào từng layer để xem vai trò của nó, từ lúc nhân viên gửi đến lúc việc hoàn tất và được ghi nhật ký.', 'Select a layer to see its role, from the moment someone asks to the moment the work is done and logged.'))}
+      <div id="layview">${layHTML()}</div>
+    </div></section>
+
+    <section class="sec alt" id="ch4"><div class="wrapx">
+      ${head(4, 'Explore', x('Cùng cách làm, <em>cho mọi bộ phận</em>.', 'The same approach, <em>for every team</em>.'), x('Các phân hệ đều xây dựng trên AgentFlow, dùng chung AI Agent, workflow engine và quản trị.', 'Every module is built on AgentFlow and shares its AI Agents, workflow engine and governance.'))}
+      <div class="ltabs" id="mtabs">${mods().map((m, i) => `<button type="button" data-i="${i}" class="${i === modIdx ? 'on' : ''}">${m.n}</button>`).join('')}</div>
+      <div id="modview">${modHTML()}</div>
+      <div class="libhead"><h3>${x('Thư viện workflow', 'Workflow library')}</h3><p>${x('Bắt đầu nhanh từ mẫu có sẵn, tùy chỉnh theo quy trình của doanh nghiệp.', 'Start fast from ready-made templates and tailor them to your process.')}</p></div>
+      <div class="chips" id="libf">${libDepts().map(([k, n]) => `<button type="button" data-k="${k}" class="${k === libF ? 'on' : ''}">${n}</button>`).join('')}</div>
+      <div class="libgrid" id="libgrid">${libHTML()}</div>
+      <div class="legend3"><i></i>${x('AI Agent hoặc tích hợp', 'AI Agent or integration')}<i class="h"></i>${x('Con người phê duyệt', 'Human approval')}</div>
+    </div></section>
+
+    <section class="sec" id="ch5"><div class="wrapx">
+      ${head(5, 'Validate', x('Việc hoàn tất, <em>mọi bước đều kiểm soát được</em>.', 'Work done, <em>every step under control</em>.'), x('AI Agent làm phần lặp lại và dừng đúng chỗ cần con người quyết định. Bạn thử ngay bên dưới.', 'The AI Agent does the repetitive work and pauses where a person must decide. Try it below.'))}
+      <div id="apprview">${apprHTML()}</div>
+      <div class="trio">
+        <div class="tc"><span class="mono">${x('Tích hợp', 'Integration')}</span><h4>${t.intT}</h4><p>${t.intP}</p>
+          <div class="tiles">${['ERP', 'CRM', 'Email', 'API', 'SQL', 'MCP', 'SSO', 'RPA', 'Excel', 'Drive', 'SharePoint'].map(n => `<span>${n}</span>`).join('')}</div></div>
+        <div class="tc"><span class="mono">${x('Quản trị', 'Governance')}</span><h4>${x('Mọi quyết định đều truy vết được', 'Every decision is traceable')}</h4>
+          <ul class="gl">${t.k3.map(([h, p]) => `<li><b>${h}</b>${p}</li>`).join('')}</ul></div>
+        <div class="tc"><span class="mono">${x('Triển khai', 'Deployment')}</span><h4>${x('Dữ liệu vẫn ở Việt Nam', 'Data stays in Vietnam')}</h4><div id="depview">${depHTML()}</div></div>
       </div>
-      ${checks(t.k1)}
+      <div class="nums"><div class="nh"><span class="mono">${x('Innomation trong con số', 'Innomation in numbers')}</span><h3>${x('Đối tác tự động hóa đáng tin cậy của doanh nghiệp lớn và cơ quan nhà nước.', 'A trusted automation partner for large enterprises and government.')}</h3></div>
+        <div class="ng">${nums.map(([n, u, d]) => `<div><b>${n}</b><u>${u}</u><p>${d}</p></div>`).join('')}</div></div>
+      <div class="tm">${[0, 1, 2].map(() => `<div class="tmc"><span class="mono">${x('NỘI DUNG GIỮ CHỖ', 'PLACEHOLDER')}</span><blockquote>${x('“Nội dung testimonial sẽ được cập nhật sau khi khách hàng xác nhận.”', '“Testimonial copy will be added once the customer approves it.”')}</blockquote><p>${x('Tên khách hàng', 'Customer name')}</p></div>`).join('')}</div>
     </div></section>
 
-    <section class="chap" id="ch2"><div class="wrapx">
-      <div class="headrow"><h2 class="big">${t.c2}</h2><p>${t.c2p}<br><a class="more" href="https://www.innomation.vn/product/agentflow">${t.c2a}</a></p></div>
-      <div class="visual mesh warm orgv" style="margin-top:clamp(28px,3.5vw,48px)"><div class="tree"><ul>${treeHTML(TREE[lang])}</ul></div></div>
-      ${checks(t.k2)}
-    </div></section>
-
-    <section class="chap" id="ch3"><div class="wrapx">
-      <div class="headrow"><h2 class="big">${t.c3}</h2><p>${t.c3p}</p></div>
-      <div class="dash">
-        <div class="panel"><div class="legend2">${t.series.map((s, i) => `<span><i style="background:${['#8B7CF6', '#3BB3A8', '#F2A65A', '#FFD27A'][i]}"></i>${s}</span>`).join('')}</div>${chartSVG(t)}
-          <div class="mono" style="font-size:10.5px;color:#9AA3BF;margin-top:8px;text-align:right">${t.chartT}</div></div>
-        <div class="panel kv"><div class="head"><div class="k">${t.kv[0][0]}</div><div class="v"><i></i>${t.kv[0][1]}</div></div>
-          ${t.kv.slice(1).map(([k, v]) => `<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}</div>
-      </div>
-      ${checks(t.k3)}
-    </div></section>
-
-    <section class="trust"><div class="wrapx"><h2 class="big" style="font-size:clamp(24px,2.4vw,36px)">${t.trustT}</h2>
-      <div class="row">${t.trust.map(([i, n]) => `<div class="it"><span>${ICO[i]}</span>${n}</div>`).join('')}</div></div></section>
-
-    <section class="darksec"><div class="wrapx">
-      <div class="headrow"><h2 class="big">${t.dk}</h2><p>${t.dkp}</p></div>
-      <div class="dtabs" id="dtabs">${BA.map((d, i) => `<button class="${i === baIdx ? 'on' : ''}" data-i="${i}">${i + 1}. ${d[lang].tab}</button>`).join('')}</div>
-      <div id="baview">${baHTML()}</div>
-    </div></section>
-
-    <section class="chap"><div class="wrapx">
-      <div class="headrow"><h2 class="big">${t.plat}</h2><p>${t.platp}</p></div>
-      <div class="duo">
-        <div class="card eco"><h3>${t.ecoT}</h3><p>${t.ecoP}</p>
-          <div class="orbit"><div class="ring"></div><div class="core">AgentFlow<small>CORE PLATFORM</small></div>
-            <span class="sat" style="left:50%;top:0">Ragify</span><span class="sat" style="left:6%;top:72%">AutoFlow</span><span class="sat" style="left:94%;top:72%">AutoMatching</span></div></div>
-        <div class="card integ"><h3>${t.intT}</h3><p>${t.intP}</p>
-          <div class="iso">${['ERP', 'CRM', 'EMAIL', 'API', 'SQL', 'MCP', 'AgentFlow', 'SSO', 'EXCEL', 'RPA', 'DRIVE', 'SHAREPOINT'].map((n, i) => `<div class="tile${n === 'AgentFlow' ? ' hl' : [1, 5, 9].includes(i) ? ' cy' : ''}">${n === 'SHAREPOINT' ? 'SP' : n}</div>`).join('')}</div></div>
-      </div>
-      <div class="feat">${t.feat.map(([i, h, p]) => `<div><span>${ICO[i]}</span><div><b>${h}</b>${p}</div></div>`).join('')}</div>
-    </div></section>
-
-    <section class="chap"><div class="wrapx">
-      <h2 class="big">${t.insT}</h2>
-      <div class="ins">
-        ${postHTML(t.posts[0], 0, t)}
-        <div class="list">${t.posts.slice(1).map((p, i) => postHTML(p, i + 1, t)).join('')}</div>
-      </div>
-    </div></section>
-
-    <section class="final"><div class="wrapx"><h2 class="big">${t.finT}</h2><p>${t.finP}</p><a class="btn" href="mailto:sales@innomation.vn">${T.cta} →</a></div></section>
+    <section class="cta2"><div class="wrapx"><div class="ctabox"><h2>${t.finT}</h2><p>${t.finP}</p><a class="btn" href="mailto:sales@innomation.vn">${T.cta} →</a></div></div></section>
     <footer class="foot"><div class="wrapx">
       <div class="cols">
         <div><img src="img/logo.png" alt="Innomation"><p class="tag">${t.tag}</p></div>
@@ -742,73 +841,49 @@
     wirePage();
   }
 
-  function postHTML([cat, title], i, t) {
-    const g = ['linear-gradient(135deg,#001AAD,#2563EB 55%,#10CBFF)', 'linear-gradient(135deg,#0A0F2E,#3B2F8F 60%,#8B7CF6)', 'linear-gradient(135deg,#0A2A6B,#10CBFF 70%,#BFF0FF)'][i];
-    return `<a class="post" href="https://www.innomation.vn/insight"><div class="cover" style="background:${g}"><span class="mono">${cat}</span><img src="img/logo.png" alt=""><strong>${title}</strong></div><div><h4>${title}</h4><span class="more">${t.insLink}</span></div></a>`;
-  }
-
-  function baHTML() {
-    const t = P[lang], b = BA[baIdx][lang];
-    const pos = [[8, 16, -4], [30, 30, 3], [12, 46, -2], [36, 62, 4], [10, 78, -3]];
-    return `<div class="ba">
-      <div class="bcard before"><span class="pill">${t.bef}</span>${b.before.map((n, i) => `<div class="note" style="left:${pos[i][0]}%;top:${pos[i][1]}%;transform:rotate(${pos[i][2]}deg)">${n}<b>${t.manual}</b></div>`).join('')}</div>
-      <div class="bcard after mesh"><span class="pill">${t.aft}</span><div class="win"><div class="bar"><i></i><span>${b.tab}</span></div>
-        <div class="body" style="justify-content:center"><div class="acts">${b.after.map(([a, s]) => `<div class="act"><span class="ck" style="background:#10CBFF;border-color:#10CBFF">✓</span>${a}<span class="s${/NGƯỜI|HUMAN/.test(s) ? ' h' : ''}">${s}</span></div>`).join('')}</div></div></div></div>
-    </div>
-    <div class="outrow"><div><span class="mono">${t.outK}</span><blockquote>${b.quote}</blockquote></div>
-      <div><span class="mono">${t.rolesK}</span><div class="rl">${b.roles.map(([h, p]) => `<div><span>${ICO.bolt}</span><div><h4>${h}</h4><p>${p}</p></div></div>`).join('')}</div></div></div>`;
-  }
-
   function wirePage() {
-    $('dtabs').onclick = e => { const x = e.target.closest('button'); if (!x) return; baIdx = +x.dataset.i; document.querySelectorAll('#dtabs button').forEach((y, i) => y.classList.toggle('on', i === baIdx)); $('baview').innerHTML = baHTML() };
-    // chương đang xem sáng lên trên thanh chương
     const links = [...document.querySelectorAll('.subnav nav a')];
     const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) links.forEach(l => l.classList.toggle('on', l.getAttribute('href') === '#' + en.target.id)) }), { rootMargin: '-45% 0px -50% 0px' });
-    ['ch1', 'ch2', 'ch3'].forEach(id => io.observe($(id)));
-    // biểu đồ mọc lên khi cuộn tới
-    const ch = $('chart2');
-    new IntersectionObserver((es, o) => es.forEach(en => { if (en.isIntersecting) { ch.classList.add('in'); o.disconnect() } }), { threshold: .3 }).observe(ch);
-    // sơ đồ rộng hơn màn hình điện thoại: cuộn sẵn vào giữa
-    const ov = document.querySelector('.orgv'); ov.scrollLeft = (ov.scrollWidth - ov.clientWidth) / 2;
-    playChat();
+    ['ch1', 'ch2', 'ch3', 'ch4', 'ch5'].forEach(id => io.observe($(id)));
+    $('layview').onclick = e => { const b = e.target.closest('button'); if (!b) return; layIdx = +b.dataset.i; $('layview').innerHTML = layHTML() };
+    $('mtabs').onclick = e => { const b = e.target.closest('button'); if (!b) return; modIdx = +b.dataset.i; document.querySelectorAll('#mtabs button').forEach((y, i) => y.classList.toggle('on', i === modIdx)); $('modview').innerHTML = modHTML() };
+    $('libf').onclick = e => { const b = e.target.closest('button'); if (!b) return; libF = b.dataset.k; document.querySelectorAll('#libf button').forEach(y => y.classList.toggle('on', y.dataset.k === libF)); $('libgrid').innerHTML = libHTML() };
+    $('apprview').onclick = e => { const b = e.target.closest('button'); if (!b) return; apprState = b.dataset.a === 'ok' ? 1 : b.dataset.a === 'no' ? 2 : 0; $('apprview').innerHTML = apprHTML() };
+    $('depview').onclick = e => { const b = e.target.closest('button'); if (!b) return; depIdx = +b.dataset.i; $('depview').innerHTML = depHTML() };
+    vzUpdate();
   }
 
-  // hội thoại chương 1: tin nhắn hiện lần lượt, các bước được tích dần, rồi lặp lại
-  function chatHTML(t, f) {
-    return `<div class="msg me"><span class="av">${ICO.user}</span><div><div class="who">${f.me}</div><div class="bub">${f.q}</div></div></div>
-            <div class="msg"><span class="av" style="color:#10CBFF">${ICO.bolt}</span><div><div class="who">${t.ag}</div><div class="bub">${f.a1}
-              <div class="acts">${f.acts.map(([a, s], i) => `<div class="act"><span class="ck">✓</span>${a}<span class="s${i === f.acts.length - 1 ? ' wait' : ''}">${s}</span></div>`).join('')}</div></div></div></div>
-            <div class="msg"><span class="av" style="color:#10CBFF">${ICO.bolt}</span><div><div class="who">${t.ag}</div><div class="bub">${f.a2}</div></div></div>`;
+  // Visualize: hai khung. Thẻ tác vụ rời rạc bên trái trượt sang khung phải và xếp thành workflow khi cuộn
+  const VZ = {
+    d: { sx: [3, 8, 2, 9, 5], sy: [13, 27, 45, 58, 74], sr: [-4, 3, -2, 4, -3], sw: 40, tw: 40, tx: 55, ty: i => 15 + i * 16.5 },
+    m: { sx: [3, 50, 3, 50, 26], sy: [11, 9, 25, 27, 39], sr: [-4, 3, 2, -3, 4], sw: 46, tw: 84, tx: 8, ty: i => 60 + i * 7.9 },
+  };
+  function vzUpdate() {
+    const w = $('vzwrap'); if (!w) return;
+    const clampv = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+    const sm = (a, b, v) => { const q = clampv((v - a) / (b - a)); return q * q * (3 - 2 * q) };
+    const r = w.getBoundingClientRect();
+    const lead = innerHeight * .5;   // hiệu ứng bắt đầu ngay khi khung hiện ra, không đợi tới lúc ghim
+    const p = matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : clampv((lead - r.top) / (lead + r.height - innerHeight));
+    const mob = innerWidth < 900, C = mob ? VZ.m : VZ.d, e = sm(0, .62, p), lerp = (a, b) => a + (b - a) * e;
+    const chips = [...document.querySelectorAll('#vzstage .vc')];
+    chips.forEach((c, i) => {
+      c.style.left = lerp(C.sx[i], C.tx) + '%'; c.style.top = lerp(C.sy[i], C.ty(i)) + '%'; c.style.width = lerp(C.sw, C.tw) + '%';
+      c.style.transform = `rotate(${lerp(C.sr[i], 0)}deg)`;
+      c.classList.toggle('on', p > .36);
+      c.querySelector('.cb1').style.opacity = 1 - sm(.2, .34, p);
+      c.querySelector('.ca1').style.opacity = sm(.38, .52, p);
+    });
+    const h = chips[0].offsetHeight;
+    document.querySelectorAll('#vzstage .slot').forEach((sl, i) => { sl.style.left = C.tx + '%'; sl.style.top = C.ty(i) + '%'; sl.style.width = C.tw + '%'; sl.style.height = h + 'px'; sl.style.opacity = 1 - e });
+    const ln = $('vzline');
+    ln.style.left = (C.tx + C.tw / 2) + '%'; ln.style.top = `calc(${C.ty(0)}% + ${h / 2}px)`; ln.style.height = (C.ty(4) - C.ty(0)) + '%'; ln.style.transform = `scaleY(${e})`;
+    const on = e > .55;
+    $('vzlab').classList.toggle('on', on);
+    document.querySelector('.vzp.r').classList.toggle('lit', on);
   }
-
-  // chọn một quy trình: đánh dấu thẻ bên trái và nạp hội thoại tương ứng vào cửa sổ
-  function setFlow(i) {
-    const t = P[lang], f = t.flows[i];
-    flowIdx = i;
-    document.querySelectorAll('#chan button').forEach((b, k) => b.classList.toggle('on', k === i));
-    $('wtitle').textContent = 'AgentFlow · ' + f.dept;
-    $('chatbody').innerHTML = chatHTML(t, f);
-  }
-
-  // hội thoại chương 1: tin nhắn hiện lần lượt, các bước được tích dần, rồi chuyển sang quy trình kế tiếp
-  function playChat() {
-    clearTimeout(chatTimer);
-    const chan = $('chan');
-    if (!chan.dataset.bound) {
-      chan.dataset.bound = 1;
-      chan.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { flowIdx = +b.dataset.f; playChat() } });
-    }
-    let msgs, acts, steps, k = 0;
-    const load = () => {
-      setFlow(flowIdx);
-      msgs = [...document.querySelectorAll('#chatbody .msg')]; acts = [...document.querySelectorAll('#chatbody .act')];
-      steps = [() => msgs[0].classList.add('show'), () => msgs[1].classList.add('show'), ...acts.map(a => () => a.classList.add('done')), () => msgs[2].classList.add('show'), () => {}, () => {}, () => {}];
-    };
-    load();
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { steps.forEach(f => f()); return }
-    const tick = () => { if (k < steps.length) { steps[k++](); chatTimer = setTimeout(tick, k < 2 ? 900 : 750) } else { k = 0; flowIdx = (flowIdx + 1) % P[lang].flows.length; load(); chatTimer = setTimeout(tick, 700) } };
-    chatTimer = setTimeout(tick, 600);
-  }
+  addEventListener('scroll', () => requestAnimationFrame(vzUpdate), { passive: true });
+  addEventListener('resize', vzUpdate);
 
 
   function applyText() {
