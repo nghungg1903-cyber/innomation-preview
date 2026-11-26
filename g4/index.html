@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>AgentFlow – Innomation (G4 · Bản dựng thử)</title>
+<meta name="description" content="AgentFlow kết nối con người, quy trình, dữ liệu và AI trên một nền tảng. Bản dựng thử, dữ liệu minh họa.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#001AAD;--blue2:#2563EB;--cyan:#10CBFF;--bg:#F7F9FF;--ink:#171C2B;--mut:#5A6385;--line:#E1E7F7;--card:#fff;--ok:#12A672;--warn:#E8920F;--bad:#D6453D;--r:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:Inter,system-ui,sans-serif;background:#fff;color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:2px;border-radius:6px}
+.sr{position:absolute;left:-9999px}
+.w{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+.alt{background:var(--bg)}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.eyebrow{color:var(--blue2);display:block;margin-bottom:14px}
+h1{font-size:60px;line-height:1.05;letter-spacing:-.04em;font-weight:700}
+h2{font-size:38px;line-height:1.15;letter-spacing:-.03em;font-weight:700;max-width:19em}
+.lead{color:var(--mut);font-size:17px;margin-top:16px;max-width:38em}
+.head{margin-bottom:44px}.head.c{text-align:center}.head.c h2,.head.c .lead{margin-left:auto;margin-right:auto}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 24px;border-radius:99px;font-weight:600;font-size:15px;transition:transform .2s,box-shadow .2s,background .2s}
+.btn.p{background:var(--blue);color:#fff}.btn.p:hover{background:#0A2AD0;transform:translateY(-1px);box-shadow:0 10px 24px -12px rgba(0,26,173,.7)}
+.btn.s{background:#fff;border:1px solid #CBD5F0;color:var(--ink)}.btn.s:hover{border-color:var(--blue2);color:var(--blue)}
+.btn.w2{background:#fff;color:var(--blue)}.btn.sm{min-height:38px;padding:0 16px;font-size:13.5px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.tag{display:inline-block;font:600 10.5px 'IBM Plex Mono';letter-spacing:.06em;padding:3px 8px;border-radius:5px;background:#E3F6FF;color:#0A55C8;text-transform:uppercase;white-space:nowrap}
+.tag.h{background:#E6EBFF;color:var(--blue2)}.tag.ok{background:#E2F6EE;color:#0B7A53}.tag.wn{background:#FFF1DC;color:#8A5200}.tag.b{background:#FDE7E5;color:#A02922}.tag.g{background:#EEF1FA;color:#6B7490}
+.demo{font:600 10.5px 'IBM Plex Mono';letter-spacing:.08em;color:#7A83A3;text-transform:uppercase}
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:height .2s}
+.nv{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px;transition:height .2s}
+header.sm .nv{height:58px}
+.nv img.lg{height:26px}
+.menu{display:flex;gap:6px;list-style:none;align-items:center}
+.menu>li{position:relative}.menu>li>a,.menu>li>button{display:flex;align-items:center;gap:4px;padding:8px 12px;border-radius:8px;font-size:14.5px;font-weight:500;color:#2A3350}
+.menu>li>a:hover,.menu>li>button:hover{background:#EEF2FF;color:var(--blue)}
+.dd{position:absolute;top:100%;left:0;min-width:240px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 20px 40px -20px rgba(23,28,43,.3);padding:8px;display:none}
+.dd.open{display:block}.dd a{display:block;padding:10px 12px;border-radius:8px;font-size:14px}.dd a:hover{background:#EEF2FF}.dd small{display:block;color:var(--mut);font-size:12.5px}
+.nr{display:flex;align-items:center;gap:12px}
+.lang{display:flex;border:1px solid var(--line);border-radius:99px;padding:3px}.lang button{padding:3px 11px;font-size:12px;font-weight:700;border-radius:99px;color:#6B7490}.lang button[aria-pressed=true]{background:var(--blue);color:#fff}
+.burger{display:none;width:44px;height:44px;border-radius:10px;border:1px solid var(--line);align-items:center;justify-content:center}
+/* hero */
+.hero{padding:72px 0 40px;background:radial-gradient(60% 70% at 85% 0%,rgba(16,203,255,.14),transparent 65%),linear-gradient(#fff,var(--bg))}
+.hg{display:grid;grid-template-columns:45fr 55fr;gap:48px;align-items:center}
+.hero h1 em{font-style:normal;color:var(--blue2)}
+.hero .lead{font-size:18px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}.chips span{font:600 11.5px 'IBM Plex Mono';letter-spacing:.04em;padding:7px 12px;border-radius:99px;background:#fff;border:1px solid var(--line);color:#4F587A}
+.win{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 40px 80px -50px rgba(0,26,173,.5);overflow:hidden}
+.wbar{display:flex;align-items:center;gap:7px;padding:11px 16px;border-bottom:1px solid var(--line);background:#FAFBFF}
+.wbar i{width:10px;height:10px;border-radius:50%;background:#DCE2F3}.wbar b{margin-left:8px;font:600 11px 'IBM Plex Mono';letter-spacing:.07em;color:#6B7490;text-transform:uppercase}.wbar .demo{margin-left:auto}
+.hbody{display:grid;grid-template-columns:1.15fr 1fr}
+.hl{padding:18px 18px 8px;border-right:1px solid var(--line)}.hl h4{font-size:14px;margin-bottom:8px}
+.row{display:flex;align-items:center;gap:10px;padding:12px 4px;border-bottom:1px solid #F0F2FA;font-size:13.5px;font-weight:500}
+.row i{flex:none;width:9px;height:9px;border-radius:50%;background:var(--cyan)}.row i.wn{background:var(--warn)}.row i.d{background:#9AA3BF}.row i.ok{background:var(--ok)}.row .tag{margin-left:auto}
+.hr{padding:18px;background:#FBFCFF}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.logbox{margin-top:12px;font-size:12.5px;color:#4F587A;display:grid;gap:8px;max-height:150px;overflow:auto}
+.logbox div{display:flex;gap:8px}.logbox time{font:600 10.5px 'IBM Plex Mono';color:#9AA3BF;flex:none;padding-top:2px}
+.logos{margin-top:56px;padding-top:30px;border-top:1px solid var(--line)}
+.logos p{text-align:center;margin-bottom:22px;color:#6B7490}
+.lg{display:flex;flex-wrap:wrap;gap:18px 44px;justify-content:center;align-items:center}
+.lg img{height:32px;width:auto;max-width:120px;object-fit:contain;filter:grayscale(1);opacity:.6;transition:.2s}.lg img:hover{filter:none;opacity:1}
+/* layers */
+.layers{display:grid;gap:10px}
+.ly{display:grid;grid-template-columns:200px 1fr 36px;gap:20px;align-items:center;text-align:left;width:100%;padding:20px 24px;border-radius:var(--r);background:#fff;border:1px solid var(--line);transition:border .2s,box-shadow .2s}
+.ly:hover{border-color:#B7C5F1}.ly b{font-size:17px}.ly span{color:var(--mut);font-size:15px}
+.ly .pl{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .2s;font-weight:700;color:var(--blue2)}
+.ly[aria-expanded=true] .pl{transform:rotate(45deg)}
+.ly.core{background:linear-gradient(135deg,var(--blue),#1D45E0);color:#fff;border-color:transparent;padding:30px 24px;box-shadow:0 30px 60px -36px rgba(0,26,173,.7)}
+.ly.core span{color:rgba(255,255,255,.85)}.ly.core .pl{border-color:rgba(255,255,255,.4);color:#fff}
+.lx{display:none;padding:0 24px 4px 24px;font-size:14.5px;color:var(--mut);margin:-4px 0 4px}
+.lx.open{display:block}.lx .mi-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.mi{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;flex:none}
+.mi svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mod{display:inline-flex;align-items:center;gap:8px;padding:5px 12px 5px 6px;border:1px solid var(--line);border-radius:99px;font-size:13px;font-weight:600;background:#fff;color:var(--ink)}
+.c-crm{background:#2563EB}.c-wk{background:#7C5CFF}.c-hr{background:#E0559C}.c-ms{background:#0E9FD0}.c-fn{background:#14B87A}
+/* story */
+.tgl{display:inline-flex;border:1px solid var(--line);border-radius:99px;padding:4px;background:#fff;margin-bottom:24px}
+.tgl button{padding:9px 22px;border-radius:99px;font-weight:600;font-size:14px;color:#5A6385}.tgl button[aria-pressed=true]{background:var(--ink);color:#fff}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bp{border-radius:var(--r);border:1px solid var(--line);padding:24px;background:#fff;min-height:210px}
+.bp.dim{opacity:.35;filter:grayscale(1)}
+.bp h4{font-size:15px;margin-bottom:14px;display:flex;gap:8px;align-items:center}
+.sc{display:flex;flex-wrap:wrap;gap:8px}.sc span{padding:8px 12px;border-radius:9px;background:#F4F6FC;font-size:13.5px;font-weight:500;border:1px dashed #C4CCE4}
+.hand{margin-top:14px;font-size:13.5px;color:var(--mut)}.hand li{margin-left:18px}
+.fl{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.fl .mod{border-color:#B7C5F1}.fl i{width:24px;height:2px;background:linear-gradient(90deg,var(--cyan),var(--blue2));background-size:200% 100%;animation:run 1.4s linear infinite}
+@keyframes run{to{background-position:-200% 0}}
+.tl{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:40px;position:relative}
+.tl button{display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px 6px;border-radius:14px;border:1px solid transparent;font-weight:600;font-size:14px;color:var(--mut)}
+.tl button .mi{width:44px;height:44px;border-radius:13px;filter:saturate(.5) opacity(.75);transition:.2s}.tl button .mi svg{width:22px;height:22px}
+.tl button[aria-selected=true]{background:#fff;border-color:var(--line);color:var(--ink);box-shadow:0 14px 30px -22px rgba(0,26,173,.6)}
+.tl button[aria-selected=true] .mi{filter:none}
+.tl:before{content:"";position:absolute;left:10%;right:10%;top:36px;height:2px;background:repeating-linear-gradient(90deg,#B7C5F1 0 8px,transparent 8px 14px)}
+.td{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px 26px;display:grid;grid-template-columns:repeat(4,1fr) auto;gap:22px;align-items:start}
+.td dt{font:600 10.5px 'IBM Plex Mono';letter-spacing:.08em;color:#8A93B0;text-transform:uppercase;margin-bottom:4px}.td dd{font-size:14.5px;font-weight:500}
+.td .nav2{display:flex;gap:8px}
+/* demo */
+.dm{margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 40px 80px -56px rgba(0,26,173,.45)}
+.dtabs{display:flex;gap:4px;padding:10px;border-bottom:1px solid var(--line);background:#FAFBFF;overflow-x:auto}
+.dtabs button{display:flex;align-items:center;gap:9px;padding:9px 16px 9px 9px;border-radius:99px;font-weight:600;font-size:14px;white-space:nowrap;color:#4F587A}
+.dtabs button[aria-selected=true]{background:#fff;box-shadow:0 0 0 1px var(--line),0 8px 18px -12px rgba(0,26,173,.5);color:var(--ink)}
+.dtabs .sp{margin-left:auto;display:flex;align-items:center;gap:10px;padding-right:6px}
+.dg{display:grid;grid-template-columns:35fr 65fr;min-height:520px}
+.dl{padding:24px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
+.dl h3{font-size:19px;line-height:1.3}.dl p{font-size:14px;color:var(--mut)}
+.st{display:grid;gap:8px;list-style:none}
+.st li{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;border:1px solid var(--line);font-size:13.5px;font-weight:600;background:#fff}
+.st li u{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;font-size:11px;text-decoration:none;background:#EEF1FA;color:#6B7490;flex:none}
+.st li.now{border-color:var(--blue2);background:#F2F5FF}.st li.now u{background:var(--blue2);color:#fff}
+.st li.done u{background:var(--ok);color:#fff}.st li.err{border-color:var(--bad);background:#FFF5F4}.st li.err u{background:var(--bad);color:#fff}
+.st li .tag{margin-left:auto}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+.chat{margin-top:auto;border-top:1px solid var(--line);padding-top:14px}
+.chat .cv{max-height:120px;overflow:auto;font-size:13px;display:grid;gap:8px;margin-bottom:10px}
+.msg{padding:8px 12px;border-radius:12px;background:#F1F4FC;max-width:92%}.msg.u{background:var(--blue);color:#fff;justify-self:end}
+.cc{display:flex;gap:6px;flex-wrap:wrap}.cc button{padding:6px 12px;border-radius:99px;font-size:12.5px;font-weight:600;border:1px solid #CBD5F0;background:#fff;color:var(--blue)}.cc button:hover{background:#EEF2FF}
+.ci{display:flex;gap:6px;margin-top:8px}.ci input{flex:1;min-width:0;height:40px;border-radius:10px;border:1px solid var(--line);padding:0 12px;font:inherit;font-size:13.5px}
+.dr{padding:24px;background:linear-gradient(160deg,#FBFCFF,#F3F6FF);display:flex;flex-direction:column;gap:16px}
+.ut{display:flex;justify-content:space-between;align-items:center}.ut h4{font-size:16px}
+.uc{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.ur{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:13px 16px;border-bottom:1px solid #F0F2FA;font-size:14px;font-weight:500;transition:background .3s}
+.ur:last-child{border:0}.ur small{display:block;color:var(--mut);font-weight:400;font-size:12.5px}
+.ur.flash{background:#F2F8FF}
+.al{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;max-height:170px;overflow:auto}
+.al h5{margin-bottom:8px}
+.ld{display:inline-block;width:14px;height:14px;border:2px solid #CBD5F0;border-top-color:var(--blue2);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.bc{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:12px;text-align:left;transition:border .2s,box-shadow .2s}
+.bc:hover{border-color:#B7C5F1;box-shadow:0 24px 40px -30px rgba(0,26,173,.5)}
+.bc.big{grid-column:span 2;grid-row:span 2}.bc.mid{grid-column:span 2}
+.bc h3{font-size:20px;line-height:1.25}.bc p{color:var(--mut);font-size:14.5px}
+.bc .vz{margin-top:auto;border-radius:12px;background:var(--bg);border:1px solid var(--line);padding:14px;font-size:12.5px}
+.bc .ex{display:none;font-size:13.5px;color:#3A4366;padding-top:8px;border-top:1px dashed var(--line)}.bc[aria-expanded=true] .ex{display:block}
+.fnode{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:8px;background:#fff;border:1px solid #CBD5F0;font-weight:600;font-size:12px}
+.fnode.h{border-color:var(--blue2);background:#F2F5FF;color:var(--blue2)}
+.vzf{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.vzf i{width:16px;height:2px;background:#9FB4F0}
+/* build */
+.bg2{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:center}
+.bs{display:grid;gap:10px;margin-top:28px}
+.bs button{display:grid;grid-template-columns:40px 1fr;gap:14px;text-align:left;padding:16px;border-radius:14px;border:1px solid var(--line);background:#fff}
+.bs button b{font-size:16px;display:block}.bs button span{color:var(--mut);font-size:14px}
+.bs button em{font:700 13px 'IBM Plex Mono';font-style:normal;color:#9AA3BF;padding-top:2px}
+.bs button[aria-selected=true]{border-color:var(--blue2);box-shadow:0 14px 30px -22px rgba(37,99,235,.7)}.bs button[aria-selected=true] em{color:var(--blue2)}
+.bm{min-height:420px}
+.fld{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;font-size:14px;margin-bottom:8px}
+.fld small{margin-left:auto;color:#8A93B0}
+.note{font-size:13px;color:var(--mut);margin-top:14px;padding:12px 14px;border-radius:10px;background:#FFF8EC;border:1px solid #F5DFB8}
+/* ai approve */
+.ap{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:16px}
+.ap .card{display:flex;flex-direction:column;gap:12px}
+.ap h4{font-size:15px;display:flex;gap:8px;align-items:center}
+.ap table{width:100%;border-collapse:collapse;font-size:13.5px}.ap th{font:600 10.5px 'IBM Plex Mono';letter-spacing:.06em;color:#8A93B0;text-align:left;padding:6px 6px;text-transform:uppercase}
+.ap td{padding:10px 6px;border-top:1px solid #F0F2FA}.ap tr.rec td{background:#F2F8FF}.ap tr.pick td{background:#E9F9F2}
+.ap label{display:flex;gap:8px;align-items:center;font-size:13.5px}
+.st2{display:inline-block;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:700}
+.audit{margin-top:16px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 20px}
+.audit h5{margin-bottom:10px}
+/* hub */
+.hubw{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center}
+.hub{width:100%;height:auto}
+.hub .n{cursor:pointer}.hub .n rect{fill:#fff;stroke:#CBD5F0;stroke-width:1.5;transition:.2s}.hub .n:hover rect,.hub .n[aria-pressed=true] rect{stroke:var(--blue2);fill:#F2F5FF}
+.hub .n text{font:600 13px Inter;fill:#2A3350;pointer-events:none}
+.hub .ln{stroke:#9FB4F0;stroke-width:2;stroke-dasharray:6 6;fill:none}.hub.on .ln{animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+.hd{background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px;min-height:300px}
+.hd h3{font-size:22px;margin:8px 0 10px}.hd p{color:var(--mut);font-size:15px}
+.hd .io{display:grid;gap:8px;margin-top:16px}.hd .io div{padding:10px 14px;border-radius:10px;background:var(--bg);font-size:13.5px}
+/* outcomes */
+.oc{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.oc>div{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px}
+.oc em{font:700 12px 'IBM Plex Mono';font-style:normal;color:#9AA3BF}
+.oc h3{font-size:22px;margin:10px 0 14px;line-height:1.2}.oc dl{display:grid;gap:12px}.oc dt{font:600 10.5px 'IBM Plex Mono';letter-spacing:.07em;color:var(--blue2);text-transform:uppercase}.oc dd{font-size:14px;color:var(--mut)}
+/* security */
+.sg{display:grid;grid-template-columns:1.2fr 1fr;gap:32px}
+.stabs{display:flex;gap:6px;margin-bottom:16px}.stabs button{padding:9px 20px;border-radius:99px;border:1px solid var(--line);font-weight:600;font-size:14px;background:#fff}.stabs button[aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.dep{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;min-height:300px}
+.dep h3{font-size:20px;margin-bottom:6px}.dep p{color:var(--mut);font-size:14.5px}
+.box{display:flex;gap:12px;align-items:stretch;margin-top:22px;flex-wrap:wrap}
+.bx{flex:1;min-width:150px;border:1.5px dashed #B7C5F1;border-radius:14px;padding:16px;font-size:13.5px;background:var(--bg)}
+.bx b{display:block;font-size:14px;margin-bottom:6px}.bx.af{border:1.5px solid var(--blue2);background:#F2F5FF}
+.chk{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px}
+.chk h3{font-size:18px;margin-bottom:14px}.chk ul{list-style:none;display:grid;gap:12px}
+.chk li{display:flex;gap:12px;font-size:14.5px;align-items:flex-start}.chk li:before{content:"✓";flex:none;width:22px;height:22px;border-radius:50%;background:#E2F6EE;color:#0B7A53;display:grid;place-items:center;font-size:12px;font-weight:800;margin-top:1px}
+/* about */
+.ab{display:grid;grid-template-columns:40fr 60fr;gap:48px;align-items:center}
+.abv{border-radius:20px;overflow:hidden;position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,var(--blue),#2540D6)}
+.abv:after{content:"";position:absolute;inset:0;background:url(../img/clay-day.jpg) center/cover;opacity:.0}
+.abv svg{position:absolute;right:-8%;top:-10%;width:90%;opacity:.18}
+.abv b{position:absolute;left:28px;bottom:24px;color:#fff;font-size:22px;letter-spacing:-.02em;max-width:12em;line-height:1.2}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+.facts div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}.facts b{display:block;font-size:26px;letter-spacing:-.03em}.facts span{font-size:12.5px;color:var(--mut)}
+/* faq */
+.faq{max-width:820px;margin:0 auto;display:grid;gap:10px}
+.fq{border:1px solid var(--line);border-radius:14px;background:#fff}
+.fq button{display:flex;justify-content:space-between;align-items:center;gap:20px;width:100%;text-align:left;padding:20px 24px;font-weight:600;font-size:16.5px;min-height:56px}
+.fq .pl{flex:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--blue2);font-weight:700;transition:transform .2s}
+.fq button[aria-expanded=true] .pl{transform:rotate(45deg)}
+.fa{display:none;padding:0 24px 22px;color:var(--mut);font-size:15px}.fa.open{display:block}
+/* cta */
+.cta{position:relative;background:var(--blue);color:#fff;overflow:hidden;padding:96px 0}
+.cta:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,rgba(0,26,173,.97) 38%,rgba(0,26,173,.55)),url(../img/clay-night.jpg) center/cover}
+.cta .w{position:relative}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.cta h2{color:#fff;font-size:42px}.cta .lead{color:rgba(255,255,255,.85)}
+.jr{display:flex;gap:8px;flex-wrap:wrap;margin-top:30px}.jr span{padding:8px 14px;border-radius:99px;border:1px solid rgba(255,255,255,.3);font-size:13px;font-weight:600;background:rgba(255,255,255,.08)}
+.jr small{display:block;width:100%;margin-top:8px;color:rgba(255,255,255,.7);font-size:12.5px}
+form{background:#fff;color:var(--ink);border-radius:20px;padding:28px;display:grid;gap:14px;box-shadow:0 40px 80px -40px rgba(0,0,0,.5)}
+form label{font-size:13px;font-weight:600;display:grid;gap:6px}
+form input,form textarea{width:100%;min-height:46px;border-radius:10px;border:1px solid #CBD5F0;padding:10px 14px;font:inherit;font-size:15px}
+form textarea{min-height:84px;resize:vertical}
+form .er{color:var(--bad);font-size:12.5px;font-weight:500;min-height:0}
+form input[aria-invalid=true],form textarea[aria-invalid=true]{border-color:var(--bad)}
+form .cons{display:flex;gap:10px;font-size:13px;font-weight:400;color:var(--mut);align-items:flex-start}.cons input{width:20px;min-height:20px;margin-top:2px;flex:none}
+.ok2{display:none;padding:22px;border-radius:14px;background:#E9F9F2;color:#0B6A49;font-weight:600}
+footer{background:#0A1030;color:#C9D0EE;padding:64px 0 32px;font-size:14px}
+.fg{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:36px}
+footer h6{color:#fff;font:600 12px 'IBM Plex Mono';letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+footer ul{list-style:none;display:grid;gap:9px}footer a:hover{color:#fff}
+.fb{margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:#8F98C4}
+.fbadge{position:fixed;left:16px;bottom:16px;z-index:60;padding:8px 14px;border-radius:99px;background:var(--ink);color:#fff;font:600 11px 'IBM Plex Mono';letter-spacing:.06em}
+@media (max-width:1024px){
+ h1{font-size:46px}h2{font-size:32px}section{padding:72px 0}
+ .hg,.bg2,.hubw,.sg,.ab,.cg{grid-template-columns:1fr}
+ .bento{grid-template-columns:repeat(2,1fr)}.bc.big{grid-column:span 2;grid-row:auto}
+ .oc{grid-template-columns:repeat(2,1fr)}.ap{grid-template-columns:1fr}
+ .fg{grid-template-columns:1fr 1fr}
+ .td{grid-template-columns:1fr 1fr}.td .nav2{grid-column:span 2}
+}
+@media (max-width:900px){
+ .burger{display:flex}.menu{display:none;position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 24px 20px}
+ .menu.open{display:flex}.dd{position:static;box-shadow:none;border:0;padding:0 0 0 12px}.nr .btn{display:none}
+}
+@media (max-width:768px){
+ .w{padding:0 20px}section{padding:56px 0}h1{font-size:34px}h2{font-size:28px}.cta h2{font-size:30px}
+ .hbody{grid-template-columns:1fr}.hl{border-right:0;border-bottom:1px solid var(--line)}
+ .ly{grid-template-columns:1fr 32px;gap:6px 12px}.ly span{grid-column:1}.ly .pl{grid-row:1/3;grid-column:2}
+ .ba{grid-template-columns:1fr}
+ .tl{grid-template-columns:repeat(5,minmax(76px,1fr));overflow-x:auto;padding-bottom:6px}.tl:before{display:none}
+ .dg{grid-template-columns:1fr}.dl{border-right:0;border-bottom:1px solid var(--line)}
+ .bento,.oc,.facts,.fg{grid-template-columns:1fr}.bc.big,.bc.mid{grid-column:auto}
+ .td{grid-template-columns:1fr}.td .nav2{grid-column:auto}
+ .dtabs .sp{display:none}
+ .nv img.lg{height:22px}.fbadge{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="i-crm" viewBox="0 0 24 24"><path d="M5 6h14v9h-8l-4 3v-3H5z"/></symbol>
+ <symbol id="i-wk" viewBox="0 0 24 24"><path d="M6 12.5l4 4 8-9"/></symbol>
+ <symbol id="i-hr" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 19a6.5 6.5 0 0113 0"/></symbol>
+ <symbol id="i-ms" viewBox="0 0 24 24"><path d="M6 9h12l-1 10H7z"/><path d="M9 9a3 3 0 016 0"/></symbol>
+ <symbol id="i-fn" viewBox="0 0 24 24"><path d="M6 18v-5M12 18V7M18 18v-8"/></symbol>
+</svg>
+<a class="sr" href="#main">Bỏ qua điều hướng</a>
+<div class="fbadge">G4 · BẢN DỰNG THỬ · DỮ LIỆU MINH HỌA</div>
+
+<header id="hd">
+ <div class="w nv">
+  <a href="#top" aria-label="Innomation"><img class="lg" src="../img/logo.png" alt="innomation"></a>
+  <ul class="menu" id="menu">
+   <li><a href="#platform" data-en="Platform">Platform</a></li>
+   <li><button aria-expanded="false" aria-controls="dd1" id="ddb"><span data-en="Solutions">Solutions</span> <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 3.5l3 3 3-3"/></svg></button>
+    <div class="dd" id="dd1"><a href="#contact">AutoFlow<small>RPA tự động hóa tác vụ lặp lại</small></a><a href="#contact">AutoMatching<small>Đối chiếu hóa đơn, PO, hợp đồng</small></a><a href="#contact">Ragify<small>Kho tri thức và trợ lý AI có trích dẫn</small></a></div></li>
+   <li><a href="#customers" data-en="Customers">Khách hàng</a></li>
+   <li><a href="#about" data-en="Company">Công ty</a></li>
+  </ul>
+  <div class="nr">
+   <div class="lang" role="group" aria-label="Ngôn ngữ"><button aria-pressed="true" data-l="vi">VI</button><button aria-pressed="false" data-l="en">EN</button></div>
+   <a class="btn p sm" href="#contact" data-en="Book a Demo / Consultation">Đặt lịch Demo / Tư vấn</a>
+   <button class="burger" id="burger" aria-label="Mở menu" aria-expanded="false" aria-controls="menu"><svg width="20" height="20" viewBox="0 0 20 20" stroke="currentColor" stroke-width="2" fill="none"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button>
+  </div>
+ </div>
+</header>
+
+<main id="main">
+<!-- S1 HERO -->
+<section class="hero" id="top">
+ <div class="w">
+  <div class="hg">
+   <div>
+    <span class="mono eyebrow">AI-powered Enterprise Automation Platform</span>
+    <h1><span data-en="Connect your business.">Kết nối doanh nghiệp.</span> <em data-en="Automate intelligently.">Tự động hóa thông minh.</em></h1>
+    <p class="lead" data-en="AgentFlow connects people, processes, data and AI on one platform, so your business runs smoothly and stays in control.">AgentFlow kết nối con người, quy trình, dữ liệu và AI trên một nền tảng, giúp doanh nghiệp vận hành liền mạch và kiểm soát tốt hơn.</p>
+    <div class="cta-row"><a class="btn p" href="#contact" data-en="Book a Demo / Consultation">Đặt lịch Demo / Tư vấn</a><a class="btn s" href="#story" data-en="Explore the platform">Khám phá nền tảng</a></div>
+    <div class="chips"><span>Cloud · On-premise · Hybrid</span><span>Dữ liệu lưu trữ tại Việt Nam</span></div>
+   </div>
+   <div class="win" aria-label="Minh họa hộp việc AgentFlow">
+    <div class="wbar"><i></i><i></i><i></i><b>AgentFlow · Hộp việc</b><span class="demo">Demo minh họa</span></div>
+    <div class="hbody">
+     <div class="hl"><h4>Việc hôm nay</h4>
+      <div class="row"><i class="wn" id="hs1"></i>Duyệt báo giá công ty ABC<span class="tag wn" id="ht1">Chờ duyệt</span></div>
+      <div class="row"><i></i>Onboarding nhân sự dự án ABC<span class="tag">AI Agent xử lý</span></div>
+      <div class="row"><i></i>Yêu cầu mua 5 laptop · PR-0412<span class="tag">AI Agent xử lý</span></div>
+      <div class="row"><i class="d"></i>Đối chiếu phiếu nhập kho<span class="tag g">Hoàn tất</span></div>
+     </div>
+     <div class="hr"><div class="card"><span class="mono" style="color:var(--blue2);font-size:10.5px">Chờ Giám đốc Kinh doanh</span>
+       <p style="font-weight:600;margin:6px 0 4px;font-size:14.5px">Báo giá công ty ABC</p><p style="font-size:12.5px;color:var(--mut)">AI đã tổng hợp điều khoản, đề xuất mức chiết khấu chuẩn.</p>
+       <div class="acts" style="margin-top:12px"><button class="btn p sm" id="hAp">Duyệt</button><button class="btn s sm" id="hRj">Từ chối</button></div></div>
+      <div class="logbox" id="hlog" aria-live="polite"><div><time>09:30</time><span>AI Agent tổng hợp báo giá ABC</span></div><div><time>09:31</time><span>Workflow chuyển Giám đốc Kinh doanh</span></div></div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="logos" id="customers"><p class="mono">Khách hàng của Innomation</p>
+   <div class="lg"><img src="../img/logos/circlek.png" alt="Circle K"><img src="../img/logos/guardian.png" alt="Guardian"><img src="../img/logos/avenue.png" alt="Avenue"><img src="../img/logos/dost-hcm.png" alt="Sở Khoa học và Công nghệ TP.HCM"><img src="../img/logos/evn-genco3.png" alt="EVN Genco3"><img src="../img/logos/mobifone.png" alt="MobiFone"><img src="../img/logos/gimasys.png" alt="Gimasys"></div></div>
+ </div>
+</section>
+
+<!-- S2 PLATFORM -->
+<section class="alt" id="platform">
+ <div class="w">
+  <div class="head c"><span class="mono eyebrow">Nền tảng</span><h2 data-en="One platform. Many ways to run your business.">Một nền tảng. Nhiều khả năng vận hành.</h2>
+   <p class="lead">AgentFlow tách rõ lớp ứng dụng nghiệp vụ khỏi phần lõi điều phối, để doanh nghiệp mở rộng từng bộ phận mà vẫn giữ một chuẩn chung.</p></div>
+  <div class="layers" id="layers">
+   <button class="ly" aria-expanded="false" aria-controls="lx1"><b>Ứng dụng nghiệp vụ</b><span>CRM, Work, HRM, Mua sắm, Fin cùng chạy trên một nền tảng.</span><i class="pl">+</i></button>
+   <div class="lx" id="lx1">Mỗi ứng dụng là một phân hệ xây dựng trên AgentFlow, dùng chung dữ liệu, phê duyệt và nhật ký.
+    <div class="mi-row"><span class="mod"><i class="mi c-crm"><svg><use href="#i-crm"/></svg></i>CRM</span><span class="mod"><i class="mi c-wk"><svg><use href="#i-wk"/></svg></i>Work</span><span class="mod"><i class="mi c-hr"><svg><use href="#i-hr"/></svg></i>HRM</span><span class="mod"><i class="mi c-ms"><svg><use href="#i-ms"/></svg></i>Mua sắm</span><span class="mod"><i class="mi c-fn"><svg><use href="#i-fn"/></svg></i>Fin</span></div></div>
+   <button class="ly core" aria-expanded="false" aria-controls="lx2"><b>AgentFlow Core</b><span>AI Agent · Workflow Engine · Business Data Entities · Tri thức. Phần lõi điều phối mọi ứng dụng.</span><i class="pl">+</i></button>
+   <div class="lx" id="lx2">Workflow tuần tự, song song, rẽ nhánh, phê duyệt nhiều cấp; AI Agent phân loại, tóm tắt, trích xuất, đề xuất; dữ liệu nghiệp vụ dùng chung.</div>
+   <button class="ly" aria-expanded="false" aria-controls="lx3"><b>Tích hợp</b><span>API, MCP, RPA, database, SSO kết nối hệ thống đang dùng.</span><i class="pl">+</i></button>
+   <div class="lx" id="lx3">Doanh nghiệp giữ hệ thống hiện có; AgentFlow đóng vai trò lớp điều phối ở giữa.</div>
+   <button class="ly" aria-expanded="false" aria-controls="lx4"><b>Bảo mật &amp; quản trị</b><span>Phân quyền, phân tích, nhật ký audit cho cả người và AI Agent.</span><i class="pl">+</i></button>
+   <div class="lx" id="lx4">Mọi quyết định của người và AI Agent đều được ghi lại, để truy vết khi cần.</div>
+  </div>
+ </div>
+</section>
+
+<!-- S4 STORY -->
+<section id="story">
+ <div class="w">
+  <div class="head"><span class="mono eyebrow">Một hợp đồng, năm phòng ban</span><h2 data-en="One contract. Five departments. One flow.">Một hợp đồng. Năm phòng ban. Một luồng.</h2>
+   <p class="lead">Công ty ABC ký hợp đồng. Từ đó, việc đi qua năm bộ phận mà không cần nhập lại hay bàn giao qua email. <span class="demo">Demo minh họa</span></p></div>
+  <div class="tgl" role="group" aria-label="So sánh trước và sau"><button aria-pressed="true" id="tb">Before</button><button aria-pressed="false" id="ta">After</button></div>
+  <div class="ba">
+   <div class="bp" id="pb"><h4><span class="tag wn">Before</span>Rời rạc</h4>
+    <div class="sc"><span>Báo giá trong email</span><span>Số liệu trong Excel</span><span>Nhập lại vào ERP</span><span>Chờ duyệt qua chat</span></div>
+    <ul class="hand"><li>Mỗi phòng ban bàn giao thủ công cho phòng tiếp theo.</li><li>Không ai thấy toàn bộ hợp đồng đang ở bước nào.</li></ul></div>
+   <div class="bp dim" id="pa"><h4><span class="tag ok">After</span>Một luồng có điều phối</h4>
+    <div class="fl"><span class="mod"><i class="mi c-crm"><svg><use href="#i-crm"/></svg></i>CRM</span><i></i><span class="mod"><i class="mi c-wk"><svg><use href="#i-wk"/></svg></i>Work</span><i></i><span class="mod"><i class="mi c-hr"><svg><use href="#i-hr"/></svg></i>HRM</span><i></i><span class="mod"><i class="mi c-ms"><svg><use href="#i-ms"/></svg></i>Mua sắm</span><i></i><span class="mod"><i class="mi c-fn"><svg><use href="#i-fn"/></svg></i>Fin</span></div>
+    <ul class="hand"><li>AI Agent hỗ trợ xử lý, người có thẩm quyền duyệt tại điểm quan trọng.</li><li>Dữ liệu đi theo hợp đồng, không nhập lại.</li></ul></div>
+  </div>
+  <div class="tl" role="tablist" aria-label="Năm bước của hợp đồng ABC" id="tl"></div>
+  <div class="td" id="td" aria-live="polite"></div>
+
+  <div class="dm" id="demo">
+   <div class="dtabs" role="tablist" aria-label="Demo theo phòng ban" id="dtabs"></div>
+   <div class="dg">
+    <div class="dl" id="dl"></div>
+    <div class="dr" id="dr"></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- S5 CAPABILITIES -->
+<section class="alt">
+ <div class="w">
+  <div class="head"><span class="mono eyebrow">Năng lực lõi</span><h2>Chiều sâu của nền tảng, không chỉ năm ứng dụng.</h2></div>
+  <div class="bento" id="bento"></div>
+ </div>
+</section>
+
+<!-- S6 BUILD -->
+<section>
+ <div class="w bg2">
+  <div><span class="mono eyebrow">Xây dựng ứng dụng</span><h2>Ứng dụng phù hợp với cách doanh nghiệp vận hành.</h2>
+   <p class="lead">Thiết kế quy trình trên trình thiết kế trực quan (no-code/low-code), dùng mẫu có thể tùy chỉnh. Innomation đồng hành cấu hình và triển khai cùng doanh nghiệp.</p>
+   <div class="bs" role="tablist" id="bs"></div></div>
+  <div class="win bm" id="bm" aria-live="polite"></div>
+ </div>
+</section>
+
+<!-- S7 AI + HUMAN -->
+<section class="alt">
+ <div class="w">
+  <div class="head c"><span class="mono eyebrow">AI Agent &amp; con người</span><h2>AI đề xuất. Con người quyết định.</h2>
+   <p class="lead">Phòng Kinh doanh cần mua gấp 5 laptop. AI phân tích báo giá và đề xuất; người quản lý quyết định; workflow chạy tiếp. <span class="demo">Demo minh họa</span></p></div>
+  <div class="ap" id="ap">
+   <div class="card"><h4><span class="tag">1</span>Yêu cầu</h4><p style="font-size:14px"><b>PR-0412</b> · 5 laptop · Phòng Kinh doanh<br>Cần trong tuần này.</p><div><span class="tag wn" id="apst">Đang chờ AI</span></div></div>
+   <div class="card"><h4><span class="tag">2</span>AI đề xuất <span class="tag h">AI Agent</span></h4>
+    <table><thead><tr><th></th><th>Nhà cung cấp</th><th>Giao</th></tr></thead><tbody id="apt"></tbody></table>
+    <p style="font-size:13px;color:var(--mut)" id="apwhy">Nhà cung cấp A có giá thấp nhất nhưng giao trễ. AI đề xuất B vì đáp ứng thời hạn.</p></div>
+   <div class="card"><h4><span class="tag">3</span>Người duyệt <span class="tag h">Con người</span></h4>
+    <div class="acts"><button class="btn p sm" id="apOk">Duyệt</button><button class="btn s sm" id="apEd">Sửa</button><button class="btn s sm" id="apNo">Từ chối</button></div>
+    <p style="font-size:13px;color:var(--mut)">AI không tự duyệt. Chỉ khi người có thẩm quyền chọn, workflow mới chạy tiếp.</p>
+    <button class="btn s sm" id="apRs">Làm lại demo</button></div>
+  </div>
+  <div class="audit"><h5>Nhật ký (audit trail)</h5><div class="logbox" id="apl" style="max-height:130px" aria-live="polite"></div></div>
+ </div>
+</section>
+
+<!-- S8 INTEGRATION -->
+<section>
+ <div class="w hubw">
+  <div><span class="mono eyebrow">Tích hợp</span><h2>Kết nối hệ thống hiện có.</h2>
+   <p class="lead" style="margin-bottom:20px">Nhóm theo loại kết nối: API, MCP, RPA, database, SSO. Chọn một nhóm để xem ví dụ dữ liệu vào ra.</p>
+   <svg class="hub" id="hub" viewBox="0 0 560 420" role="group" aria-label="Sơ đồ tích hợp"></svg></div>
+  <div class="hd" id="hdet" aria-live="polite"></div>
+ </div>
+</section>
+
+<!-- S9 OUTCOMES -->
+<section class="alt">
+ <div class="w">
+  <div class="head c"><span class="mono eyebrow">Giá trị</span><h2>Giá trị đo bằng cách vận hành, không bằng lời hứa.</h2></div>
+  <div class="oc">
+   <div><em>01</em><h3>Hiệu quả vận hành</h3><dl><dt>Vấn đề</dt><dd>Bàn giao thủ công làm việc dừng giữa các phòng ban.</dd><dt>Nền tảng làm gì</dt><dd>Điều phối luồng, chuyển việc và dữ liệu sang bước tiếp theo.</dd><dt>Kết quả</dt><dd>Việc đi liền mạch, ai cũng thấy đang ở bước nào.</dd></dl></div>
+   <div><em>02</em><h3>Tối ưu chi phí</h3><dl><dt>Vấn đề</dt><dd>Nhân sự mất thời gian vào thao tác lặp lại.</dd><dt>Nền tảng làm gì</dt><dd>AI Agent và workflow xử lý phần lặp lại.</dd><dt>Kết quả</dt><dd>Nhân sự tập trung vào việc cần phán đoán.</dd></dl></div>
+   <div><em>03</em><h3>Quản trị &amp; kiểm soát</h3><dl><dt>Vấn đề</dt><dd>Khó truy vết ai quyết định gì, khi nào.</dd><dt>Nền tảng làm gì</dt><dd>Phê duyệt theo cấp, phân quyền, ghi nhật ký audit.</dd><dt>Kết quả</dt><dd>Mọi quyết định của người và AI đều truy vết được.</dd></dl></div>
+   <div><em>04</em><h3>Khả năng mở rộng</h3><dl><dt>Vấn đề</dt><dd>Mỗi bộ phận một công cụ riêng, khó nhân rộng.</dd><dt>Nền tảng làm gì</dt><dd>Thêm phân hệ trên cùng một nền tảng và một chuẩn.</dd><dt>Kết quả</dt><dd>Bắt đầu từ một quy trình, mở rộng theo nhu cầu.</dd></dl></div>
+  </div>
+ </div>
+</section>
+
+<!-- S10 SECURITY -->
+<section>
+ <div class="w">
+  <div class="head"><span class="mono eyebrow">Bảo mật &amp; triển khai</span><h2>Dữ liệu ở Việt Nam, mọi bước đều truy vết được.</h2></div>
+  <div class="sg">
+   <div><div class="stabs" role="tablist" id="stabs"></div><div class="dep" id="dep" aria-live="polite"></div></div>
+   <div class="chk"><h3>Kiểm soát</h3><ul>
+    <li>Triển khai Cloud, On-premise (trên hạ tầng của khách hàng) hoặc Hybrid.</li>
+    <li>Dữ liệu lưu trữ tại Việt Nam.</li>
+    <li>Hỗ trợ model AI chạy nội bộ, dữ liệu không bị đưa ra ngoài.</li>
+    <li>Tích hợp SSO; phân quyền theo vai trò.</li>
+    <li>Nhật ký audit cho quyết định của người và AI Agent.</li></ul>
+    <a class="btn p" style="margin-top:22px" href="#contact" data-en="Book a Demo / Consultation">Đặt lịch Demo / Tư vấn</a>
+    <p style="font-size:13px;color:var(--mut);margin-top:10px">Trao đổi trực tiếp với chuyên gia kỹ thuật.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- S11 ABOUT -->
+<section class="alt" id="about">
+ <div class="w ab">
+  <div class="abv"><svg viewBox="0 0 24 24" fill="none" stroke="#10CBFF" stroke-width=".5" stroke-linejoin="round"><path d="M13 2 4 14h7l-2 8 9-12h-7l2-8z"/></svg><b>The trusted partner in Automation Solution</b></div>
+  <div><span class="mono eyebrow">Về Innomation</span><h2 style="font-size:34px">Đối tác công nghệ đồng hành cùng doanh nghiệp và cơ quan nhà nước.</h2>
+   <p class="lead">Innomation tập trung vào Enterprise AI, workflow automation và intelligent operations, đồng hành cùng doanh nghiệp từ khảo sát quy trình đến triển khai AgentFlow.</p>
+   <div class="facts"><div><b>~30</b><span>Khách hàng</span></div><div><b>Top 4</b><span>Nhà cung cấp RPA tại Việt Nam</span></div><div><b>~40</b><span>Nhân sự</span></div></div>
+   <p class="demo" style="margin-top:12px;text-transform:none;letter-spacing:0">Số liệu đang chờ xác minh phạm vi và thời điểm trước khi công bố.</p>
+   <a class="btn s" style="margin-top:20px" href="#about">Về Innomation</a></div>
+ </div>
+</section>
+
+<!-- S12 FAQ -->
+<section>
+ <div class="w">
+  <div class="head c"><span class="mono eyebrow">FAQ</span><h2>Câu hỏi thường gặp.</h2></div>
+  <div class="faq" id="faq"></div>
+  <p style="text-align:center;margin-top:28px;color:var(--mut)">Vẫn còn câu hỏi? <a href="#contact" style="color:var(--blue);font-weight:600" data-en="Book a Demo / Consultation">Đặt lịch Demo / Tư vấn</a></p>
+ </div>
+</section>
+
+<!-- S13 CTA -->
+<section class="cta" id="contact">
+ <div class="w cg">
+  <div><span class="mono" style="color:#BFEFFF">Bắt đầu</span>
+   <h2 style="margin-top:14px">Bắt đầu với quy trình quan trọng nhất của doanh nghiệp bạn.</h2>
+   <p class="lead">Chia sẻ nhu cầu, chúng tôi sẽ trao đổi cách AgentFlow phù hợp với quy trình của doanh nghiệp.</p>
+   <div class="jr" aria-label="Hành trình đề xuất"><span>Khảo sát</span><span>Thiết kế</span><span>Chạy thử</span><span>Triển khai</span><span>Mở rộng</span><small>Hành trình đề xuất, không phải cam kết thời gian. Bắt đầu nhỏ, mở rộng theo nhu cầu.</small></div></div>
+  <div>
+   <form id="form" novalidate>
+    <label>Họ và tên<input name="n" autocomplete="name" required aria-describedby="e-n"><span class="er" id="e-n"></span></label>
+    <label>Email công việc<input name="e" type="email" autocomplete="email" required aria-describedby="e-e"><span class="er" id="e-e"></span></label>
+    <label>Công ty<input name="c" autocomplete="organization" required aria-describedby="e-c"><span class="er" id="e-c"></span></label>
+    <label>Nhu cầu<textarea name="m" required aria-describedby="e-m"></textarea><span class="er" id="e-m"></span></label>
+    <label>Điện thoại (tùy chọn)<input name="p" type="tel" autocomplete="tel"></label>
+    <label class="cons"><input type="checkbox" name="k" required aria-describedby="e-k"><span>Tôi đồng ý để Innomation liên hệ theo thông tin trên và đã đọc chính sách quyền riêng tư.</span></label><span class="er" id="e-k"></span>
+    <button class="btn p" type="submit" id="sub" data-en="Book a Demo / Consultation">Đặt lịch Demo / Tư vấn</button>
+    <p class="demo" style="text-transform:none;letter-spacing:0">Bản dựng thử: biểu mẫu chỉ mô phỏng, không gửi dữ liệu.</p>
+   </form>
+   <div class="ok2" id="ok2" role="status">Đã ghi nhận (mô phỏng). Trong bản chính thức, đội Sales sẽ liên hệ qua email bạn cung cấp.</div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="w">
+  <div class="fg">
+   <div><img src="../img/logo.png" alt="innomation" style="height:26px;filter:brightness(0) invert(1);margin-bottom:16px"><p>The trusted partner in Automation Solution</p><p style="margin-top:14px">36 Mạc Đĩnh Chi, Phường Tân Định, TP. Hồ Chí Minh</p></div>
+   <div><h6>Platform</h6><ul><li><a href="#platform">AgentFlow</a></li><li><a href="#story">Demo</a></li><li><a href="#contact" data-en="Book a Demo / Consultation">Đặt lịch Demo / Tư vấn</a></li></ul></div>
+   <div><h6>Solutions</h6><ul><li><a href="#contact">AutoFlow</a></li><li><a href="#contact">AutoMatching</a></li><li><a href="#contact">Ragify</a></li></ul></div>
+   <div><h6>Liên hệ</h6><ul><li>028 7309 9009</li><li><a href="mailto:sales@innomation.vn">sales@innomation.vn</a></li><li><a href="mailto:info@innomation.vn">info@innomation.vn</a></li><li><a href="https://www.linkedin.com/company/innomation-technology/" rel="noopener" target="_blank">LinkedIn</a> · <a href="https://www.facebook.com/profile.php?id=61578706206291" rel="noopener" target="_blank">Facebook</a> · <a href="https://www.youtube.com/@InnomationTechnology" rel="noopener" target="_blank">YouTube</a></li></ul></div>
+  </div>
+  <div class="fb"><span>© Innomation Technology Corporation</span><span>Chính sách quyền riêng tư</span></div>
+ </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var ICON={crm:'#i-crm',wk:'#i-wk',hr:'#i-hr',ms:'#i-ms',fn:'#i-fn'};
+var CLS={crm:'c-crm',wk:'c-wk',hr:'c-hr',ms:'c-ms',fn:'c-fn'};
+function mi(k,size){return '<i class="mi '+CLS[k]+'"'+(size?' style="width:'+size+'px;height:'+size+'px"':'')+'><svg><use href="'+ICON[k]+'"/></svg></i>'}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function now(){var d=new Date();return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
+function logTo(el,text,t){var d=document.createElement('div');d.innerHTML='<time>'+(t||now())+'</time><span>'+esc(text)+'</span>';el.appendChild(d);el.scrollTop=el.scrollHeight}
+
+/* header */
+var hd=$('#hd');addEventListener('scroll',function(){hd.classList.toggle('sm',scrollY>40)},{passive:true});
+var burger=$('#burger'),menu=$('#menu');
+burger.addEventListener('click',function(){var o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+var ddb=$('#ddb'),dd=$('#dd1');
+ddb.addEventListener('click',function(e){e.stopPropagation();var o=dd.classList.toggle('open');ddb.setAttribute('aria-expanded',o)});
+document.addEventListener('click',function(e){if(!dd.contains(e.target)){dd.classList.remove('open');ddb.setAttribute('aria-expanded','false')}if(menu.classList.contains('open')&&e.target.closest('#menu a')){menu.classList.remove('open');burger.setAttribute('aria-expanded','false')}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){dd.classList.remove('open');ddb.setAttribute('aria-expanded','false');menu.classList.remove('open');burger.setAttribute('aria-expanded','false')}});
+
+/* language: headlines + CTAs */
+$$('[data-en]').forEach(function(el){el.setAttribute('data-vi',el.textContent)});
+$$('.lang button').forEach(function(b){b.addEventListener('click',function(){
+  var en=b.getAttribute('data-l')==='en';
+  $$('.lang button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});
+  document.documentElement.lang=en?'en':'vi';
+  $$('[data-en]').forEach(function(el){el.textContent=en?el.getAttribute('data-en'):el.getAttribute('data-vi')});
+})});
+
+/* hero card */
+(function(){
+  var done=false,st=$('#ht1'),dot=$('#hs1'),log=$('#hlog');
+  $('#hAp').addEventListener('click',function(){if(done)return;done=true;st.className='tag ok';st.textContent='Đã duyệt';dot.className='ok';logTo(log,'Giám đốc Kinh doanh duyệt báo giá ABC');logTo(log,'Workflow tạo hợp đồng, chuyển sang Work')});
+  $('#hRj').addEventListener('click',function(){if(done)return;done=true;st.className='tag b';st.textContent='Từ chối';dot.className='d';logTo(log,'Báo giá bị từ chối, trả về CRM để chỉnh sửa')});
+})();
+
+/* layers */
+$$('.ly').forEach(function(b){b.addEventListener('click',function(){
+  var x=document.getElementById(b.getAttribute('aria-controls')),o=b.getAttribute('aria-expanded')!=='true';
+  b.setAttribute('aria-expanded',o);x.classList.toggle('open',o)})});
+
+/* before/after */
+(function(){
+  var tb=$('#tb'),ta=$('#ta'),pb=$('#pb'),pa=$('#pa');
+  function set(a){tb.setAttribute('aria-pressed',!a);ta.setAttribute('aria-pressed',a);pb.classList.toggle('dim',a);pa.classList.toggle('dim',!a)}
+  tb.addEventListener('click',function(){set(false)});ta.addEventListener('click',function(){set(true)});
+})();
+
+/* timeline */
+var STEPS=[
+ {k:'crm',n:'CRM',trig:'Báo giá ABC sẵn sàng',act:'Gửi duyệt giá',actor:'Con người · Giám đốc Kinh doanh',out:'Hợp đồng chốt, thông tin gửi sang Work',data:'Khách hàng, điều khoản, phạm vi'},
+ {k:'wk',n:'Work',trig:'Hợp đồng chốt',act:'Khởi tạo dự án, tóm tắt tiến độ tuần',actor:'AI Agent + Workflow',out:'Dự án tạo xong, nhu cầu nhân sự gửi sang HRM',data:'Phạm vi, mốc thời gian'},
+ {k:'hr',n:'HRM',trig:'Dự án cần nhân sự',act:'Gửi lịch hội nhập',actor:'Workflow',out:'Nhân sự sẵn sàng, nhu cầu thiết bị gửi sang Mua sắm',data:'Danh sách nhân sự, ngày bắt đầu'},
+ {k:'ms',n:'Mua sắm',trig:'Yêu cầu thiết bị',act:'Duyệt PR-0412',actor:'Con người · Trưởng phòng',out:'PR duyệt, chứng từ gửi sang Fin',data:'Danh mục thiết bị, nhà cung cấp'},
+ {k:'fn',n:'Fin',trig:'PR duyệt, hàng về',act:'Chuyển thanh toán 41 chứng từ',actor:'Hệ thống + người duyệt',out:'Đối chiếu xong, nhật ký ghi lại',data:'Chứng từ, PO, hóa đơn'}
+];
+var tl=$('#tl'),td=$('#td'),cur=0;
+tl.innerHTML=STEPS.map(function(s,i){return '<button role="tab" id="t'+i+'" aria-selected="'+(i===0)+'" tabindex="'+(i===0?0:-1)+'">'+mi(s.k)+'<span>'+(i+1)+'. '+s.n+'</span></button>'}).join('');
+function showStep(i){
+  cur=Math.max(0,Math.min(4,i));var s=STEPS[cur];
+  $$('button',tl).forEach(function(b,j){b.setAttribute('aria-selected',j===cur);b.tabIndex=j===cur?0:-1});
+  td.innerHTML='<dl><dt>Trigger</dt><dd>'+s.trig+'</dd></dl><dl><dt>Hành động</dt><dd>'+s.act+'</dd></dl><dl><dt>Ai thực hiện</dt><dd>'+s.actor+'</dd></dl><dl><dt>Kết quả và bước sau</dt><dd>'+s.out+'<br><small style="color:var(--mut)">Dữ liệu chuyển: '+s.data+'</small></dd></dl><div class="nav2"><button class="btn s sm" id="pv"'+(cur===0?' disabled':'')+'>Trước</button><button class="btn p sm" id="nx"'+(cur===4?' disabled':'')+'>Tiếp</button></div>';
+  $('#pv',td).addEventListener('click',function(){showStep(cur-1)});$('#nx',td).addEventListener('click',function(){showStep(cur+1)});
+}
+tl.addEventListener('click',function(e){var b=e.target.closest('button');if(b)showStep($$('button',tl).indexOf(b))});
+tl.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();showStep(cur+(e.key==='ArrowRight'?1:-1));$$('button',tl)[cur].focus()}});
+showStep(0);
+
+/* DEMO */
+var DM={
+ crm:{n:'CRM',title:'Chốt hợp đồng công ty ABC',ctx:'Báo giá ABC đã soạn xong. AI hỗ trợ tổng hợp, Giám đốc Kinh doanh duyệt.',
+  rows:[['Báo giá ABC-2026-07','Chờ xử lý'],['Cơ hội: Gói triển khai quy trình','Đang theo dõi'],['Liên hệ: Đầu mối mua hàng ABC','Đã xác nhận']],
+  steps:[{t:'AI tổng hợp điều khoản báo giá',kind:'auto',who:'AI',log:'AI Agent tổng hợp điều khoản và đề xuất chiết khấu chuẩn',row:0,res:'Đã tổng hợp'},
+         {t:'Giám đốc Kinh doanh duyệt báo giá',kind:'approve',who:'Người',log:'Giám đốc Kinh doanh duyệt báo giá ABC',rej:'Báo giá bị từ chối, trả về chỉnh sửa',row:0,res:'Đã duyệt'},
+         {t:'Chốt hợp đồng, tạo dự án',kind:'auto',who:'Workflow',log:'Workflow chốt hợp đồng và tạo dự án ABC trong Work',row:1,res:'Hợp đồng chốt'}],
+  chips:[['Tóm tắt báo giá ABC','Báo giá ABC gồm gói triển khai quy trình, điều khoản thanh toán theo giai đoạn và thời hạn hiệu lực. Mức chiết khấu nằm trong khung chuẩn, không cần phê duyệt ngoại lệ. (Demo minh họa)'],['Có rủi ro nào không?','Không phát hiện điều khoản ngoài khung chuẩn. Cần Giám đốc Kinh doanh xác nhận trước khi chốt. (Demo minh họa)']]},
+ wk:{n:'Work',title:'Khởi tạo dự án ABC',ctx:'Hợp đồng chốt tự tạo dự án từ mẫu, giao việc và theo dõi tiến độ.',
+  rows:[['Dự án ABC · Triển khai quy trình','Chưa tạo'],['Đầu việc 1 · Khảo sát hiện trạng','Chưa giao'],['Đầu việc 2 · Thiết kế quy trình','Chưa giao']],
+  steps:[{t:'Tạo dự án từ mẫu chuẩn',kind:'auto',who:'Workflow',log:'Workflow tạo dự án ABC từ mẫu chuẩn',row:0,res:'Đã tạo'},
+         {t:'Giao đầu việc cho đội dự án',kind:'auto',who:'Workflow',log:'Workflow giao 4 đầu việc cho đội dự án',row:1,res:'Đã giao'},
+         {t:'AI tóm tắt tiến độ tuần',kind:'auto',who:'AI',log:'AI Agent tóm tắt tiến độ tuần gửi quản lý dự án',row:2,res:'Đã tóm tắt'}],
+  chips:[['Tóm tắt tiến độ tuần','Tuần này: dự án ABC đã tạo, 4 đầu việc đã giao, chưa có đầu việc quá hạn. (Demo minh họa)'],['Ai đang trễ việc?','Hiện chưa có đầu việc nào quá hạn. (Demo minh họa)']]},
+ hr:{n:'HRM',title:'Onboarding nhân sự dự án',ctx:'Nhân sự mới của dự án nhận lịch hội nhập và quyền hệ thống tự động.',
+  rows:[['Nhân sự dự án · 2 người','Chưa xử lý'],['Lịch hội nhập tuần 1','Chưa gửi'],['Cấp quyền hệ thống','Chưa cấp']],
+  steps:[{t:'Xác định nhân sự dự án',kind:'auto',who:'Workflow',log:'Workflow xác định 2 nhân sự cho dự án ABC',row:0,res:'Đã xác định'},
+         {t:'Gửi lịch hội nhập tuần 1',kind:'auto',who:'Workflow',log:'Workflow gửi lịch hội nhập tuần 1',row:1,res:'Đã gửi'},
+         {t:'Trưởng phòng duyệt cấp quyền',kind:'approve',who:'Người',log:'Trưởng phòng duyệt cấp quyền hệ thống',rej:'Từ chối cấp quyền, yêu cầu bổ sung lý do',row:2,res:'Đã cấp'}],
+  chips:[['Gửi lịch hội nhập','Lịch hội nhập tuần 1 gồm giới thiệu đội dự án, đào tạo quy trình và cấp tài khoản. (Demo minh họa)'],['Còn thiếu gì cho nhân sự mới?','Còn chờ duyệt cấp quyền hệ thống. (Demo minh họa)']]},
+ ms:{n:'Mua sắm',title:'Yêu cầu mua 5 laptop · PR-0412',ctx:'Kiểm tra ngân sách, AI so sánh báo giá, trưởng phòng duyệt, rồi tạo PO.',
+  rows:[['PR-0412 · 5 laptop','Mới tạo'],['So sánh 3 báo giá nhà cung cấp','Chưa chạy'],['PO','Chưa tạo']],
+  steps:[{t:'Kiểm tra ngân sách phòng ban',kind:'auto',who:'Hệ thống',log:'Hệ thống xác nhận ngân sách phòng Kinh doanh đủ',row:0,res:'Ngân sách đủ'},
+         {t:'AI so sánh 3 báo giá',kind:'auto',who:'AI',log:'AI phát hiện nhà cung cấp rẻ nhất giao trễ, đề xuất nhà cung cấp B',row:1,res:'Đã đề xuất B'},
+         {t:'Trưởng phòng duyệt PR-0412',kind:'approve',who:'Người',log:'Trưởng phòng duyệt PR-0412 theo đề xuất B',rej:'PR-0412 bị từ chối, quay lại bước chỉnh sửa',row:0,res:'Đã duyệt'},
+         {t:'Tạo PO',kind:'auto',who:'Workflow',log:'Workflow tạo PO từ PR-0412',row:2,res:'Đã tạo PO'}],
+  chips:[['Duyệt PR-0412','PR-0412 cần Trưởng phòng duyệt. AI đề xuất nhà cung cấp B vì đáp ứng thời hạn giao. (Demo minh họa)'],['Vì sao không chọn nhà cung cấp rẻ nhất?','Nhà cung cấp A có giá thấp nhất nhưng giao sau thời hạn yêu cầu. (Demo minh họa)']]},
+ fn:{n:'Fin',title:'Đối chiếu và thanh toán',ctx:'AI đối chiếu chứng từ với PO, ngoại lệ chuyển kế toán, rồi duyệt thanh toán.',
+  rows:[['41 chứng từ cần đối chiếu','Chờ xử lý'],['Chứng từ INV-2034','Chưa kiểm'],['Lệnh thanh toán','Chưa tạo']],
+  steps:[{t:'AI đối chiếu 41 chứng từ với PO',kind:'auto',who:'AI',log:'AI đối chiếu 41 chứng từ, phát hiện 1 chứng từ lệch (INV-2034)',row:0,res:'40 khớp, 1 lệch'},
+         {t:'Kế toán xử lý ngoại lệ INV-2034',kind:'approve',who:'Người',log:'Kế toán xác nhận chênh lệch INV-2034 hợp lệ',rej:'Kế toán từ chối, yêu cầu nhà cung cấp gửi lại chứng từ',row:1,res:'Đã xử lý'},
+         {t:'Chuyển thanh toán',kind:'auto',who:'Hệ thống',log:'Hệ thống chuyển thanh toán 41 chứng từ',row:2,res:'Đã chuyển'}],
+  chips:[['Chuyển thanh toán 41 chứng từ','Có 1 chứng từ lệch cần kế toán xử lý trước khi chuyển thanh toán. (Demo minh họa)'],['INV-2034 lệch ở đâu?','INV-2034 có số lượng khác PO. Chờ kế toán xác nhận. (Demo minh họa)']]}
+};
+var ORD=['crm','wk','hr','ms','fn'];
+var dt=$('#dtabs'),dl=$('#dl'),dr=$('#dr'),curK='crm',S=null,busy=false,timer=null,auto=false;
+dt.innerHTML=ORD.map(function(k,i){return '<button role="tab" data-k="'+k+'" aria-selected="'+(i===0)+'" tabindex="'+(i===0?0:-1)+'">'+mi(k,28)+DM[k].n+'</button>'}).join('')+'<div class="sp"><span class="demo">Demo minh họa</span><button class="btn s sm" id="runAll">Chạy thử hợp đồng ABC</button></div>';
+function fresh(k){var d=DM[k];return {k:k,i:0,rows:d.rows.map(function(r){return r[1]}),st:d.steps.map(function(){return 'todo'}),logs:[],chat:[]}}
+var STATE={};ORD.forEach(function(k){STATE[k]=fresh(k)});
+function render(){
+  S=STATE[curK];var d=DM[curK],done=S.i>=d.steps.length;
+  var stepper=d.steps.map(function(s,j){var c=S.st[j]==='done'?'done':S.st[j]==='err'?'err':(j===S.i&&!done?'now':'');return '<li class="'+c+'"><u>'+(S.st[j]==='done'?'✓':S.st[j]==='err'?'!':(j+1))+'</u>'+esc(s.t)+'<span class="tag '+(s.who==='AI'?'':'h')+'">'+s.who+'</span></li>'}).join('');
+  var cur=d.steps[S.i],btns='';
+  if(busy){btns='<button class="btn p sm" disabled><span class="ld"></span>Đang xử lý</button>'}
+  else if(done){btns='<span class="tag ok">Hoàn tất</span>'}
+  else if(cur.kind==='approve'){btns='<button class="btn p sm" data-a="ok">Duyệt</button><button class="btn s sm" data-a="no">Từ chối</button>'}
+  else{btns='<button class="btn p sm" data-a="run">Thực hiện bước này</button>'}
+  if(S.st[S.i]==='err'&&!busy)btns='<button class="btn p sm" data-a="retry">Gửi lại</button>';
+  btns+='<button class="btn s sm" data-a="reset">Làm lại</button>';
+  dl.innerHTML='<div><span class="mono" style="color:var(--blue2);font-size:11px">Tình huống</span><h3 style="margin-top:6px">'+d.title+'</h3><p style="margin-top:6px">'+d.ctx+'</p></div><ul class="st">'+stepper+'</ul><div class="acts">'+btns+'</div><div class="chat"><div class="cv" id="cv" aria-live="polite">'+S.chat.map(function(m){return '<div class="msg '+m[0]+'">'+esc(m[1])+'</div>'}).join('')+'</div><div class="cc">'+d.chips.map(function(c,i){return '<button data-c="'+i+'">'+esc(c[0])+'</button>'}).join('')+'</div><div class="ci"><input id="ci" placeholder="Hỏi trợ lý AI" aria-label="Hỏi trợ lý AI"><button class="btn p sm" data-a="send">Gửi</button></div></div>';
+  dr.innerHTML='<div class="ut"><h4>'+d.n+' · '+d.title+'</h4><span class="tag '+(done?'ok':'wn')+'">'+(done?'Hoàn tất':'Đang chạy')+'</span></div><div class="uc">'+d.rows.map(function(r,i){return '<div class="ur" data-r="'+i+'"><div>'+r[0]+'</div><span class="tag '+(S.rows[i]===r[1]?'g':'ok')+'">'+esc(S.rows[i])+'</span></div>'}).join('')+'</div><div class="al"><h5>Nhật ký hoạt động</h5><div class="logbox" id="al" style="max-height:none">'+(S.logs.length?S.logs.map(function(l){return '<div><time>'+l[0]+'</time><span>'+esc(l[1])+'</span></div>'}).join(''):'<div><span style="color:#9AA3BF">Chưa có hoạt động. Bắt đầu từ bước 1.</span></div>')+'</div></div>';
+  var cv=$('#cv');if(cv)cv.scrollTop=cv.scrollHeight;
+}
+function addLog(t){S.logs.push([now(),t])}
+function finishStep(ok){
+  var d=DM[curK],s=d.steps[S.i];busy=true;render();
+  setTimeout(function(){
+    busy=false;
+    if(ok){S.st[S.i]='done';S.rows[s.row]=s.res;addLog(s.log);S.i++}
+    else{S.st[S.i]='err';S.rows[s.row]='Từ chối';addLog(s.rej)}
+    render();var r=$('[data-r="'+s.row+'"]',dr);if(r){r.classList.add('flash');setTimeout(function(){r.classList.remove('flash')},600)}
+    if(auto)autoNext();
+  },700);
+}
+dl.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;var a=b.getAttribute('data-a'),c=b.getAttribute('data-c');
+  if(c!==null){var ch=DM[curK].chips[+c];S.chat.push(['u',ch[0]]);S.chat.push(['',ch[1]]);render();return}
+  if(a==='send'){var i=$('#ci'),v=i.value.trim();if(!v)return;S.chat.push(['u',v]);S.chat.push(['','Trong bản demo, trợ lý chỉ trả lời các câu mẫu. Hãy chọn một gợi ý bên dưới.']);render();return}
+  if(a==='reset'){stopAuto();STATE[curK]=fresh(curK);busy=false;render();return}
+  if(a==='retry'){S.st[S.i]='todo';S.rows[DM[curK].steps[S.i].row]=DM[curK].rows[DM[curK].steps[S.i].row][1];render();return}
+  if(a==='run')finishStep(true);if(a==='ok')finishStep(true);if(a==='no')finishStep(false);
+});
+dl.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.id==='ci'){e.preventDefault();var b=$('[data-a="send"]',dl);b&&b.click()}});
+function selTab(k,focus){stopAuto();curK=k;busy=false;$$('button[role=tab]',dt).forEach(function(b){var o=b.getAttribute('data-k')===k;b.setAttribute('aria-selected',o);b.tabIndex=o?0:-1;if(o&&focus)b.focus()});render()}
+dt.addEventListener('click',function(e){var b=e.target.closest('button[role=tab]');if(b)selTab(b.getAttribute('data-k'))});
+dt.addEventListener('keydown',function(e){if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;e.preventDefault();var i=ORD.indexOf(curK)+(e.key==='ArrowRight'?1:-1);i=(i+5)%5;selTab(ORD[i],true)});
+function stopAuto(){auto=false;clearTimeout(timer);var r=$('#runAll');if(r){r.textContent='Chạy thử hợp đồng ABC'}}
+function autoNext(){
+  if(!auto)return;var d=DM[curK];
+  if(S.i>=d.steps.length){
+    var n=ORD.indexOf(curK)+1;
+    if(n>=ORD.length){stopAuto();return}
+    timer=setTimeout(function(){if(!auto)return;curK=ORD[n];$$('button[role=tab]',dt).forEach(function(b){var o=b.getAttribute('data-k')===curK;b.setAttribute('aria-selected',o);b.tabIndex=o?0:-1});STATE[curK]=fresh(curK);render();autoNext()},700);return}
+  timer=setTimeout(function(){if(auto)finishStep(true)},650);
+}
+dt.addEventListener('click',function(e){
+  if(e.target.id!=='runAll')return;
+  if(auto){stopAuto();return}
+  ORD.forEach(function(k){STATE[k]=fresh(k)});curK='crm';$$('button[role=tab]',dt).forEach(function(b){b.setAttribute('aria-selected',b.getAttribute('data-k')==='crm')});
+  auto=true;e.target.textContent='Dừng';render();autoNext();
+});
+render();
+
+/* bento */
+var BN=[
+ {c:'big',t:'Điều phối',h:'Workflow tuần tự, song song, rẽ nhánh, phê duyệt nhiều cấp',p:'Thiết kế một lần, chạy xuyên các phòng ban.',ex:'Workflow Engine hỗ trợ luồng tuần tự, song song, rẽ nhánh và phê duyệt nhiều cấp.',vz:'<div class="vzf"><span class="fnode">Yêu cầu</span><i></i><span class="fnode">Kiểm tra</span><i></i><span class="fnode h">Phê duyệt</span><i></i><span class="fnode">Thực thi</span></div><div class="vzf" style="margin-top:10px;padding-left:38px"><i style="width:2px;height:16px"></i><span class="fnode">Nhánh ngoại lệ</span></div>'},
+ {c:'mid',t:'Xử lý',h:'AI Agent phân loại, tóm tắt, trích xuất, đề xuất',p:'AI làm phần lặp lại, đưa ra đề xuất kèm lý do.',ex:'AI Agent đề xuất, quyết định cuối cùng thuộc về người có thẩm quyền.',vz:'<b>Đề xuất:</b> chọn nhà cung cấp B<br><span style="color:var(--mut)">Lý do: đáp ứng thời hạn giao.</span>'},
+ {c:'',t:'Kiểm soát',h:'Phê duyệt theo SLA',p:'Người có thẩm quyền quyết định tại điểm quan trọng.',ex:'Human Task và Approval với SLA.',vz:'<span class="tag wn">Chờ duyệt</span> Báo giá ABC'},
+ {c:'',t:'Kết nối',h:'API, MCP, RPA, database, SSO',p:'Làm việc với hệ thống đang dùng.',ex:'Kết nối doanh nghiệp: API, MCP, RPA, database, SSO.',vz:'<span class="tag">API</span> <span class="tag">MCP</span> <span class="tag">RPA</span> <span class="tag">DB</span>'},
+ {c:'mid',t:'Quản lý dữ liệu',h:'Business Data Entities',p:'Dữ liệu nghiệp vụ dùng chung giữa các ứng dụng.',ex:'Thực thể dữ liệu nghiệp vụ dùng chung cho các phân hệ.',vz:'<div class="row" style="padding:6px 0"><i></i>Khách hàng ABC<span class="tag g">Thực thể</span></div><div class="row" style="padding:6px 0;border:0"><i></i>Hợp đồng ABC<span class="tag g">Thực thể</span></div>'},
+ {c:'mid',t:'Giám sát',h:'Phân tích và nhật ký audit',p:'Theo dõi luồng và truy vết từng quyết định.',ex:'Analytics và Audit cho quyết định của người và AI Agent.',vz:'<div class="logbox" style="max-height:none"><div><time>09:31</time><span>AI đề xuất B</span></div><div><time>09:40</time><span>Trưởng phòng duyệt</span></div></div>'}
+];
+$('#bento').innerHTML=BN.map(function(b,i){return '<button class="bc '+b.c+'" aria-expanded="false" data-i="'+i+'"><span class="mono" style="color:var(--blue2);font-size:11px">'+b.t+'</span><h3>'+b.h+'</h3><p>'+b.p+'</p><div class="vz">'+b.vz+'</div><div class="ex">'+b.ex+'</div></button>'}).join('');
+$('#bento').addEventListener('click',function(e){var b=e.target.closest('.bc');if(!b)return;b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')!=='true')});
+
+/* build */
+var BS=[
+ {t:'Design',d:'Thiết kế biểu mẫu và dữ liệu cho quy trình.',m:function(){return '<div class="wbar"><i></i><i></i><i></i><b>Trình thiết kế · Biểu mẫu</b><span class="demo">Demo minh họa</span></div><div style="padding:22px"><h4 style="margin-bottom:14px">Yêu cầu mua thiết bị</h4><div class="fld">Người đề xuất<small>Tự điền</small></div><div class="fld">Loại thiết bị<small>Danh sách</small></div><div class="fld">Số lượng<small>Số</small></div><div class="fld">Báo giá đính kèm<small>Tệp</small></div></div>'}},
+ {t:'Configure',d:'Cấu hình quy tắc, vai trò và ánh xạ dữ liệu.',m:function(){return '<div class="wbar"><i></i><i></i><i></i><b>Trình thiết kế · Thuộc tính</b><span class="demo">Demo minh họa</span></div><div style="padding:22px"><h4 style="margin-bottom:14px">Trường: Số lượng</h4><div class="fld">Bắt buộc<small>Bật</small></div><div class="fld">Giá trị tối đa<small>Theo hạn mức phòng ban</small></div><div class="fld">Ánh xạ dữ liệu<small>Thực thể: Thiết bị</small></div><div class="fld">Người xem<small>Phòng Kinh doanh</small></div></div>'}},
+ {t:'Automate',d:'Thêm bước AI và phê duyệt vào luồng.',m:function(){return '<div class="wbar"><i></i><i></i><i></i><b>Trình thiết kế · Workflow</b><span class="demo">Demo minh họa</span></div><div style="padding:30px 22px"><div class="vzf"><span class="fnode">Yêu cầu</span><i></i><span class="fnode">AI so sánh báo giá</span><i></i><span class="fnode h">Trưởng phòng duyệt</span></div><div class="vzf" style="margin-top:12px"><i style="width:16px"></i><span class="fnode">Tạo PO</span><i></i><span class="fnode">Thông báo người gửi</span></div><p style="margin-top:20px;font-size:13px;color:var(--mut)">Bước phê duyệt vừa được thêm vào luồng.</p></div>'}},
+ {t:'Deploy',d:'Xem trước ứng dụng và đưa vào vận hành.',m:function(){return '<div class="wbar"><i></i><i></i><i></i><b>Xem trước ứng dụng</b><span class="demo">Demo minh họa</span></div><div style="padding:22px"><h4 style="margin-bottom:14px">Yêu cầu mua thiết bị</h4><div class="fld">Loại thiết bị<small>Laptop</small></div><div class="fld">Số lượng<small>5</small></div><div style="margin-top:14px"><button class="btn p sm" disabled>Gửi yêu cầu</button> <span class="tag ok" style="margin-left:6px">Sẵn sàng triển khai</span></div></div>'}}
+];
+var bsI=0;
+$('#bs').innerHTML=BS.map(function(s,i){return '<button role="tab" aria-selected="'+(i===0)+'" data-i="'+i+'"><em>0'+(i+1)+'</em><div><b>'+s.t+'</b><span>'+s.d+'</span></div></button>'}).join('');
+function bsShow(i){bsI=i;$$('#bs button').forEach(function(b,j){b.setAttribute('aria-selected',j===i)});$('#bm').innerHTML=BS[i].m()}
+$('#bs').addEventListener('click',function(e){var b=e.target.closest('button');if(b)bsShow(+b.getAttribute('data-i'))});
+bsShow(0);
+
+/* AI approve */
+var QT=[['A','Nhà cung cấp A','Trễ 14 ngày'],['B','Nhà cung cấp B','3 ngày'],['C','Nhà cung cấp C','2 ngày']];
+var ap={sel:'B',state:'wait',edit:false};
+function apRender(){
+  $('#apt').innerHTML=QT.map(function(q){var rec=q[0]==='B'?' rec':'',pick=ap.state==='ok'&&ap.sel===q[0]?' pick':'';return '<tr class="'+(pick||rec).trim()+'"><td>'+(ap.edit?'<input type="radio" name="q" aria-label="'+q[1]+'" value="'+q[0]+'"'+(ap.sel===q[0]?' checked':'')+'>':(q[0]==='B'?'<span class="tag h">Đề xuất</span>':''))+'</td><td>'+q[1]+(q[0]==='A'?' <span class="tag wn">Giá thấp nhất</span>':'')+'</td><td>'+q[2]+'</td></tr>'}).join('');
+  var st=$('#apst');var m={wait:['wn','Chờ người duyệt'],ok:['ok','Đã duyệt · tạo PO'],no:['b','Đã từ chối · quay lại chỉnh sửa']}[ap.state];st.className='tag '+m[0];st.textContent=m[1];
+  $('#apOk').disabled=ap.state!=='wait';$('#apNo').disabled=ap.state!=='wait';$('#apEd').disabled=ap.state!=='wait';
+}
+function apInit(){ap={sel:'B',state:'wait',edit:false};$('#apl').innerHTML='';logTo($('#apl'),'Yêu cầu PR-0412 vào hộp việc');logTo($('#apl'),'AI so sánh 3 báo giá, phát hiện nhà cung cấp A giá thấp nhất nhưng giao trễ');logTo($('#apl'),'AI đề xuất nhà cung cấp B. Chờ người duyệt.');$('#apEd').textContent='Sửa';apRender()}
+$('#apOk').addEventListener('click',function(){ap.state='ok';ap.edit=false;logTo($('#apl'),'Trưởng phòng duyệt nhà cung cấp '+ap.sel+(ap.sel!=='B'?' (khác đề xuất của AI)':''));logTo($('#apl'),'Workflow tạo PO từ PR-0412');$('#apEd').textContent='Sửa';apRender()});
+$('#apNo').addEventListener('click',function(){ap.state='no';ap.edit=false;logTo($('#apl'),'Trưởng phòng từ chối đề xuất. Yêu cầu quay lại bước chỉnh sửa.');apRender()});
+$('#apEd').addEventListener('click',function(){ap.edit=!ap.edit;this.textContent=ap.edit?'Xong':'Sửa';if(!ap.edit)logTo($('#apl'),'Trưởng phòng chọn nhà cung cấp '+ap.sel);apRender()});
+$('#apt').addEventListener('change',function(e){if(e.target.name==='q')ap.sel=e.target.value});
+$('#apRs').addEventListener('click',apInit);
+apInit();
+
+/* hub */
+var HN=[['ERP','Hệ thống ERP','Đọc và ghi dữ liệu nghiệp vụ giữa AgentFlow và ERP hiện có.','PO được duyệt trong AgentFlow','Ghi sang ERP để ghi nhận'],
+ ['CRM','Hệ thống CRM','Đồng bộ khách hàng và cơ hội giữa các hệ thống.','Hợp đồng ABC được chốt','Cập nhật cơ hội trong CRM'],
+ ['Email','Email','Nhận yêu cầu và gửi thông báo qua email.','Email yêu cầu từ khách hàng','Thông báo kết quả cho người gửi'],
+ ['Database','Cơ sở dữ liệu','Đọc và ghi dữ liệu từ database của doanh nghiệp.','Bảng dữ liệu nghiệp vụ','Kết quả xử lý ghi lại'],
+ ['Tài liệu','Kho tài liệu','Lấy tài liệu để AI Agent trích xuất và tóm tắt.','Hợp đồng, báo giá dạng tệp','Thông tin đã trích xuất'],
+ ['API / MCP','API và MCP','Kết nối hệ thống có API hoặc MCP.','Sự kiện từ hệ thống ngoài','Hành động trả lại hệ thống'],
+ ['RPA','RPA','Tự động hóa thao tác trên ứng dụng không có API.','Thao tác lặp trên giao diện','Dữ liệu đưa vào luồng'],
+ ['SSO','Đăng nhập một lần','Tích hợp SSO để người dùng đăng nhập bằng tài khoản doanh nghiệp.','Tài khoản doanh nghiệp','Quyền truy cập theo vai trò']];
+(function(){
+  var hub=$('#hub'),cx=280,cy=210,R=150,Rx=210,h='<defs><linearGradient id="hg" x1="0" x2="1"><stop stop-color="#001AAD"/><stop offset="1" stop-color="#2563EB"/></linearGradient></defs>',pts=[];
+  HN.forEach(function(n,i){var a=-Math.PI/2+i*2*Math.PI/8,x=cx+Rx*Math.cos(a),y=cy+R*1.2*Math.sin(a);pts.push([x,y]);h+='<path class="ln" d="M'+cx+' '+cy+' L'+x.toFixed(1)+' '+y.toFixed(1)+'"/>'});
+  h+='<g><rect x="'+(cx-62)+'" y="'+(cy-30)+'" width="124" height="60" rx="16" fill="url(#hg)"/><text x="'+cx+'" y="'+(cy+5)+'" text-anchor="middle" fill="#fff" style="font:700 15px Inter">AgentFlow</text></g>';
+  HN.forEach(function(n,i){var p=pts[i];h+='<g class="n" role="button" tabindex="0" aria-pressed="false" data-i="'+i+'" aria-label="'+n[1]+'"><rect x="'+(p[0]-44).toFixed(1)+'" y="'+(p[1]-18).toFixed(1)+'" width="88" height="36" rx="10"/><text x="'+p[0].toFixed(1)+'" y="'+(p[1]+5).toFixed(1)+'" text-anchor="middle">'+n[0]+'</text></g>'});
+  hub.innerHTML=h;
+  function sel(i){$$('.n',hub).forEach(function(g,j){g.setAttribute('aria-pressed',j===i)});var n=HN[i];$('#hdet').innerHTML='<span class="mono eyebrow">Nhóm kết nối</span><h3>'+n[1]+'</h3><p>'+n[2]+'</p><div class="io"><div><b>Vào:</b> '+n[3]+'</div><div><b>Ra:</b> '+n[4]+'</div></div><p class="demo" style="margin-top:16px;text-transform:none;letter-spacing:0">Ví dụ minh họa theo loại kết nối, chưa phải danh sách connector.</p>'}
+  hub.addEventListener('click',function(e){var g=e.target.closest('.n');if(g)sel(+g.getAttribute('data-i'))});
+  hub.addEventListener('keydown',function(e){var g=e.target.closest('.n');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();sel(+g.getAttribute('data-i'))}});
+  sel(0);
+  if('IntersectionObserver' in window){new IntersectionObserver(function(en){en.forEach(function(x){hub.classList.toggle('on',x.isIntersecting)})},{threshold:.3}).observe(hub)}else hub.classList.add('on');
+})();
+
+/* security */
+var DP=[
+ {t:'Cloud',p:'Triển khai trên hạ tầng đám mây. Dữ liệu lưu trữ tại Việt Nam.',b:[['Doanh nghiệp','Người dùng và quy trình'],['AgentFlow trên Cloud','Workflow, AI Agent, dữ liệu',1],['Hệ thống hiện có','Kết nối qua tích hợp']]},
+ {t:'On-premise',p:'Triển khai trên hạ tầng của khách hàng, kèm model AI chạy nội bộ khi cần.',b:[['Hạ tầng khách hàng','Toàn bộ nằm trong mạng nội bộ'],['AgentFlow + AI nội bộ','Dữ liệu không rời hạ tầng',1],['Hệ thống hiện có','Kết nối trong mạng nội bộ']]},
+ {t:'Hybrid',p:'Kết hợp: phần nhạy cảm đặt trên hạ tầng khách hàng, phần còn lại trên Cloud.',b:[['Hạ tầng khách hàng','Dữ liệu và AI nhạy cảm'],['AgentFlow','Điều phối giữa hai môi trường',1],['Cloud','Các phần còn lại']]}
+];
+var stabs=$('#stabs');stabs.innerHTML=DP.map(function(d,i){return '<button role="tab" aria-selected="'+(i===0)+'" data-i="'+i+'">'+d.t+'</button>'}).join('');
+function dpShow(i){$$('button',stabs).forEach(function(b,j){b.setAttribute('aria-selected',j===i)});var d=DP[i];$('#dep').innerHTML='<h3>'+d.t+'</h3><p>'+d.p+'</p><div class="box">'+d.b.map(function(x){return '<div class="bx'+(x[2]?' af':'')+'"><b>'+x[0]+'</b>'+x[1]+'</div>'}).join('')+'</div><p class="demo" style="margin-top:18px;text-transform:none;letter-spacing:0">Sơ đồ khái niệm. Chi tiết kiến trúc sẽ được trao đổi theo từng dự án.</p>'}
+stabs.addEventListener('click',function(e){var b=e.target.closest('button');if(b)dpShow(+b.getAttribute('data-i'))});dpShow(0);
+
+/* FAQ */
+var FQ=[['AgentFlow là gì?','Nền tảng AI workflow automation giúp doanh nghiệp thiết kế, điều phối và thực thi quy trình, kết nối con người, dữ liệu, hệ thống và AI Agent trong một luồng.'],
+ ['AgentFlow có thay thế ERP không?','AgentFlow kết nối với hệ thống đang dùng qua API, MCP, RPA, database. Doanh nghiệp không bắt buộc phải thay hệ thống hiện có.'],
+ ['Có tùy chỉnh theo nghiệp vụ của doanh nghiệp không?','Có thể thiết kế quy trình theo nghiệp vụ của doanh nghiệp trên trình thiết kế trực quan. Innomation đồng hành cấu hình và triển khai.'],
+ ['AI sử dụng dữ liệu của tôi như thế nào?','Nền tảng hỗ trợ model AI chạy nội bộ, dữ liệu không bị đưa ra ngoài. Dữ liệu lưu trữ tại Việt Nam.'],
+ ['Có triển khai On-premise không?','Có. Doanh nghiệp có thể chọn Cloud, On-premise (trên hạ tầng của mình) hoặc Hybrid.'],
+ ['Bắt đầu như thế nào?','Bắt đầu từ một quy trình quan trọng, sau đó mở rộng theo nhu cầu. Đặt lịch Demo / Tư vấn để trao đổi phạm vi với đội ngũ Innomation.'],
+ ['Chi phí như thế nào?','Vui lòng liên hệ sales@innomation.vn để được tư vấn.']];
+$('#faq').innerHTML=FQ.map(function(f,i){return '<div class="fq"><button aria-expanded="false" aria-controls="fa'+i+'" id="fb'+i+'">'+f[0]+'<i class="pl">+</i></button><div class="fa" id="fa'+i+'" role="region" aria-labelledby="fb'+i+'">'+f[1]+'</div></div>'}).join('');
+$('#faq').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var o=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',o);document.getElementById(b.getAttribute('aria-controls')).classList.toggle('open',o)});
+
+/* form */
+(function(){
+  var f=$('#form');
+  function err(id,msg,el){document.getElementById('e-'+id).textContent=msg;if(el)el.setAttribute('aria-invalid',msg?'true':'false')}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();var ok=true,first=null;
+    [['n','Vui lòng nhập họ tên.'],['c','Vui lòng nhập tên công ty.'],['m','Vui lòng mô tả nhu cầu.']].forEach(function(r){var el=f.elements[r[0]];if(!el.value.trim()){err(r[0],r[1],el);ok=false;first=first||el}else err(r[0],'',el)});
+    var em=f.elements.e;if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em.value.trim())){err('e','Email chưa hợp lệ.',em);ok=false;first=first||em}else err('e','',em);
+    var k=f.elements.k;if(!k.checked){err('k','Vui lòng đồng ý để chúng tôi liên hệ.',k);ok=false;first=first||k}else err('k','',k);
+    if(!ok){first.focus();return}
+    var s=$('#sub');s.disabled=true;s.innerHTML='<span class="ld"></span>Đang gửi (mô phỏng)';
+    setTimeout(function(){f.style.display='none';$('#ok2').style.display='block'},900);
+  });
+})();
+})();
+</script>
+</body>
+</html>
